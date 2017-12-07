@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.View;
 
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
@@ -59,7 +60,12 @@ public class OrderActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        custom_order.setOnLeftButtonClickListener(new CustomTool.OnLeftButtonClickListener() {
+            @Override
+            public void onLeftButtonClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
