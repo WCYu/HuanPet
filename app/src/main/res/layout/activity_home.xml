@@ -99,7 +99,7 @@
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:layout_widthPercent="100%"
+                app:layout_widthPercent="90%"
                 android:background="@android:color/white"
                 android:orientation="vertical">
                 <com.example.huanpet.custom.PercentLinearLayout
