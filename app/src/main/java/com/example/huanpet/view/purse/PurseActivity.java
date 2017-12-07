@@ -42,7 +42,7 @@ public class PurseActivity extends BaseActivity {
     @Override
     public void initData() {
         purse_custom.initViewsVisible(true,true,false,true);
-        purse_custom.setReturnBtn(" ");
+        purse_custom.setReturnBtn("   ");
         purse_custom.setAppTitle("我的钱包");
         purse_custom.setRightTitle("交易记录");
     }
