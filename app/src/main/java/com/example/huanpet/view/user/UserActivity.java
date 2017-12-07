@@ -1,5 +1,8 @@
 package com.example.huanpet.view.user;
 
+import android.content.Intent;
+import android.provider.MediaStore;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +50,10 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.Head_portrait:
-                options();
+                Intent intent = new Intent(Intent.ACTION_PICK, null);
+                intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                startActivityForResult(intent,2);
+
                 break;
 
 
@@ -90,20 +96,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void options() {
-//        ActionSheetDialog mDialog = new ActionSheetDialog(this).builder();  
-//        mDialog.setTitle("选择");  
-//        mDialog.setCancelable(false);  
-//        mDialog.addSheetItem("拍照", SheetItemColor.Blue, new OnSheetItemClickListener() {  
-//            @Override  
-//            public void onClick(int which) {  
-//                PhotoUtil.photograph(MainActivity.this);  
-//            }  
-//        }).addSheetItem("从相册选取", SheetItemColor.Blue, new OnSheetItemClickListener() {  
-//            @Override  
-//            public void onClick(int which) {  
-//                PhotoUtil.selectPictureFromAlbum(MainActivity.this);  
-//            }  
-//        }).show(); 
 
     }
 
