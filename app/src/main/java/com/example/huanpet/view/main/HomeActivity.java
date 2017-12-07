@@ -107,7 +107,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         Intent intent=new Intent();
         switch (v.getId()) {
             case R.id.main_user:
-                intent.setClass(HomeActivity.this, UserActivity.class);
+                Intent main_user_intent = new Intent(HomeActivity.this, UserActivity.class);
+                startActivity(main_user_intent);
                 break;
             case R.id.main_news:
                 intent.setClass(HomeActivity.this, NewsActivity.class);
