@@ -53,7 +53,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
                 Intent intent = new Intent(Intent.ACTION_PICK, null);
                 intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
                 startActivityForResult(intent,2);
-
                 break;
 
 
