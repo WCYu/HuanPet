@@ -2,13 +2,17 @@ package com.example.huanpet.view.main;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.widget.SearchView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
+import com.example.huanpet.utils.CustomTool;
 import com.example.huanpet.view.know.KnowActivity;
 import com.example.huanpet.view.news.NewsActivity;
 import com.example.huanpet.view.order.OrderActivity;
@@ -19,7 +23,6 @@ import com.example.huanpet.view.user.UserActivity;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
-    private android.support.v7.widget.Toolbar home_tool;
     private LinearLayout main_user;
     private LinearLayout main_news;
     private LinearLayout main_pet;
@@ -28,7 +31,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout main_know;
     private LinearLayout main_set;
     private Button main_btn;
-
+    private CustomTool customTool;
+    private SearchView searchView;
+    private ImageView imageView;
+    private DrawerLayout drawerLayout;
+    private LinearLayout linearLayout;
     @Override
     public int initLayoutID() {
         return R.layout.activity_home;
@@ -36,7 +43,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void initView() {
-        home_tool=findViewById(R.id.home_tool);
         main_user=findViewById(R.id.main_user);
         main_news=findViewById(R.id.main_news);
         main_pet=findViewById(R.id.main_pet);
@@ -45,6 +51,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         main_know=findViewById(R.id.main_know);
         main_set=findViewById(R.id.main_set);
         main_btn=findViewById(R.id.main_btn);
+        customTool=findViewById(R.id.home_custom);
+        searchView=findViewById(R.id.home_search);
+        imageView=findViewById(R.id.home_spreads);
+        drawerLayout=findViewById(R.id.home_drawer);
+        linearLayout=findViewById(R.id.home_hides);
     }
 
     @Override
@@ -71,11 +82,24 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         main_purse.setOnClickListener(this);
         main_know.setOnClickListener(this);
         main_set.setOnClickListener(this);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(linearLayout);
+            }
+        });
     }
 
     @Override
     public void setMyAppTitle() {
+        customTool.setRightIcon(R.drawable.map);
+        customTool.initViewsVisible(false,false,true,false);
+        customTool.setOnRightImgClickLisrener(new CustomTool.OnRightImgClickListener() {
+            @Override
+            public void onRightImgClick(View v) {
 
+            }
+        });
     }
 
     @Override
