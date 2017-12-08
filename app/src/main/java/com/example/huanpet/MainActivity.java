@@ -88,8 +88,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 PreferencesUtil.getInstance().setWelcomeId(1);
                 Intent in = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(in);
+
                 finish();
                 break;
         }
     }
+
 }
