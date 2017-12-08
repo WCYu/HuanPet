@@ -36,39 +36,51 @@
             android:layout_height="0dp"
             app:layout_heightPercent="20%"
             android:gravity="center_horizontal|center_vertical"
-            android:text="￥1000.00"
+            android:text="￥10000.00"
             android:textColor="@android:color/holo_red_light"
             />
-        <RelativeLayout
+        <com.example.huanpet.custom.PercentLinearLayout
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_heightPercent="60%">
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/chongzhi"
                 android:layout_width="100dp"
                 android:layout_height="50dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="60dp"
-                android:layout_marginStart="60dp"
+                android:layout_marginEnd="17dp"
+                android:layout_marginRight="17dp"
                 android:background="#fade05"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="充值" />
-
-            <TextView
-                android:id="@+id/tixian"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_alignBottom="@+id/chongzhi"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginEnd="63dp"
-                android:layout_marginRight="63dp"
-                android:background="#f5f0f0"
-                android:gravity="center_horizontal|center_vertical"
-                android:text="提现" />
         </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/tixian"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginStart="17dp"
+                    android:background="#f5f0f0"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:text="提现" />
+            </RelativeLayout>
+        </com.example.huanpet.custom.PercentLinearLayout>
     </com.example.huanpet.custom.PercentLinearLayout>
     <!--"分割线"-->
     <View
