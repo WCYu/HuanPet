@@ -28,6 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true">
                 <TextView
+                    android:id="@+id/screening_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="选择其他城市"/>
@@ -38,13 +39,17 @@
             </LinearLayout>
         </RelativeLayout>
         <CheckBox
+            android:id="@+id/screening_cityName"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:button="@null"
             android:gravity="center"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
             android:drawableLeft="@drawable/location"
             android:text="城市"
+            android:checked="true"
             app:layout_widthPercent="30%"
             app:layout_heightPercent="40%"
             android:background="@drawable/ischeck_btn"/>
@@ -74,15 +79,18 @@
             android:orientation="horizontal"
             app:layout_heightPercent="40%">
             <CheckBox
+                android:id="@+id/screening_bathe"
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
                 android:text="洗澡"
+                android:checked="true"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
             <CheckBox
+                android:id="@+id/screening_pick_up"
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -118,29 +126,33 @@
             android:layout_marginLeft="15dp"
             app:layout_heightPercent="20%">
             <CheckBox
+                android:id="@+id/screening_yuan_dan"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
-                android:text="洗澡"
+                android:text="元旦可接单"
+                android:checked="true"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
             <CheckBox
+                android:id="@+id/screening_chun_jie"
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
-                android:text="接/送"
+                android:text="春节可接单"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
             <CheckBox
+                android:id="@+id/screening_qing_ming"
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
-                android:text="接/送"
+                android:text="清明节可接单"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
         </com.example.huanpet.custom.PercentLinearLayout>
@@ -153,29 +165,32 @@
             android:layout_marginLeft="15dp"
             app:layout_heightPercent="20%">
             <CheckBox
+                android:id="@+id/screening_lao_dong"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
-                android:text="洗澡"
+                android:text="劳动节可接单"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
             <CheckBox
+                android:id="@+id/screening_duan_wu"
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
-                android:text="接/送"
+                android:text="端午节可接单"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
             <CheckBox
+                android:id="@+id/screening_zhong_qiu"
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
-                android:text="接/送"
+                android:text="中秋节可接单"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
         </com.example.huanpet.custom.PercentLinearLayout>
@@ -188,11 +203,12 @@
             android:layout_marginLeft="15dp"
             app:layout_heightPercent="20%">
             <CheckBox
+                android:id="@+id/screening_guo_qing"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:button="@null"
                 android:gravity="center"
-                android:text="洗澡"
+                android:text="国庆节可接单"
                 app:layout_widthPercent="30%"
                 android:background="@drawable/ischeck_btn"/>
 
@@ -203,6 +219,7 @@
         android:layout_height="0.5dp"
         android:background="@android:color/darker_gray"/>
     <Button
+        android:id="@+id/screening_reset"
         android:layout_marginTop="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -217,6 +234,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
         <Button
+            android:id="@+id/screening_determine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_widthPercent="88%"
