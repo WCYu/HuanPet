@@ -23,9 +23,8 @@
         <activity android:name=".view.pet.PetActivity" />
         <activity android:name=".view.purse.PurseActivity" />
         <activity android:name=".view.set.SetActivity" />
-        <activity android:name=".view.user.UserActivity">
-
-        </activity>
+        <activity android:name=".view.user.UserActivity"></activity>
+        <activity android:name=".view.main.CityActivity"></activity>
     </application>
 
 </manifest>
