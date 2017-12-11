@@ -35,11 +35,11 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginRight="10dp">
+        >
         <ImageView
             android:id="@+id/ivRightImg"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:src="@mipmap/ic_launcher"/>
         <TextView
             android:id="@+id/tvRightTitle"
