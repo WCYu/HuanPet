@@ -19,6 +19,7 @@ import com.example.huanpet.R;
 public class CustomTool extends LinearLayout{
     private OnLeftButtonClickListener mLeftButtonClickListener;
     private OnRightImgClickListener onRightImgClickListener;
+    private OnRightTitleClickListener onRightTitleClick;//
     private MyViewHolder mViewHolder;
     private View viewAppTitle;
 
@@ -56,10 +57,18 @@ public class CustomTool extends LinearLayout{
                 onRightImgClickListener.onRightImgClick(view);
             }
         });
+
         mViewHolder.tvRightTitle.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 onRightImgClickListener.onRightImgClick(view);
+            }
+        });
+        //
+        mViewHolder.tvRightTitle.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onRightTitleClick.onRightTitleClick(v);
             }
         });
     }
@@ -71,6 +80,7 @@ public class CustomTool extends LinearLayout{
         mViewHolder.ivRightImg.setVisibility(isRightIconVisile ? View.VISIBLE : View.INVISIBLE);
         mViewHolder.tvRightTitle.setVisibility(isRightTitleVisile ? View.VISIBLE : View.INVISIBLE);
     }
+
 
     public void setAppTitle(String title) {
         if (!TextUtils.isEmpty(title)) {
@@ -111,11 +121,22 @@ public class CustomTool extends LinearLayout{
     public void setOnRightImgClickLisrener(OnRightImgClickListener onRightImgClickListener){
         this.onRightImgClickListener=onRightImgClickListener;
     }
+
+    //
+    public void setOnRightTitleClickListener(OnRightTitleClickListener listen) {
+
+        onRightTitleClick = listen;
+    }
+
     public interface OnLeftButtonClickListener {
         void onLeftButtonClick(View v);
     }
     public interface OnRightImgClickListener{
         void onRightImgClick(View v);
+    }
+    //
+    public interface OnRightTitleClickListener{
+        void onRightTitleClick(View v);
     }
     static class MyViewHolder {
         LinearLayout lly_zong;
