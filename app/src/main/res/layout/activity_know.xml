@@ -12,6 +12,7 @@
     app:layout_heightPercent="10%"
     android:id="@+id/know_custom"></com.example.huanpet.utils.CustomTool>
     <TextView
+        android:id="@+id/tx"
         android:layout_margin="5dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
