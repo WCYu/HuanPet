@@ -33,9 +33,8 @@ import com.example.huanpet.view.order.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
-import com.example.huanpet.view.user.UserActivity;
+import com.example.huanpet.view.user.activity.UserActivity;
 import com.zaaach.citypicker.CityPickerActivity;
-
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;

@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15sp"
             android:gravity="center"
-            android:text="更换用户头像"
+            android:text="性别"
             android:textColor="@color/colorGreyDark"
             android:textSize="@dimen/text_title" />
 
@@ -26,12 +26,12 @@
             android:background="@color/colorGreyDark" />
 
         <TextView
-            android:id="@+id/but_Take_pictures"
+            android:id="@+id/textview_boy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15sp"
             android:gravity="center"
-            android:text="@string/Take_pictures"
+            android:text="@string/boy"
             android:textColor="@color/colorBlue"
             android:textSize="@dimen/text_title"/>
         <View
@@ -40,35 +40,18 @@
             android:background="@color/colorGreyDark" />
 
         <TextView
-            android:id="@+id/but_album"
+            android:id="@+id/textview_girl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="15sp"
             android:gravity="center"
-            android:text="@string/album"
+            android:text="@string/gril"
             android:textColor="@color/colorBlue"
             android:textSize="@dimen/text_title"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginTop="@dimen/text_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_corners"
-        android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/but_cancel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15sp"
-            android:gravity="center"
-            android:text="@string/cancel"
-            android:textColor="@color/colorBlue"
-            android:textSize="@dimen/text_title"/>
-
-    </LinearLayout>
 
 
 </LinearLayout>
