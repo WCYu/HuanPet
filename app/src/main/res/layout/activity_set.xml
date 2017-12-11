@@ -14,7 +14,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="0dp"
-    app:layout_heightPercent="10%"
+    app:layout_heightPercent="6%"
     android:id="@+id/jilu">
 
     <TextView
@@ -39,10 +39,15 @@
         android:layout_marginRight="14dp"
         android:src="@drawable/enter" />
 </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="6%"
         android:id="@+id/wife">
         <TextView
             android:layout_width="wrap_content"
@@ -56,20 +61,49 @@
             android:text="是否在WIFI下缓存"
             android:id="@+id/textView1" />
 
-        <ImageView
+        <!--<ImageView-->
+            <!--android:id="@+id/off"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/textView1"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginEnd="14dp"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:src="@drawable/off" />-->
+        <!--<ImageView-->
+            <!--android:visibility="gone"-->
+            <!--android:id="@+id/on"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/textView1"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginEnd="14dp"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:src="@drawable/on" />-->
+        <CheckBox
+            android:id="@+id/box"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView1"
             android:layout_alignBottom="@+id/textView1"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_marginEnd="14dp"
-            android:layout_marginRight="14dp"
-            android:src="@drawable/off" />
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/off"
+            android:button="@null" />
     </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="6%"
         android:id="@+id/clear">
         <TextView
             android:layout_width="wrap_content"
@@ -106,10 +140,15 @@
             android:layout_marginRight="12dp"
             android:src="@drawable/delete_pet" />
     </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="6%"
         android:id="@+id/pingfen">
         <TextView
             android:layout_width="wrap_content"
@@ -133,10 +172,15 @@
             android:layout_marginRight="14dp"
             android:src="@drawable/enter" />
     </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="6%"
         android:id="@+id/guanyu">
         <TextView
             android:layout_width="wrap_content"
@@ -160,10 +204,15 @@
             android:layout_marginRight="14dp"
             android:src="@drawable/enter" />
     </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_heightPercent="10%"
+        app:layout_heightPercent="6%"
         android:id="@+id/sycnc">
         <TextView
             android:layout_width="wrap_content"
