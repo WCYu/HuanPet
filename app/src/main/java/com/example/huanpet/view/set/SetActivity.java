@@ -55,7 +55,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener {
     public void initData() {
         set_custom.initViewsVisible(true,true,false,false);
         set_custom.setAppTitle("设置");
-        set_custom.setReturnBtn("   ");
+        set_custom.setReturnBtn("  ");
     }
 
     @Override

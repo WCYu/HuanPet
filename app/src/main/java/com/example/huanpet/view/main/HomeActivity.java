@@ -23,6 +23,7 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.huanpet.MainActivity;
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.CustomTool;
@@ -33,9 +34,11 @@ import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
 import com.example.huanpet.view.user.UserActivity;
+import com.zaaach.citypicker.CityPickerActivity;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
     private LinearLayout main_news;
     private LinearLayout main_pet;
@@ -55,6 +58,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private RadioButton home_screening;
     private RadioGroup home_group;
     private ListView home_list;
+    private CheckBox screening_cityName;
 
     @Override
     public int initLayoutID() {
@@ -161,7 +165,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         CheckBox screening_yuan_dan = screeningView.findViewById(R.id.screening_yuan_dan);
         CheckBox screening_pick_up = screeningView.findViewById(R.id.screening_pick_up);
         CheckBox screening_bathe = screeningView.findViewById(R.id.screening_bathe);
-        CheckBox screening_cityName = screeningView.findViewById(R.id.screening_cityName);
+        screening_cityName = screeningView.findViewById(R.id.screening_cityName);
         TextView screening_city = screeningView.findViewById(R.id.screening_city);
         initScreeningListener(screening_guo_qing);
         initScreeningListener(screening_zhong_qiu);
@@ -176,8 +180,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         screening_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(HomeActivity.this,CityActivity.class);
-                startActivity(intent);
+                startActivityForResult(new Intent(HomeActivity.this, CityPickerActivity.class),
+                        REQUEST_CODE_PICK_CITY);
             }
         });
     }
@@ -227,23 +231,28 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void initVicinityView(View vicinityView) {
         RadioGroup vicinity_group = vicinityView.findViewById(R.id.vicinity_group);
         final RadioButton vicinity_near = vicinityView.findViewById(R.id.vicinity_near);
-        RadioButton vicinity_praise = vicinityView.findViewById(R.id.vicinity_praise);
-        RadioButton vicinity_order = vicinityView.findViewById(R.id.vicinity_order);
-        RadioButton vicinity_high = vicinityView.findViewById(R.id.vicinity_high);
-        RadioButton vicinity_low = vicinityView.findViewById(R.id.vicinity_low);
+        final RadioButton vicinity_praise = vicinityView.findViewById(R.id.vicinity_praise);
+        final RadioButton vicinity_order = vicinityView.findViewById(R.id.vicinity_order);
+        final RadioButton vicinity_high = vicinityView.findViewById(R.id.vicinity_high);
+        final RadioButton vicinity_low = vicinityView.findViewById(R.id.vicinity_low);
         vicinity_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.vicinity_near:
+                        home_vicinity.setText(vicinity_near.getText());
                         break;
                     case R.id.vicinity_praise:
+                        home_vicinity.setText(vicinity_praise.getText());
                         break;
                     case R.id.vicinity_order:
+                        home_vicinity.setText(vicinity_order.getText());
                         break;
                     case R.id.vicinity_high:
+                        home_vicinity.setText(vicinity_high.getText());
                         break;
                     case R.id.vicinity_low:
+                        home_vicinity.setText(vicinity_low.getText());
                         break;
                 }
             }
@@ -313,5 +322,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 break;
         }
         startActivity(intent);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK){
+            if (data != null){
+                String city = data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY);
+                screening_cityName.setText(city);
+            }
+        }
     }
 }
