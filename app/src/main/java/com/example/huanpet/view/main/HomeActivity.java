@@ -156,15 +156,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void initScreeningView(View screeningView) {
         Button screening_determine = screeningView.findViewById(R.id.screening_determine);
         Button screening_reset = screeningView.findViewById(R.id.screening_reset);
-        CheckBox screening_guo_qing = screeningView.findViewById(R.id.screening_guo_qing);
-        CheckBox screening_zhong_qiu = screeningView.findViewById(R.id.screening_zhong_qiu);
-        CheckBox screening_duan_wu = screeningView.findViewById(R.id.screening_duan_wu);
-        CheckBox screening_lao_dong = screeningView.findViewById(R.id.screening_lao_dong);
-        CheckBox screening_qing_ming = screeningView.findViewById(R.id.screening_qing_ming);
-        CheckBox screening_chun_jie = screeningView.findViewById(R.id.screening_chun_jie);
-        CheckBox screening_yuan_dan = screeningView.findViewById(R.id.screening_yuan_dan);
-        CheckBox screening_pick_up = screeningView.findViewById(R.id.screening_pick_up);
-        CheckBox screening_bathe = screeningView.findViewById(R.id.screening_bathe);
+        final CheckBox screening_guo_qing = screeningView.findViewById(R.id.screening_guo_qing);
+        final CheckBox screening_zhong_qiu = screeningView.findViewById(R.id.screening_zhong_qiu);
+        final CheckBox screening_duan_wu = screeningView.findViewById(R.id.screening_duan_wu);
+        final CheckBox screening_lao_dong = screeningView.findViewById(R.id.screening_lao_dong);
+        final CheckBox screening_qing_ming = screeningView.findViewById(R.id.screening_qing_ming);
+        final CheckBox screening_chun_jie = screeningView.findViewById(R.id.screening_chun_jie);
+        final CheckBox screening_yuan_dan = screeningView.findViewById(R.id.screening_yuan_dan);
+        final CheckBox screening_pick_up = screeningView.findViewById(R.id.screening_pick_up);
+        final CheckBox screening_bathe = screeningView.findViewById(R.id.screening_bathe);
         screening_cityName = screeningView.findViewById(R.id.screening_cityName);
         TextView screening_city = screeningView.findViewById(R.id.screening_city);
         initScreeningListener(screening_guo_qing);
@@ -177,11 +177,38 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         initScreeningListener(screening_pick_up);
         initScreeningListener(screening_bathe);
         initScreeningListener(screening_cityName);
+
+        //城市选择监听
         screening_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(HomeActivity.this, CityPickerActivity.class),
                         REQUEST_CODE_PICK_CITY);
+            }
+        });
+
+        //确定监听
+        screening_determine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //重置监听
+        screening_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                screening_guo_qing.setChecked(false);
+                screening_zhong_qiu.setChecked(false);
+                screening_duan_wu.setChecked(false);
+                screening_lao_dong.setChecked(false);
+                screening_qing_ming.setChecked(false);
+                screening_chun_jie.setChecked(false);
+                screening_yuan_dan.setChecked(false);
+                screening_pick_up.setChecked(false);
+                screening_bathe.setChecked(false);
+                screening_cityName.setChecked(false);
             }
         });
     }
@@ -190,7 +217,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     Toast.makeText(HomeActivity.this, buttonView.getText(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -323,10 +350,11 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         }
         startActivity(intent);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK){
-            if (data != null){
+        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK) {
+            if (data != null) {
                 String city = data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY);
                 screening_cityName.setText(city);
             }
