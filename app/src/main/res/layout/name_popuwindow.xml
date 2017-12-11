@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGreyDark"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_corners"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            android:gravity="center"
+            android:text="性别"
+            android:textColor="@color/colorGreyDark"
+            android:textSize="@dimen/text_title" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/colorGreyDark" />
+
+        <TextView
+            android:id="@+id/textview_boy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            android:gravity="center"
+            android:text="@string/boy"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/text_title"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="@color/colorGreyDark" />
+
+        <TextView
+            android:id="@+id/textview_girl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15sp"
+            android:gravity="center"
+            android:text="@string/gril"
+            android:textColor="@color/colorBlue"
+            android:textSize="@dimen/text_title"/>
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

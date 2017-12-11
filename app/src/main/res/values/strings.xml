@@ -16,4 +16,16 @@
     <string name="Take_pictures">拍照</string>
     <string name="album">相册</string>
     <string name="cancel">取消</string>
+    <string name="boy">男</string>
+    <string name="gril">女</string>
+    <string name="name_edittext">请输入16字以内的名称(中文,数字,字母)</string>
+    <string name="name_phone">输入手机号</string>
+    <string name="name_wechat">输入微信号</string>
+    <string name="name_QQ">输入QQ号</string>
+    <string name="name_city">输入具体街道-小区-栋-号</string>
+    <string name="title_activity_modify_the_name">ModifyTheNameActivity</string>
+    <string name="title_activity_we_chat">WeChatActivity</string>
+    <string name="title_activity_phone">PhoneActivity</string>
+    <string name="title_activity_qq">QQActivity</string>
+    <string name="title_activity_contact_address">ContactAddressActivity</string>
 </resources>

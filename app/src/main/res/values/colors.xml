@@ -21,7 +21,7 @@
 
     <!--红-->
     <color name="colorRed">#FF3333</color>
-    <color name="colorBlue">#9BC9FB</color>
+    <color name="colorBlue">#1B7DDC</color>
     <!--灰-->
     <color name="colorGreyFill">#F7F7F7</color>
     <color name="colorGrey">#F5F4F4</color>
@@ -29,4 +29,8 @@
     <color name="colorGreyBottom">#E3E3E3</color>
     <color name="colorGreyLight">#CCCCCC</color>
     <color name="colorGreyDark">#999999</color>
+
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="login_button_normal">#169fff</color>
+    <color name="login_button_pressed">#1073b9</color>
 </resources>

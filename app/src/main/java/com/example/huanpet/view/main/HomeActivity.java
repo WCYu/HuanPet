@@ -1,7 +1,6 @@
 package com.example.huanpet.view.main;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -15,7 +14,7 @@ import com.example.huanpet.view.order.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
-import com.example.huanpet.view.user.UserActivity;
+import com.example.huanpet.view.user.activity.UserActivity;
 
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
 
