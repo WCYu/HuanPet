@@ -10,6 +10,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.huanpet.R;
+import com.example.huanpet.view.main.HomeActivity;
 import com.example.huanpet.view.pet.View.TipPop;
 
 import java.util.concurrent.TimeUnit;
@@ -19,8 +20,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 
-public class PetActivity extends AppCompatActivity implements View.OnClickListener{
-
+public class PetActivity extends AppCompatActivity implements View.OnClickListener {
 
 
     private RelativeLayout title_view;
@@ -28,6 +28,7 @@ public class PetActivity extends AppCompatActivity implements View.OnClickListen
     private TipPop tipPop;
     private View titleView;
     private ImageView tz;
+    private ImageView fhhh;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,15 +42,21 @@ public class PetActivity extends AppCompatActivity implements View.OnClickListen
 
         tipPop = TipPop.getInstance(this);
 
-
+        fhhh = (ImageView) findViewById(R.id.fhhh);
+        fhhh.setOnClickListener(this);
         titleView = findViewById(R.id.title_view);
         tz = (ImageView) findViewById(R.id.tz);
         tz.setOnClickListener(this);
         title_view = (RelativeLayout) findViewById(R.id.title_view);
         title_view.setOnClickListener(this);
 
-
-
+fhhh.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+      Intent in=new Intent(PetActivity.this, HomeActivity.class);
+      startActivity(in);
+    }
+});
         tz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -9,13 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huanpet.R;
-import com.example.huanpet.custom.ClearEditText;
+import com.example.huanpet.custom.EditTextWithDelete;
 
 public class WeightActivity extends AppCompatActivity {
 
-    private ClearEditText clearEditText;
+    private EditTextWithDelete clearEditText;
     private TextView wc;
-    private ClearEditText searchEditText;
+    private EditTextWithDelete searchEditText;
     private TextView button_clear;
 
     @Override
@@ -30,7 +30,7 @@ public class WeightActivity extends AppCompatActivity {
 
     private void initView() {
         wc = (TextView) findViewById(R.id.wc);
-        searchEditText = (ClearEditText) findViewById(R.id.searchEditText);
+        searchEditText = (EditTextWithDelete) findViewById(R.id.searchEditText);
         button_clear = (TextView) findViewById(R.id.button_clear);
         wc.setOnClickListener(new View.OnClickListener() {
             @Override

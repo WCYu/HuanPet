@@ -67,6 +67,8 @@ public class PetAddActivity extends AppCompatActivity implements View.OnClickLis
     private TextView cwcc;
     private ImageView fanzhuan;
     private TextView tv_mSex;
+    private ImageView fh;
+    private RelativeLayout title_view;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +111,18 @@ public class PetAddActivity extends AppCompatActivity implements View.OnClickLis
         edit.setOnClickListener(this);
         quan = (LinearLayout) findViewById(R.id.quan);
         quan.setOnClickListener(this);
+        fh = (ImageView) findViewById(R.id.fh);
+        fh.setOnClickListener(this);
+        title_view = (RelativeLayout) findViewById(R.id.title_view);
+        title_view.setOnClickListener(this);
         mBirth = (TextView) findViewById(R.id.mBirth);
         mSex = (TextView) findViewById(R.id.tv_mSex);
-        fanzhuan = (ImageView) findViewById(R.id.fanzhuan);
-        fanzhuan.setOnClickListener(this);
+
         tv_mSex = (TextView) findViewById(R.id.tv_mSex);
         tv_mSex.setOnClickListener(this);
         initListener();
+
+
 
 
     }
@@ -156,10 +163,10 @@ public class PetAddActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(in);
             }
         });
-        fanzhuan.setOnClickListener(new View.OnClickListener() {
+        fh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(PetAddActivity.this,PetActivity.class);
+                Intent in = new Intent(PetAddActivity.this, PetActivity.class);
                 startActivity(in);
             }
         });
