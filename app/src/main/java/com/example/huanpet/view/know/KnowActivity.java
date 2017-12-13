@@ -57,48 +57,6 @@ public class KnowActivity extends BaseActivity {
                 finish();
             }
         });
-        tx.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                HashMap<String, String> stringStringHashMap = new HashMap<>();
-                stringStringHashMap.put("sign","7dd7276f7a7b1b657e0088707b92ca08");
-                stringStringHashMap.put("ip","172.20.10.3");
-                stringStringHashMap.put("token","7dd7276f7a7b1b657e0088707b92ca08");
-                stringStringHashMap.put("channel","android");
-                RequestBody requestBody = new RequestBody() {
-                    @Override
-                    public MediaType contentType() {
-                        return null;
-                    }
-
-                    @Override
-                    public void writeTo(BufferedSink sink) throws IOException {
-
-                    }
-                };
-                OkhttpUtil.getInstance().post("http://123.56.150.230:8885/dog_family/", stringStringHashMap,requestBody, new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                Toast.makeText(KnowActivity.this, response.body().string()+"", Toast.LENGTH_SHORT).show();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                    }
-                });
-            }
-        });
     }
 
     @Override
