@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.PreferencesUtil;
-import com.example.huanpet.view.main.HomeActivity;
+import com.example.huanpet.view.main.view.HomeActivity;
 
 import java.util.ArrayList;
 
@@ -72,7 +72,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if(PreferencesUtil.getInstance().getWelcomeId()!=0){
             Intent in = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(in);
-            finish();
         }
         welcome_pager = (ViewPager) findViewById(R.id.welcome_pager);
         start_btn = (Button) findViewById(R.id.start_btn);

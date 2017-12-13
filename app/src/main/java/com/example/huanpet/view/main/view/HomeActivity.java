@@ -1,16 +1,13 @@
-package com.example.huanpet.view.main;
+package com.example.huanpet.view.main.view;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -23,19 +20,28 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.huanpet.MainActivity;
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
+import com.example.huanpet.entity.HomeBean;
 import com.example.huanpet.utils.CustomTool;
 import com.example.huanpet.view.know.KnowActivity;
+import com.example.huanpet.view.main.adapter.HomeListAdapter;
+import com.example.huanpet.view.main.presenter.HomePresenter;
 import com.example.huanpet.view.news.NewsActivity;
 import com.example.huanpet.view.order.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
 import com.example.huanpet.view.user.activity.UserActivity;
+import com.google.gson.Gson;
 import com.zaaach.citypicker.CityPickerActivity;
-public class HomeActivity extends BaseActivity implements View.OnClickListener {
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
@@ -58,6 +64,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private RadioGroup home_group;
     private ListView home_list;
     private CheckBox screening_cityName;
+    private HomePresenter homePresenter;
 
     @Override
     public int initLayoutID() {
@@ -85,6 +92,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         home_pettype = findViewById(R.id.home_pettype);
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
+        homePresenter = new HomePresenter(this);
+        int mPage=1;
+        Map param=new HashMap();
+        param.put("orderBy", "distance asc");
+        param.put("coordX", 40.22);
+        param.put("coordY",116.23 );
+        param.put("beginIndex", (mPage - 1) * 10);
+        param.put("endIndex", mPage * 10);
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
     }
 
     //初始化适配器
@@ -155,15 +171,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private void initScreeningView(View screeningView) {
         Button screening_determine = screeningView.findViewById(R.id.screening_determine);
         Button screening_reset = screeningView.findViewById(R.id.screening_reset);
-        CheckBox screening_guo_qing = screeningView.findViewById(R.id.screening_guo_qing);
-        CheckBox screening_zhong_qiu = screeningView.findViewById(R.id.screening_zhong_qiu);
-        CheckBox screening_duan_wu = screeningView.findViewById(R.id.screening_duan_wu);
-        CheckBox screening_lao_dong = screeningView.findViewById(R.id.screening_lao_dong);
-        CheckBox screening_qing_ming = screeningView.findViewById(R.id.screening_qing_ming);
-        CheckBox screening_chun_jie = screeningView.findViewById(R.id.screening_chun_jie);
-        CheckBox screening_yuan_dan = screeningView.findViewById(R.id.screening_yuan_dan);
-        CheckBox screening_pick_up = screeningView.findViewById(R.id.screening_pick_up);
-        CheckBox screening_bathe = screeningView.findViewById(R.id.screening_bathe);
+        final CheckBox screening_guo_qing = screeningView.findViewById(R.id.screening_guo_qing);
+        final CheckBox screening_zhong_qiu = screeningView.findViewById(R.id.screening_zhong_qiu);
+        final CheckBox screening_duan_wu = screeningView.findViewById(R.id.screening_duan_wu);
+        final CheckBox screening_lao_dong = screeningView.findViewById(R.id.screening_lao_dong);
+        final CheckBox screening_qing_ming = screeningView.findViewById(R.id.screening_qing_ming);
+        final CheckBox screening_chun_jie = screeningView.findViewById(R.id.screening_chun_jie);
+        final CheckBox screening_yuan_dan = screeningView.findViewById(R.id.screening_yuan_dan);
+        final CheckBox screening_pick_up = screeningView.findViewById(R.id.screening_pick_up);
+        final CheckBox screening_bathe = screeningView.findViewById(R.id.screening_bathe);
         screening_cityName = screeningView.findViewById(R.id.screening_cityName);
         TextView screening_city = screeningView.findViewById(R.id.screening_city);
         initScreeningListener(screening_guo_qing);
@@ -176,11 +192,38 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         initScreeningListener(screening_pick_up);
         initScreeningListener(screening_bathe);
         initScreeningListener(screening_cityName);
+
+        //城市选择监听
         screening_city.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityForResult(new Intent(HomeActivity.this, CityPickerActivity.class),
                         REQUEST_CODE_PICK_CITY);
+            }
+        });
+
+        //确定监听
+        screening_determine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        //重置监听
+        screening_reset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                screening_guo_qing.setChecked(false);
+                screening_zhong_qiu.setChecked(false);
+                screening_duan_wu.setChecked(false);
+                screening_lao_dong.setChecked(false);
+                screening_qing_ming.setChecked(false);
+                screening_chun_jie.setChecked(false);
+                screening_yuan_dan.setChecked(false);
+                screening_pick_up.setChecked(false);
+                screening_bathe.setChecked(false);
+                screening_cityName.setChecked(false);
             }
         });
     }
@@ -189,7 +232,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     Toast.makeText(HomeActivity.this, buttonView.getText(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -322,13 +365,25 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         }
         startActivity(intent);
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK){
-            if (data != null){
+        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK) {
+            if (data != null) {
                 String city = data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY);
                 screening_cityName.setText(city);
             }
         }
+    }
+
+    @Override
+    public void getData(final String data) {
+        final String str=data;
+        Log.e("TAG-----------",data);
+        Gson gs=new Gson();
+        HomeBean homeBean = gs.fromJson(str, HomeBean.class);
+        List<HomeBean.DescBean> desc = homeBean.getDesc();
+        HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);
+        home_list.setAdapter(homeListAdapter);
     }
 }
