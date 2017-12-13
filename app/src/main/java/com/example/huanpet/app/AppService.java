@@ -2,6 +2,7 @@ package com.example.huanpet.app;
 
 import android.app.Application;
 
+import com.example.huanpet.utils.util.AppUtils;
 import com.example.huanpet.view.user.ScreenAdaptation;
 
 /**
@@ -19,6 +20,7 @@ public class AppService extends Application {
         super.onCreate();
         mApplication=this;
         //需要传入ui设计给的大小
+        AppUtils.setAppContext(this);
         new ScreenAdaptation(this, 720,1280).register();
     }
 }
