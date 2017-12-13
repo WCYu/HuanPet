@@ -31,6 +31,7 @@ public class TypeofpetActivity extends AppCompatActivity {
         add("狗");
         add("猫");
         add("小宠");
+
     }};
 
     private ArrayList<Fragment> fragmentList = new ArrayList<Fragment>() {{
