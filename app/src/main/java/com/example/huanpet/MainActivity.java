@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.PreferencesUtil;
-import com.example.huanpet.view.main.HomeActivity;
+import com.example.huanpet.view.main.view.HomeActivity;
 
 import java.util.ArrayList;
 
