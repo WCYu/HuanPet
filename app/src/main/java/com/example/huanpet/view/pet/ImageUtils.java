@@ -42,6 +42,7 @@ public class ImageUtils {
             } catch (FileNotFoundException e) {
                 photoFile.delete();
                 localPath = null;
+
                 e.printStackTrace();
             } catch (IOException e) {
                 photoFile.delete();
