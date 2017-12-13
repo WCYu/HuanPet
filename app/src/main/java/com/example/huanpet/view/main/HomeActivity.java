@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +37,8 @@ import com.example.huanpet.view.set.SetActivity;
 import com.example.huanpet.view.user.activity.UserActivity;
 import com.zaaach.citypicker.CityPickerActivity;
 public class HomeActivity extends BaseActivity implements View.OnClickListener {
-
+    //记录用户首次点击返回键的时间
+    private long firstTime = 0;
     private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
     private LinearLayout main_news;
@@ -330,5 +332,20 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 screening_cityName.setText(city);
             }
         }
+    }
+    //双击退出程序
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            long secondTime = System.currentTimeMillis();
+            if (secondTime - firstTime > 2000) {
+                Toast.makeText(HomeActivity.this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+                firstTime = secondTime;
+                return true;
+            } else {
+                System.exit(0);
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -28,4 +28,15 @@
     <string name="title_activity_phone">PhoneActivity</string>
     <string name="title_activity_qq">QQActivity</string>
     <string name="title_activity_contact_address">ContactAddressActivity</string>
+    <string name="title_activity_sign_in">SignInActivity</string>
+    <!-- 自定义 -->
+    <color name="edit_font_color">#B7B7B7</color>
+    <string name="register_welcome_text">欢迎您加入宠物寄养</string>
+    <string name="register_phone_hint">请输入手机号码</string>
+    <string name="register_get_code">获取验证码</string>
+    <string name="register_code_hint">请输入验证码</string>
+    <string name="wangji_pwd">忘记密码</string>
+    <string name="input_pwd_hint">请输入密码</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="register_name_hint">请输入用户名</string>
 </resources>
