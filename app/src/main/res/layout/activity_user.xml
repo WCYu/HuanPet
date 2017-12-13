@@ -10,6 +10,8 @@
     android:layout_width="wrap_content"
     android:orientation="vertical"
     android:layout_height="wrap_content">
+
+
     <com.example.huanpet.utils.CustomTool
         android:id="@+id/customtool_user"
         android:layout_width="match_parent"
@@ -23,7 +25,7 @@
 
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="15%"
+        app:layout_heightPercent="13%"
         android:id="@+id/Head_portrait"
         android:layout_width="match_parent"
         android:orientation="horizontal"
@@ -64,7 +66,7 @@
 
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%"
+        app:layout_heightPercent="8%"
         android:id="@+id/Name"
         android:layout_width="match_parent"
         android:layout_height="100px"
@@ -106,7 +108,7 @@
 
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%"
+        app:layout_heightPercent="8%"
         android:id="@+id/Gender"
         android:layout_width="match_parent"
         android:layout_height="100px"
@@ -148,7 +150,7 @@
 
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%"
+        app:layout_heightPercent="8%"
         android:id="@+id/Date_of_birth"
         android:layout_width="match_parent"
         android:layout_height="100px"
@@ -196,7 +198,7 @@
 
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%"
+        app:layout_heightPercent="8%"
         android:id="@+id/Mobile_phone"
         android:layout_width="match_parent"
         android:layout_height="100px"
@@ -238,7 +240,7 @@
 
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%"
+        app:layout_heightPercent="8%"
         android:id="@+id/WeChat"
         android:layout_width="match_parent"
         android:layout_height="100px"
@@ -279,7 +281,7 @@
         android:background="#DDDDDD" />
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%"
+        app:layout_heightPercent="8%"
         android:id="@+id/QQ"
         android:layout_width="match_parent"
         android:layout_height="100px"
@@ -319,7 +321,7 @@
 
     <LinearLayout
         app:layout_widthPercent="100%"
-        app:layout_heightPercent="7%"
+        app:layout_heightPercent="8%"
         android:id="@+id/Contact_address"
         android:layout_width="match_parent"
         android:layout_height="100px"
