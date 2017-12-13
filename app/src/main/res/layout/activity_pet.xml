@@ -14,10 +14,10 @@
         android:layout_marginTop="10dp">
         <ImageView
             android:layout_marginTop="10dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@mipmap/fanzhuan" />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+android:id="@+id/fhhh"
+            android:src="@drawable/back_gray" />
 
         <TextView
 
@@ -41,5 +41,6 @@
 
 
     </RelativeLayout>
+
 
 </LinearLayout>

@@ -8,6 +8,7 @@ import com.example.huanpet.R;
 public class ImmuneActivity extends AppCompatActivity {
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_immune);

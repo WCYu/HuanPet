@@ -1,0 +1,82 @@
+package com.example.huanpet.view.user.SignIn;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import com.example.huanpet.R;
+import com.example.huanpet.app.BaseActivity;
+
+public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+
+    private Button back_header;
+    private Button header_title;
+    private EditText edit_phone;
+    private Button btn_get_code;
+    private EditText edit_code;
+    private EditText edit_username;
+    private EditText edit_password;
+    private ImageButton btn_register;
+    private ImageView main_login_qq;
+    private ImageView main_login_wachat;
+    private LinearLayout container;
+
+    @Override
+    public int initLayoutID() {
+        return R.layout.activity_register;
+    }
+
+    @Override
+    public void initView() {
+        back_header = (Button) findViewById(R.id.back_header);
+        header_title = (Button) findViewById(R.id.header_title);
+        edit_phone = (EditText) findViewById(R.id.edit_phone);
+        btn_get_code = (Button) findViewById(R.id.btn_get_code);
+        edit_code = (EditText) findViewById(R.id.edit_code);
+        edit_username = (EditText) findViewById(R.id.edit_username);
+        edit_password = (EditText) findViewById(R.id.edit_password);
+        btn_register = (ImageButton) findViewById(R.id.btn_register);
+        main_login_qq = (ImageView) findViewById(R.id.main_login_qq);
+        main_login_wachat = (ImageView) findViewById(R.id.main_login_wachat);
+        container = (LinearLayout) findViewById(R.id.container);
+
+        header_title.setOnClickListener(this);
+    }
+    @Override
+    public void onClick(View v) {
+            switch (v.getId()){
+                case R.id.header_title:
+                    Intent intentheader = new Intent(RegisterActivity.this,SignInActivity.class);
+                    startActivity(intentheader);
+                    break;
+            }
+    }
+    @Override
+    public void initAdapter() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void setMyAppTitle() {
+
+    }
+
+
+}

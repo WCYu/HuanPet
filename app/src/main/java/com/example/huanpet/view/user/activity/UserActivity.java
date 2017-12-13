@@ -64,14 +64,16 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     private LinearLayout QQ;
     private LinearLayout Contact_address;
     private ImageView imageview_head;
-
     private PopupWindow window;
     protected static Uri tempUri;
     private UserManagers userManagers;
     private String verifycode;
-    protected static final int CHOOSE_PICTURE = 0;
-    protected static final int TAKE_PICTURE = 1;
-    private static final int CROP_SMALL_PICTURE = 2;
+    private static final int PHOTO_REQUEST_CAREMA = 1;// 拍照
+    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
+    private static final int PHOTO_REQUEST_CUT = 3;// 结果
+    private File tempFile;
+    /* 头像名称 */
+    private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
     private CustomTool customtool_user;
 
     private TextView textview_name;
@@ -188,27 +190,51 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     }
 
     private void showDateDialog() {
-        final AlertDialog dialog = new AlertDialog.Builder(UserActivity.this)
-                .create();
-        dialog.show();
-        Window window = dialog.getWindow();
-        // 设置布局
-        window.setContentView(R.layout.datepicker_layout);
-        // 设置宽高
-        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        // 设置弹出的动画效果
-        window.setWindowAnimations(R.style.AnimBottom);
+//        final AlertDialog dialog = new AlertDialog.Builder(UserActivity.this)
+//                .create();
+//        dialog.show();
+//        Window window = dialog.getWindow();
+//        // 设置布局
+//        window.setContentView(R.layout.datepicker_layout);
+//        // 设置宽高
+//        window.setLayout(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+//        // 设置弹出的动画效果
+//        window.setWindowAnimations(R.style.AnimBottom);
+
+
+        View views = View.inflate(this, R.layout.datepicker_layout, null);
+
+        window = new PopupWindow(views, ActionBar.LayoutParams.MATCH_PARENT,
+                ViewPager.LayoutParams.WRAP_CONTENT,
+                true);
+        window.setAnimationStyle(R.style.style_dialog);
+//        views.getBackground().setAlpha(140);
+        window.setBackgroundDrawable(new BitmapDrawable());
+        //出现位置
+        window.showAtLocation(Head_portrait, Gravity.BOTTOM, 0, 0);
+        // 设置PopupWindow以外部分的背景颜色  有一种变暗的效果
+        final WindowManager.LayoutParams wlBackground = getWindow().getAttributes();
+        wlBackground.alpha = 0.5f;  // 0.0 完全不透明,1.0完全透明
+        getWindow().setAttributes(wlBackground);
+        //popuwindow消失时，恢复原来的颜色
+        window.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                wlBackground.alpha = 1.0f;
+                getWindow().setAttributes(wlBackground);
+            }
+        });
 
 
         Calendar c = Calendar.getInstance();
         int curYear = c.get(Calendar.YEAR);
         int curMonth = c.get(Calendar.MONTH) + 1;//通过Calendar算出的月数要+1
         int curDate = c.get(Calendar.DATE);
-        year = (WheelView) window.findViewById(R.id.year);
+        year = (WheelView) views.findViewById(R.id.year);
         initYear();
-        month = (WheelView) window.findViewById(R.id.month);
+        month = (WheelView) views.findViewById(R.id.month);
         initMonth();
-        day = (WheelView) window.findViewById(R.id.day);
+        day = (WheelView) views.findViewById(R.id.day);
         initDay(curYear, curMonth);
 
 
@@ -220,31 +246,33 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         day.setVisibleItems(7);
 
         // 设置监听
-        Button ok = (Button) window.findViewById(R.id.set);
-        Button cancel = (Button) window.findViewById(R.id.cancel);
+        Button ok = (Button) views.findViewById(R.id.set);
+        Button cancel = (Button) views.findViewById(R.id.cancel);
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String str = String.format(Locale.CHINA, "%4d年%2d月%2d日", year.getCurrentItem() + 1950, month.getCurrentItem() + 1, day.getCurrentItem() + 1);
 //                Toast.makeText(UserActivity.this, str, Toast.LENGTH_LONG).show();
                 textview_Date_of_birth.setText(str);
-                dialog.cancel();
+//                dialog.cancel();
+                window.dismiss();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.cancel();
+//                dialog.cancel();
+                window.dismiss();
             }
         });
-        LinearLayout cancelLayout = (LinearLayout) window.findViewById(R.id.view_none);
-        cancelLayout.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                dialog.cancel();
-                return false;
-            }
-        });
+//        LinearLayout cancelLayout = (LinearLayout) window.findViewById(R.id.view_none);
+//        cancelLayout.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent motionEvent) {
+//                dialog.cancel();
+//                return false;
+//            }
+//        });
 
     }
 
@@ -422,182 +450,216 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
 
     //拍照作为头像
     private void getImageBenDi() {
-        Intent openCameraIntent = new Intent(
-                MediaStore.ACTION_IMAGE_CAPTURE);
-        tempUri = Uri.fromFile(new File(Environment
-                .getExternalStorageDirectory(), "image.jpg"));
-        // 指定照片保存路径（SD卡），image.jpg为一个临时文件，每次拍照后这个图片都会被替换
-        openCameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, tempUri);
-        startActivityForResult(openCameraIntent, TAKE_PICTURE);
+        // 激活相机
+        Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+        // 判断存储卡是否可以用，可用进行存储
+        if (hasSdcard()) {
+            tempFile = new File(Environment.getExternalStorageDirectory(),PHOTO_FILE_NAME);
+            // 从文件中创建uri
+            Uri uri = Uri.fromFile(tempFile);
+
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
+        }
+        // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CAREMA
+        startActivityForResult(intent, PHOTO_REQUEST_CAREMA);
+    }
+    /*
+    *   判断sdcard是否被挂载
+    */
+    private boolean hasSdcard() {
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // 从本地相册选取图片作为头像
     private void choseHeadImageFromGallery() {
-        Intent intentFromGallery = new Intent(Intent.ACTION_PICK, null);
-        // 设置文件类型
-        intentFromGallery.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(intentFromGallery, CHOOSE_PICTURE);
-//        finish();
+        // 激活系统图库，选择一张图片
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_GALLERY
+        startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
     }
+    /*
+       * 剪切图片
+       */
+    private void crop(Uri uri) {
+        // 裁剪图片意图
+        Intent intent = new Intent("com.android.camera.action.CROP");
+        intent.setDataAndType(uri, "image/*");
+        intent.putExtra("crop", "true");
+        // 裁剪框的比例，1：1
+        intent.putExtra("aspectX", 1);
+        intent.putExtra("aspectY", 1);
+        // 裁剪后输出图片的尺寸大小
+        intent.putExtra("outputX", 250);
+        intent.putExtra("outputY", 250);
+
+        intent.putExtra("outputFormat", "JPEG");// 图片格式
+        intent.putExtra("noFaceDetection", true);// 取消人脸识别
+        intent.putExtra("return-data", true);
+        // 开启一个带有返回值的Activity，请求码为PHOTO_REQUEST_CUT
+        startActivityForResult(intent, PHOTO_REQUEST_CUT);
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) { // 如果返回码是可以用的
-            switch (requestCode) {
-                case CHOOSE_PICTURE:
-                    startPhotoZoom(data.getData()); // 开始对图片进行裁剪处理
-                    break;
-                case TAKE_PICTURE:
-                    startPhotoZoom(tempUri);
-                    break;
-                case CROP_SMALL_PICTURE:
-                    if (data != null) {
-                        setImageToView(data); // 让刚才选择裁剪得到的图片显示在界面上
-                    }
-                    break;
+        if (requestCode == PHOTO_REQUEST_GALLERY) {
+            // 从相册返回的数据
+            if (data != null) {
+                // 得到图片的全路径
+                Uri uri = data.getData();
+                crop(uri);
             }
-        }
-                 if(data!=null) {
-                     if (requestCode == 0) {
-                         //用户名回传的数据
-                         Bundle bundle_name = data.getExtras();
-                         String name = bundle_name.getString("name");
-                         textview_name.setText(name);
-                     } else if (requestCode == 1) {
-                         //手机回传的数据
-                         Bundle bundle_phone = data.getExtras();
-                         String phone = bundle_phone.getString("phone");
-                         textview_Phone.setText(phone);
-                     } else if (requestCode == 2) {
-                         //微信回传的数据
-                         Bundle bundle_wechat = data.getExtras();
-                         String wechat = bundle_wechat.getString("wechat");
-                         textview_WeChat.setText(wechat);
 
-                     } else if (requestCode == 3) {
-                         //QQ回传的数据
-                         Bundle bundle_QQ = data.getExtras();
-                         String QQ = bundle_QQ.getString("QQ");
-                         textview_qq.setText(QQ);
-                     } else if (requestCode == 4) {
-                         //联系地址回传的数据
-                         Bundle bundle_contactaddress = data.getExtras();
-                         String contactaddress = bundle_contactaddress.getString("contactaddress");
-                         textview_Contact_address.setText(contactaddress);
-                     }
-                 }
+        } else if (requestCode == PHOTO_REQUEST_CAREMA) {
+            // 从相机返回的数据
+            if (data!=null&&hasSdcard()) {
+                crop(Uri.fromFile(tempFile));
+            } else {
+                Toast.makeText(UserActivity.this, "未找到存储卡，无法存储照片！",Toast.LENGTH_SHORT).show();
+            }
 
+        } else if (requestCode == PHOTO_REQUEST_CUT) {
+            // 从剪切图片返回的数据
+            if (data != null) {
+                //获取Bitmap图片
+                Bitmap bitmap = data.getParcelableExtra("data");
+                //剪切图片
+//                uploadPic(bitmap);
+                Bitmap photo = ImageUtils.toRoundBitmap(bitmap);// 这个时候的图片已经被处理成圆形的了
+                //设置图片
+                imageview_head.setImageBitmap(photo);
+                //popupwindow消失,系统背景颜色改变
+                window.dismiss();
+                WindowManager.LayoutParams params = getWindow().getAttributes();
+                params.alpha = 1f;
+                getWindow().setAttributes(params);
+                Toast.makeText(this, "已提交申请，待审核", Toast.LENGTH_SHORT).show();
+            }
+            try {
+                // 将临时文件删除
+                tempFile.delete();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
 
-    }
+            if (data != null) {
+                if (requestCode == 0) {
+                    //用户名回传的数据
+                    Bundle bundle_name = data.getExtras();
+                    String name = bundle_name.getString("name");
+                    textview_name.setText(name);
+                } else if (requestCode == 1) {
+                    //手机回传的数据
+                    Bundle bundle_phone = data.getExtras();
+                    String phone = bundle_phone.getString("phone");
+                    textview_Phone.setText(phone);
+                } else if (requestCode == 2) {
+                    //微信回传的数据
+                    Bundle bundle_wechat = data.getExtras();
+                    String wechat = bundle_wechat.getString("wechat");
+                    textview_WeChat.setText(wechat);
 
-    protected void startPhotoZoom(Uri uri) {
-        if (uri == null) {
-            Log.i("tag", "The uri is not exist.");
-        }
-        tempUri = uri;
-        Intent intent = new Intent("com.android.camera.action.CROP");
-        intent.setDataAndType(uri, "image/*");
-        // 设置裁剪
-        intent.putExtra("crop", "true");
-        // aspectX aspectY 是宽高的比例
-        intent.putExtra("aspectX", 1);
-        intent.putExtra("aspectY", 1);
-        // outputX outputY 是裁剪图片宽高
-        intent.putExtra("outputX", 150);
-        intent.putExtra("outputY", 150);
-        intent.putExtra("return-data", true);
-        tempUri = null;
-        startActivityForResult(intent, CROP_SMALL_PICTURE);
-    }
-
-    protected void setImageToView(Intent data) {
-        Bundle extras = data.getExtras();
-        if (extras != null) {
-            Bitmap photo = extras.getParcelable("data");
-            ImageUtils.toRoundBitmap(photo);
-            imageview_head.setImageBitmap(photo);
-            uploadPic(photo);
-        }
-    }
-
-    private void uploadPic(Bitmap bitmap) {
-        // 上传至服务器
-        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
-        // 注意这里得到的图片已经是圆形图片了
-        // bitmap是没有做个圆形处理的，但已经被裁剪了
-        final String imagePath = ImageUtils.savePhoto(bitmap, Environment
-                .getExternalStorageDirectory().getAbsolutePath(), String
-                .valueOf(System.currentTimeMillis()));
-        if (imagePath != null) {
-//            String url = "http://my.cntv.cn/intf/napi/api.php" + "?client="
-//                    + "cbox_mobile" + "&method=" + "user.alterUserFace"
-//                    + "&userid=" + mUserManager.getUserId();
-            String url = "http://my.cntv.cn/intf/napi/api.php";
-            Log.e("TAG", "-----verifycode----" + "开始");
-            OkHttpClient okHttpClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
-                List<Cookie> cooKies = new ArrayList<>();
-
-                @Override
-                public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-                    cooKies = cookies;
-                    Log.e("TAG", "-----verifycode----" + "进行中");
-                    for (Cookie cookie : cooKies) {
-                        Log.e("TAG", "-----verifycode----" + cookie.value());
-                        if ("verifycode".equals(cookie.name())) {
-                            verifycode = cookie.value();
-                        }
-                    }
+                } else if (requestCode == 3) {
+                    //QQ回传的数据
+                    Bundle bundle_QQ = data.getExtras();
+                    String QQ = bundle_QQ.getString("QQ");
+                    textview_qq.setText(QQ);
+                } else if (requestCode == 4) {
+                    //联系地址回传的数据
+                    Bundle bundle_contactaddress = data.getExtras();
+                    String contactaddress = bundle_contactaddress.getString("contactaddress");
+                    textview_Contact_address.setText(contactaddress);
                 }
+            }
 
-                @Override
-                public List<Cookie> loadForRequest(HttpUrl url) {
-                    return cooKies;
-                }
-            }).build();
-            Log.e("TAG", "-----verifycode----" + "结束");
-            File file = new File(imagePath);
-            MultipartBody.Builder builder = new MultipartBody.Builder();
-            builder.setType(MultipartBody.FORM);
-            builder.addFormDataPart("client", "ipanda_mobile");
-            builder.addFormDataPart("method", "user.alterUserFace");
-            builder.addFormDataPart("userid", userManagers.getUserId());
-            builder.addFormDataPart("facefile", file.getName(), RequestBody.create(MediaType.parse("image/png"), file));
-            RequestBody body = builder.build();
-//            Request request = new Request.Builder().url(url).build();
-            Request request = new Request.Builder().url(url).addHeader("Referer", "iPanda.Android")
-                    .addHeader("User-Agent", "CNTV_APP_CLIENT_CBOX_MOBILE")
-                    .addHeader("Cookie", "verifycode=" + userManagers.getVerifycode()).post(body).build();
-
-            okHttpClient.newCall(request).enqueue(new Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-                    Log.e("TAG", userManagers.getUserId() + "----------上传头像--------失败" + verifycode);
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String string = response.body().string();
-                    try {
-                        JSONObject jsonObject = new JSONObject(string);
-                        int code = jsonObject.getInt("code");
-                        if (code == 0) {
-                            String error = jsonObject.getString("error");
-                            Log.e("TAG", userManagers.getUserId() + "----------上传头像--------成功" + error);
-                        } else if (code == -100) {
-                            String error = jsonObject.getString("error");
-                            Log.e("TAG", "--------error-----" + error);
-                            Log.e("TAG", userManagers.getUserId() + "----------上传头像--------失败" + userManagers.getVerifycode());
-                        }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-
-                    }
-                    Log.e("TAG", "----------上传头像--------" + string + userManagers.getUserId() + "----" + imagePath);
-                }
-            });
         }
     }
+
+
+
+//    private void uploadPic(Bitmap bitmap) {
+//        // 上传至服务器
+//        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
+//        // 注意这里得到的图片已经是圆形图片了
+//        // bitmap是没有做个圆形处理的，但已经被裁剪了
+//        final String imagePath = ImageUtils.savePhoto(bitmap, Environment
+//                .getExternalStorageDirectory().getAbsolutePath(), String
+//                .valueOf(System.currentTimeMillis()));
+//        if (imagePath != null) {
+////            String url = "http://my.cntv.cn/intf/napi/api.php" + "?client="
+////                    + "cbox_mobile" + "&method=" + "user.alterUserFace"
+////                    + "&userid=" + mUserManager.getUserId();
+//            String url = "http://my.cntv.cn/intf/napi/api.php";
+//            Log.e("TAG", "-----verifycode----" + "开始");
+//            OkHttpClient okHttpClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
+//                List<Cookie> cooKies = new ArrayList<>();
+//
+//                @Override
+//                public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
+//                    cooKies = cookies;
+//                    Log.e("TAG", "-----verifycode----" + "进行中");
+//                    for (Cookie cookie : cooKies) {
+//                        Log.e("TAG", "-----verifycode----" + cookie.value());
+//                        if ("verifycode".equals(cookie.name())) {
+//                            verifycode = cookie.value();
+//                        }
+//                    }
+//                }
+//
+//                @Override
+//                public List<Cookie> loadForRequest(HttpUrl url) {
+//                    return cooKies;
+//                }
+//            }).build();
+//            Log.e("TAG", "-----verifycode----" + "结束");
+//            File file = new File(imagePath);
+//            MultipartBody.Builder builder = new MultipartBody.Builder();
+//            builder.setType(MultipartBody.FORM);
+//            builder.addFormDataPart("client", "ipanda_mobile");
+//            builder.addFormDataPart("method", "user.alterUserFace");
+//            builder.addFormDataPart("userid", userManagers.getUserId());
+//            builder.addFormDataPart("facefile", file.getName(), RequestBody.create(MediaType.parse("image/png"), file));
+//            RequestBody body = builder.build();
+////            Request request = new Request.Builder().url(url).build();
+//            Request request = new Request.Builder().url(url).addHeader("Referer", "iPanda.Android")
+//                    .addHeader("User-Agent", "CNTV_APP_CLIENT_CBOX_MOBILE")
+//                    .addHeader("Cookie", "verifycode=" + userManagers.getVerifycode()).post(body).build();
+//
+//            okHttpClient.newCall(request).enqueue(new Callback() {
+//                @Override
+//                public void onFailure(Call call, IOException e) {
+//                    Log.e("TAG", userManagers.getUserId() + "----------上传头像--------失败" + verifycode);
+//                }
+//
+//                @Override
+//                public void onResponse(Call call, Response response) throws IOException {
+//                    String string = response.body().string();
+//                    try {
+//                        JSONObject jsonObject = new JSONObject(string);
+//                        int code = jsonObject.getInt("code");
+//                        if (code == 0) {
+//                            String error = jsonObject.getString("error");
+//                            Log.e("TAG", userManagers.getUserId() + "----------上传头像--------成功" + error);
+//                        } else if (code == -100) {
+//                            String error = jsonObject.getString("error");
+//                            Log.e("TAG", "--------error-----" + error);
+//                            Log.e("TAG", userManagers.getUserId() + "----------上传头像--------失败" + userManagers.getVerifycode());
+//                        }
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//
+//                    }
+//                    Log.e("TAG", "----------上传头像--------" + string + userManagers.getUserId() + "----" + imagePath);
+//                }
+//            });
+//        }
+//    }
 
 
     @Override

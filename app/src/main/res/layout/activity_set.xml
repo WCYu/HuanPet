@@ -6,5 +6,237 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.example.huanpet.view.set.SetActivity">
+    <com.example.huanpet.utils.CustomTool
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="10%"
+        android:id="@+id/set_custom"></com.example.huanpet.utils.CustomTool>
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    app:layout_heightPercent="6%"
+    android:id="@+id/jilu">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:gravity="center_vertical"
+        android:text="查看历史记录"
+        android:id="@+id/textView" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:src="@drawable/enter" />
+</RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6%"
+        android:id="@+id/wife">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center_vertical"
+            android:text="是否在WIFI下缓存"
+            android:id="@+id/textView1" />
+
+        <!--<ImageView-->
+            <!--android:id="@+id/off"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/textView1"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginEnd="14dp"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:src="@drawable/off" />-->
+        <!--<ImageView-->
+            <!--android:visibility="gone"-->
+            <!--android:id="@+id/on"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignBottom="@+id/textView1"-->
+            <!--android:layout_alignParentEnd="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_marginEnd="14dp"-->
+            <!--android:layout_marginRight="14dp"-->
+            <!--android:src="@drawable/on" />-->
+        <CheckBox
+            android:id="@+id/box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView1"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="15dp"
+            android:layout_marginRight="15dp"
+            android:background="@drawable/off"
+            android:button="@null" />
+    </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6%"
+        android:id="@+id/clear">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center_vertical"
+            android:text="清除缓存"
+            android:id="@+id/textView2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView2"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="46dp"
+            android:layout_marginRight="46dp"
+            android:text="0.00M"
+            android:id="@+id/textView6" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:src="@drawable/delete_pet" />
+    </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6%"
+        android:id="@+id/pingfen">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center_vertical"
+            android:text="评分"
+            android:id="@+id/textView3"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView3"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:src="@drawable/enter" />
+    </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6%"
+        android:id="@+id/guanyu">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center_vertical"
+            android:text="关于欢宠"
+            android:id="@+id/textView5"
+            />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="14dp"
+            android:layout_marginRight="14dp"
+            android:src="@drawable/enter" />
+    </RelativeLayout>
+    <View
+        android:background="#ddd"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="0.045%"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="6%"
+        android:id="@+id/sycnc">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="22dp"
+            android:layout_marginStart="22dp"
+            android:gravity="center_vertical"
+            android:text="检查更新"
+            android:id="@+id/textView7"
+            />
+
+        <TextView
+            android:id="@+id/version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView7"
+            android:layout_alignBottom="@+id/textView7"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:text="已是最新版本" />
+    </RelativeLayout>
 </com.example.huanpet.custom.PercentLinearLayout>
