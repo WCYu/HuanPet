@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.huanpet.view.set.SetActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.huanpet.view.user.SignIn.SignInActivity"
+    tools:showIn="@layout/activity_sign_in">
 
 </android.support.constraint.ConstraintLayout>

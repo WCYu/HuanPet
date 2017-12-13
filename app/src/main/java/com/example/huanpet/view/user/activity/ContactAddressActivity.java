@@ -34,7 +34,7 @@ public class ContactAddressActivity extends BaseActivity {
                 startActivity(intentname);
             }
         });
-        customtool_city.setAppTitle("QQ");
+        customtool_city.setAppTitle("联系地址");
         customtool_city.setRightTitle("提交");
         customtool_city.initViewsVisible(true,true,false,true);
         city_edittext = findViewById(R.id.city_edittext);

@@ -10,7 +10,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.example.huanpet.R;
-import com.example.huanpet.view.main.view.HomeActivity;
+import com.example.huanpet.view.main.HomeActivity;
 import com.example.huanpet.view.pet.View.TipPop;
 
 import java.util.concurrent.TimeUnit;
