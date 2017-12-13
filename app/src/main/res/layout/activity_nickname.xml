@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.huanpet.custom.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    app:layout_widthPercent="50%"
-    app:layout_heightPercent="50%"
+    android:background="#F0F1F5"
     tools:context=".view.pet.nicknameActivity">
-
     <RelativeLayout
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F9F9"
+        >
+        <ImageView
+            android:layout_marginTop="15dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/fh"
+            android:src="@drawable/back_gray" />
+
+        <TextView
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="4"
+            android:gravity="center"
+            android:text="昵称"
+
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            />
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/wc"
+
+            android:layout_alignParentRight ="true"
+            android:layout_marginTop="15dp"
+            android:text="完成"
+            android:textColor="#d7c256"
+            android:layout_marginRight="10dp"
+            />
+
+   <!-- <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
@@ -41,27 +75,26 @@
             android:layout_alignParentRight ="true"
             android:layout_marginTop="10dp"
             />
-
+-->
 
 
     </RelativeLayout>
     <LinearLayout
-        android:layout_width="fill_parent"
+
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dip"
-        android:layout_marginLeft="5dip"
-        android:layout_marginRight="5dip"
-        android:layout_marginTop="5dip"
-        android:gravity="center_vertical"
+        android:orientation="vertical" >
 
-        android:orientation="horizontal" >
-
-        <com.example.huanpet.custom.ClearEditText
+        <com.example.huanpet.custom.EditTextWithDelete
             android:id="@+id/searchEditText"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_weight="1"
-            android:hint="搜索"
+           android:background="@drawable/shaape"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+
 
             android:imeOptions="actionDone"
             android:singleLine="true"
@@ -111,4 +144,4 @@
 
 
 
-</com.example.huanpet.custom.PercentLinearLayout>
+</LinearLayout>

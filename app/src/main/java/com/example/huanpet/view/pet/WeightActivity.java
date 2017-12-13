@@ -38,6 +38,7 @@ public class WeightActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(searchEditText.getText().toString())) {
                     Toast.makeText(WeightActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
                 } else {
+
                     Intent intent = new Intent(WeightActivity.this, PetAddActivity.class);
                     intent.putExtra("cc", searchEditText.getText().toString());
                     startActivity(intent);

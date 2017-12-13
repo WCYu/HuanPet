@@ -158,6 +158,7 @@ public class PetAddActivity extends AppCompatActivity implements View.OnClickLis
         });
         mianyi.setOnClickListener(new View.OnClickListener() {
             @Override
+
             public void onClick(View v) {
                 Intent in = new Intent(PetAddActivity.this, ImmuneActivity.class);
                 startActivity(in);

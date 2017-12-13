@@ -27,6 +27,7 @@ public class nicknameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_nickname);
         initView();
 
+
         clearEditText = findViewById(R.id.searchEditText);
 
 
