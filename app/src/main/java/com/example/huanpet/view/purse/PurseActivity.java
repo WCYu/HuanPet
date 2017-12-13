@@ -1,5 +1,6 @@
 package com.example.huanpet.view.purse;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -53,6 +54,18 @@ public class PurseActivity extends BaseActivity {
             @Override
             public void onLeftButtonClick(View v) {
                 finish();
+            }
+        });
+        myjifen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(PurseActivity.this,MyJifenActivity.class));
+            }
+        });
+        purse_custom.setOnRightImgClickLisrener(new CustomTool.OnRightImgClickListener() {
+            @Override
+            public void onRightImgClick(View v) {
+
             }
         });
     }

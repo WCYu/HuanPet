@@ -53,4 +53,8 @@ public class OkhttpUtil {
         Request request = new Request.Builder().post(requestBody).headers(headers.build()).url(url).build();
         okHttpClient.newCall(request).enqueue(callback);
     }
+    public void postJson(String url,RequestBody requestBody,Callback callback){
+        Request request = new Request.Builder().post(requestBody).url(url).build();
+        okHttpClient.newCall(request).enqueue(callback);
+    }
 }

@@ -1,16 +1,13 @@
-package com.example.huanpet.view.main;
+package com.example.huanpet.view.main.view;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -23,19 +20,28 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.huanpet.MainActivity;
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
+import com.example.huanpet.entity.HomeBean;
 import com.example.huanpet.utils.CustomTool;
 import com.example.huanpet.view.know.KnowActivity;
+import com.example.huanpet.view.main.adapter.HomeListAdapter;
+import com.example.huanpet.view.main.presenter.HomePresenter;
 import com.example.huanpet.view.news.NewsActivity;
 import com.example.huanpet.view.order.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
 import com.example.huanpet.view.user.activity.UserActivity;
+import com.google.gson.Gson;
 import com.zaaach.citypicker.CityPickerActivity;
-public class HomeActivity extends BaseActivity implements View.OnClickListener {
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
@@ -58,6 +64,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
     private RadioGroup home_group;
     private ListView home_list;
     private CheckBox screening_cityName;
+    private HomePresenter homePresenter;
 
     @Override
     public int initLayoutID() {
@@ -85,6 +92,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
         home_pettype = findViewById(R.id.home_pettype);
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
+        homePresenter = new HomePresenter(this);
+        int mPage=1;
+        Map param=new HashMap();
+        param.put("orderBy", "distance asc");
+        param.put("coordX", 40.22);
+        param.put("coordY",116.23 );
+        param.put("beginIndex", (mPage - 1) * 10);
+        param.put("endIndex", mPage * 10);
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
     }
 
     //初始化适配器
@@ -358,5 +374,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener {
                 screening_cityName.setText(city);
             }
         }
+    }
+
+    @Override
+    public void getData(final String data) {
+        final String str=data;
+        Log.e("TAG-----------",data);
+        Gson gs=new Gson();
+        HomeBean homeBean = gs.fromJson(str, HomeBean.class);
+        List<HomeBean.DescBean> desc = homeBean.getDesc();
+        HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);
+        home_list.setAdapter(homeListAdapter);
     }
 }
