@@ -30,6 +30,8 @@
 
         <activity android:name=".view.set.SetActivity" />
 
+        <activity android:name=".view.purse.MyJifenActivity" />
+
         <activity android:name=".view.user.activity.UserActivity" />
         <activity android:name=".view.user.activity.ContactAddressActivity" />
         <activity android:name=".view.user.activity.ModifyTheNameActivity" />
