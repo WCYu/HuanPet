@@ -23,11 +23,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.huanpet.MainActivity;
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.CustomTool;
-import com.example.huanpet.view.main.HomeActivity;
+import com.example.huanpet.view.main.view.HomeActivity;
 import com.example.huanpet.view.user.adpter.NumericWheelAdapter;
 import com.example.huanpet.view.user.image.ImageUtils;
 import com.example.huanpet.view.user.image.UserManagers;
@@ -40,7 +39,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 

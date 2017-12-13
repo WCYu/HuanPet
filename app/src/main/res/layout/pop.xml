@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_gravity="bottom">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@android:color/transparent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:orientation="vertical">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corners_bg_top"
+                android:gravity="center"
+                android:text="更换用户头像"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textSize="40px" />
+
+            <Button
+                android:id="@+id/btn_makephoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2px"
+                android:background="#FFF"
+                android:text="拍照"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#5CA9FD" />
+
+
+            <Button
+                android:id="@+id/btn_selectphoto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2px"
+                android:background="@drawable/corners_bg_bottom"
+                android:text="相册"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#5CA9FD" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20px"
+            android:background="@drawable/corners_bg"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btn_photocancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corners_bg"
+                android:text="取消"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="#5CA9FD" />
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

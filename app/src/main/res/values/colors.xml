@@ -44,6 +44,7 @@
     <color name="share_color_p">#CFCFCF</color>
     <color name="blue">#009ce5</color>
     <color name="yell">#F5F9F106</color>
+    <color name="cheng">#F8F9B006</color>
     <!--首页-->
     <color name="home_tab_back">#E6EBEF</color>
     <color name="home_tab_font_sel">#121ec3</color>

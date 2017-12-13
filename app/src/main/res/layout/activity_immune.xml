@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f4f1f1"
+    tools:context="com.example.huanpet.view.pet.ImmuneActivity">
+
+    <RelativeLayout
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F9F9F9"
+        >
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/fh"
+        android:src="@drawable/back_gray" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:text="免疫情况"
+
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/wc"
+
+        android:layout_alignParentRight ="true"
+        android:layout_marginTop="15dp"
+        android:text="完成"
+        android:textColor="#d7c256"
+        android:layout_marginRight="10dp"
+        />
+    </RelativeLayout>
+
+   <!-- <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="10dp">
+    <ImageView
+        android:layout_marginTop="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_weight="1"
+        android:src="@mipmap/fanzhuan" />
+
+    <TextView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="4"
+        android:gravity="center"
+        android:text="免疫情况"
+
+        android:layout_marginTop="8dp"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/wc"
+        android:text="完成"
+        android:textColor="#d7c256"
+        android:layout_alignParentRight ="true"
+        android:layout_marginTop="10dp"
+        />
+    </RelativeLayout>
+-->
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+        android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+                android:text="以前是否免疫过"
+               />
+
+            <RadioGroup
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+              android:layout_marginRight="10dp"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/petImnue_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:checked="false"
+                    android:background="@drawable/search_immnues"
+                    />
+            </RadioGroup>
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/Relate_pet_topIMMNUE"
+            android:layout_width="match_parent"
+            android:background="#ffffff"
+android:layout_marginTop="20dp"
+            android:layout_height="85dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="上次免疫时间"
+                />
+
+            <ImageView
+                android:id="@+id/d"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+              android:layout_marginRight="20dp"
+                android:src="@drawable/enter" />
+            <TextView
+
+                android:id="@+id/topTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+              android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@+id/d"/>
+        </RelativeLayout>
+        <View
+
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:background="#e9e6e9"
+            ></View>
+       <!-- <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60px"
+            android:background="#ffffff"
+            android:textSize="40px"
+            android:text="请如实选择宠物已免疫病毒类型"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal"
+            android:layout_margin="35px">
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60px"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:background="@drawable/shape_liner">
+
+                <CheckBox
+                    android:id="@+id/virus_quanwen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60px"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/shape_redio"
+                    android:text="犬温病毒" />
+            </RadioGroup>
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                android:background="@drawable/shape_liner">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="犬瘟病毒"/>
+            </RadioGroup>
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60px"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/shape_liner">
+                <CheckBox
+                    android:id="@+id/virus_xixiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60px"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/shape_redio"
+                    android:text="犬细小病毒"/>
+            </RadioGroup>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100px"
+            android:orientation="horizontal"
+            android:layout_marginLeft="35px"
+            android:layout_marginRight="35px"
+            >
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="60px"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/shape_liner">
+
+                <CheckBox
+                    android:id="@+id/virus_quanxian"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60px"
+                    android:button="@null"
+                    android:checked="false"
+                    android:drawableLeft="@drawable/shape_redio"
+                    android:text="犬腺病毒" />
+            </RadioGroup>
+            <RadioGroup
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="invisible"
+                android:background="@drawable/shape_liner">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="犬瘟病毒"/>
+            </RadioGroup>
+        </LinearLayout>-->
+
+</LinearLayout>
