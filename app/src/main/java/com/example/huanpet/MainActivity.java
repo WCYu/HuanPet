@@ -11,7 +11,6 @@ import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.PreferencesUtil;
 import com.example.huanpet.view.main.HomeActivity;
 
-
 import java.util.ArrayList;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {

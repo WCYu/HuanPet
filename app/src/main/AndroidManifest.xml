@@ -24,7 +24,27 @@
         <activity android:name=".view.pet.PetActivity" />
         <activity android:name=".view.purse.PurseActivity" />
         <activity android:name=".view.set.SetActivity" />
-        <activity android:name=".view.user.UserActivity"></activity>
+        <activity android:name=".view.user.activity.UserActivity" />
+        <activity
+            android:name=".view.user.activity.ModifyTheNameActivity"
+            android:label="@string/title_activity_modify_the_name"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.user.activity.WeChatActivity"
+            android:label="@string/title_activity_we_chat"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.user.activity.PhoneActivity"
+            android:label="@string/title_activity_phone"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.user.activity.QQActivity"
+            android:label="@string/title_activity_qq"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".view.user.activity.ContactAddressActivity"
+            android:label="@string/title_activity_contact_address"
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name="com.zaaach.citypicker.CityPickerActivity"
             android:theme="@style/CityPicker.NoActionBar"
