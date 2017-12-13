@@ -6,6 +6,34 @@
     <color name="huise">#F0F1F5</color>
     <color name="white">#F9F9FA</color>
     <color name="black">#090909</color>
+    <!--绿-->
+    <color name="colorGreenFill">#73CD80</color>
+    <color name="colorGreenText">#13B129</color>
+    <color name="colorGreen">#4CBF5C</color>
+
+    <!--白-->
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhiteBg">#F9F9F9</color>
+
+    <!--黑-->
+    <color name="colorBlack">#000000</color>
+    <color name="colorBlackText">#333333</color>
+
+    <!--红-->
+    <color name="colorRed">#FF3333</color>
+    <color name="colorBlue">#1B7DDC</color>
+    <!--灰-->
+    <color name="colorGreyFill">#F7F7F7</color>
+    <color name="colorGrey">#F5F4F4</color>
+    <color name="colorGreyLine">#F1F1F1</color>
+    <color name="colorGreyBottom">#E3E3E3</color>
+    <color name="colorGreyLight">#CCCCCC</color>
+    <color name="colorGreyDark">#999999</color>
+
+    <color name="province_line_border">#D0D0D0</color>
+    <color name="login_button_normal">#169fff</color>
+    <color name="login_button_pressed">#1073b9</color>
+=======
     <color name="gray">#7c7c7c</color>
     <color name="transparent">#00000000</color> <!-- 透明 -->
     <color name="transparent_half">#90000000</color> <!-- 半透明 -->
@@ -100,4 +128,5 @@
     <color name="home_upgrade">#285AA0</color>
 
     <color name="setting_divider_line_bg">#c2c2c2</color>
+>>>>>>> 213f0b3aec7a25ff104f34b2cb40a2c29aa9e5ff
 </resources>

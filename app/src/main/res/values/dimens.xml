@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 <dimen name="title_height">45dp</dimen>
@@ -221,3 +222,8 @@
     <dimen name="dp1.5">1.5dp</dimen>
 
 </resources>
+=======
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+</resources>
+>>>>>>> d4ae3d6d7070f5486e59d5f20ae5a7827aba132a
