@@ -11,6 +11,11 @@ import android.widget.Toast;
 
 import com.example.huanpet.R;
 import com.example.huanpet.custom.EditTextWithDelete;
+import com.example.huanpet.utils.OkhttpUtil;
+import com.example.huanpet.utils.util.SignUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class nicknameActivity extends AppCompatActivity {
@@ -46,9 +51,16 @@ public class nicknameActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(searchEditText.getText().toString())) {
                     Toast.makeText(nicknameActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
                 } else {
+
+                  /*  Map<String,String> params = new HashMap<>();
+
+                    params.put("petName",searchEditText.getText().toString());
+
+                    OkhttpUtil.getInstance().post("petInfo/updatePetInfo.jhtml ",params,);*/
                     Intent intent = new Intent(nicknameActivity.this, PetAddActivity.class);
                     intent.putExtra("bb", searchEditText.getText().toString());
                     startActivity(intent);
+
                 }
 
             }

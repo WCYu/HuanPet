@@ -76,4 +76,5 @@
             android:value="138e5cf1e8961ae326ff0908c03d1ae1" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-sdk tools:overrideLibrary="compile 'com.gjiazhe:wavesidebar:1.0.2'"/>
 </manifest>
