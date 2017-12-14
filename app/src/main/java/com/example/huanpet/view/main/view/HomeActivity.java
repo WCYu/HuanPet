@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,7 @@ import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.entity.HomeBean;
 import com.example.huanpet.utils.CustomTool;
+import com.example.huanpet.utils.PreferencesUtil;
 import com.example.huanpet.view.know.KnowActivity;
 import com.example.huanpet.view.main.adapter.HomeListAdapter;
 import com.example.huanpet.view.main.presenter.HomePresenter;
@@ -32,6 +34,7 @@ import com.example.huanpet.view.order.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
+import com.example.huanpet.view.user.SignIn.SignInActivity;
 import com.example.huanpet.view.user.activity.UserActivity;
 import com.google.gson.Gson;
 import com.zaaach.citypicker.CityPickerActivity;
@@ -41,7 +44,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
+public class HomeActivity extends BaseActivity implements View.OnClickListener, IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
@@ -51,6 +54,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     private LinearLayout main_purse;
     private LinearLayout main_know;
     private LinearLayout main_set;
+    private LinearLayout main_adduser;
     private Button main_btn;
     private CustomTool customTool;
     private SearchView searchView;
@@ -81,6 +85,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         main_purse = findViewById(R.id.main_purse);
         main_know = findViewById(R.id.main_know);
         main_set = findViewById(R.id.main_set);
+        main_adduser=findViewById(R.id.main_adduser);
         main_btn = findViewById(R.id.main_btn);
         customTool = findViewById(R.id.home_custom);
         searchView = findViewById(R.id.home_search);
@@ -93,25 +98,31 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
         homePresenter = new HomePresenter(this);
-        int mPage=1;
-        Map param=new HashMap();
+        int mPage = 1;
+        Map param = new HashMap();
         param.put("orderBy", "distance asc");
         param.put("coordX", 40.22);
-        param.put("coordY",116.23 );
+        param.put("coordY", 116.23);
         param.put("beginIndex", (mPage - 1) * 10);
         param.put("endIndex", mPage * 10);
+
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml", param);
+
         homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
+        String userId = PreferencesUtil.getInstance().getUserId();
+//        Log.e("Tat-------------",userId);
+        if(!TextUtils.isEmpty(userId)){
+            main_adduser.setVisibility(View.GONE);
+        }else {
+            main_adduser.setVisibility(View.VISIBLE);
+        }
+
     }
 
     //初始化适配器
     @Override
     public void initAdapter() {
-        main_set.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "设置", Toast.LENGTH_SHORT).show();
-            }
-        });
+
     }
 
     //初始化数据
@@ -130,6 +141,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         main_purse.setOnClickListener(this);
         main_know.setOnClickListener(this);
         main_set.setOnClickListener(this);
+        main_adduser.setOnClickListener(this);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -303,8 +315,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
 
     //初始化PopupWindow
     private void initPopu(View vicinityView) {
-        vicinityView.getBackground().setAlpha(200);
-        PopupWindow popupWindow = new PopupWindow(vicinityView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+//        vicinityView.getBackground().setAlpha(200);
+        final PopupWindow popupWindow = new PopupWindow(vicinityView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        vicinityView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                popupWindow.dismiss();
+            }
+        });
         popupWindow.setFocusable(true);
         popupWindow.setWidth(ViewGroup.LayoutParams.FILL_PARENT);
         popupWindow.setHeight(ViewGroup.LayoutParams.FILL_PARENT);
@@ -347,6 +365,9 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
             case R.id.main_news:
                 intent.setClass(HomeActivity.this, NewsActivity.class);
                 break;
+            case R.id.main_adduser:
+                intent.setClass(HomeActivity.this, SignInActivity.class);
+                break;
             case R.id.main_pet:
                 intent.setClass(HomeActivity.this, PetActivity.class);
                 break;
@@ -378,12 +399,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
 
     @Override
     public void getData(final String data) {
-        final String str=data;
-        Log.e("TAG-----------",data);
-        Gson gs=new Gson();
+        final String str = data;
+        Log.e("TAG-----------", data);
+        Gson gs = new Gson();
         HomeBean homeBean = gs.fromJson(str, HomeBean.class);
         List<HomeBean.DescBean> desc = homeBean.getDesc();
-        HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);
+        HomeListAdapter homeListAdapter = new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc, this);
         home_list.setAdapter(homeListAdapter);
     }
 }
