@@ -7,52 +7,53 @@
     <ImageView
         android:id="@+id/homeitem_icon"
         app:layout_widthPercent="20%"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <LinearLayout
-        android:layout_width="0dp"
+        android:padding="10dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:orientation="vertical">
         <TextView
             android:id="@+id/homeitem_hom"
-            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="home"/>
         <RatingBar
             android:id="@+id/homeitem_bar"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:max="5"
+            android:isIndicator="true"
+            android:numStars="5"
             />
         <TextView
-            android:layout_gravity="center"
             android:id="@+id/homeitem_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="address"/>
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
         app:layout_widthPercent="20%"
-        android:orientation="vertical"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/cheng"
-            android:textSize="24sp"
-            android:text="￥50起"/>
-        <TextView
-            android:id="@+id/homeitem_distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/location"
-            android:text="距离"/>
-    </LinearLayout>
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/cheng"
+                android:textSize="20sp"
+                android:text="￥50起"/>
+            <TextView
+                android:id="@+id/homeitem_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/location"
+                android:text="距离"/>
+        </LinearLayout>
+    </RelativeLayout>
 </com.example.huanpet.custom.PercentLinearLayout>

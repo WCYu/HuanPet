@@ -41,7 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener, IHomeView {
+public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
@@ -93,14 +93,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
         homePresenter = new HomePresenter(this);
-        int mPage = 1;
-        Map param = new HashMap();
+        int mPage=1;
+        Map param=new HashMap();
         param.put("orderBy", "distance asc");
         param.put("coordX", 40.22);
-        param.put("coordY", 116.23);
+        param.put("coordY",116.23 );
         param.put("beginIndex", (mPage - 1) * 10);
         param.put("endIndex", mPage * 10);
-        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml", param);
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
     }
 
     //初始化适配器
@@ -378,12 +378,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void getData(final String data) {
-        final String str = data;
-        Log.e("TAG-----------", data);
-        Gson gs = new Gson();
+        final String str=data;
+        Log.e("TAG-----------",data);
+        Gson gs=new Gson();
         HomeBean homeBean = gs.fromJson(str, HomeBean.class);
         List<HomeBean.DescBean> desc = homeBean.getDesc();
-        HomeListAdapter homeListAdapter = new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc, this);
+        HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);
         home_list.setAdapter(homeListAdapter);
     }
 }

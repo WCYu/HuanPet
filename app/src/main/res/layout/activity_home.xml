@@ -112,8 +112,9 @@
         android:background="@android:color/transparent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_gravity="start"
+        android:orientation="vertical"
+
         >
         <com.example.huanpet.custom.PercentLinearLayout
             android:layout_width="match_parent"
@@ -192,6 +193,25 @@
                             android:text="消息"/>
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/main_adduser"
+                        app:layout_heightPercent="6%"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:layout_margin="10dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/customer_information"/>
+                        <TextView
+                            android:layout_margin="5dp"
+                            android:layout_gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="添加用户"/>
+                    </LinearLayout>
                     <LinearLayout
                         android:id="@+id/main_pet"
                         app:layout_heightPercent="6%"

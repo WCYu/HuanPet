@@ -10,6 +10,9 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.huanpet.R;
 import com.example.huanpet.entity.HomeBean;
 
@@ -49,10 +52,13 @@ public class HomeListAdapter extends BaseAdapter {
         ViewHolder vh=new ViewHolder(convertView);
         vh.homeitem_hom.setText(descBeans.get(position).getFamily());
         vh.homeitem_address.setText(descBeans.get(position).getAddress());
-        vh.homeitem_distance.setText(descBeans.get(position).getDistance()+"");
-        Glide.with(context).load(descBeans.get(position).getUserImage()).into(vh.homeitem_icon);
+        double shu=1000;
+        double distance=descBeans.get(position).getDistance();
+        double dizhi=distance/shu;
+        String result = String .format("%.2f",dizhi);
+        vh.homeitem_distance.setText(result+"km");
+        Glide.with(context).load(descBeans.get(position).getUserImage()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(vh.homeitem_icon);
         vh.homeitem_bar.setRating((float) descBeans.get(position).getScore());
-
         return convertView;
     }
 
