@@ -28,7 +28,7 @@ import com.example.huanpet.view.know.KnowActivity;
 import com.example.huanpet.view.main.adapter.HomeListAdapter;
 import com.example.huanpet.view.main.presenter.HomePresenter;
 import com.example.huanpet.view.news.NewsActivity;
-import com.example.huanpet.view.order.OrderActivity;
+import com.example.huanpet.view.order.view.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
