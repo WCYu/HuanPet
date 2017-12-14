@@ -7,97 +7,79 @@
     android:orientation="vertical"
     android:background="#FFFFFF"
     tools:context="com.example.huanpet.view.pet.TypeofpetActivity">
-    <com.example.huanpet.custom.PercentLinearLayout
+    <RelativeLayout
+        android:id="@+id/title_view"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#F9F9F9"
+        >
+    <ImageView
+        android:layout_marginTop="15dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/fh"
+
+        android:src="@drawable/back_gray" />
+
+    <TextView
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#ffffff"
-        >
 
-        <ImageView
-            android:layout_marginTop="10dp"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_weight="1"
-            android:src="@mipmap/fanzhuan" />
+        android:gravity="center"
+        android:text="昵称"
 
-        <TextView
+        android:layout_marginTop="13dp"
+        android:textSize="20sp"
+        />
+    </RelativeLayout>
 
-            android:layout_width="match_parent"
+    <com.example.huanpet.custom.EditTextWithDelete
+        android:id="@+id/searchEditText"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_weight="1"
+        android:background="@drawable/cwed"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+
+
+        android:imeOptions="actionDone"
+        android:singleLine="true"
+        android:textSize="16sp" />
+
+
+    <!--    <SearchView
+    android:layout_marginTop="15dp"
+            android:id="@+id/searchView"
+            android:layout_width="330dp"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="宠物品种"
+            android:iconifiedByDefault="false"
+           android:background="@null"
+            android:layout_marginLeft="15dp"
+            android:queryHint="请输入宠物种类或者拼音"
+         />-->
 
-            android:layout_marginTop="8dp"
-            android:textSize="20sp"
-            />
-    </com.example.huanpet.custom.PercentLinearLayout>
+   <!-- <SearchView
+        android:layout_marginTop="15dp"
+        android:id="@+id/filter_edit"
 
 
-<!--    <SearchView
-android:layout_marginTop="15dp"
-        android:id="@+id/searchView"
-        android:layout_width="330dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:iconifiedByDefault="false"
-       android:background="@null"
-        android:layout_marginLeft="15dp"
+        android:background="@drawable/shaape"
+
         android:queryHint="请输入宠物种类或者拼音"
-     />-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="63dp"
-            android:background="#f7f3f3"
-            android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+        />-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp">
 
-            <RelativeLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-
-              >
-
-                <EditText
-                    android:id="@+id/edittext"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="8dp"
-                   android:background="@drawable/shaape"
-                    android:hint="请输入搜索内容"
-                    android:maxLength="10"
-                    android:paddingLeft="15dp"
-                    android:singleLine="true"
-                    android:textSize="12sp"
-                   />
-
-
-                <ImageView
-                    android:id="@+id/imageview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerInParent="true"
-                    android:paddingRight="20dp"
-                    android:src="@drawable/delete_pet"
-                    android:visibility="gone" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/textview"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:text="搜索"
-                android:textColor="#a39f9f"
-                android:textSize="20sp" />
-        </LinearLayout>
+    </android.support.v7.widget.RecyclerView>
 
 
 
@@ -119,7 +101,9 @@ android:background="#ffffff"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/vp"
-    />
+    >
+
+</android.support.v4.view.ViewPager>
 
 
 

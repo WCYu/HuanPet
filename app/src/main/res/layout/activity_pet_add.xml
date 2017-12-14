@@ -92,7 +92,7 @@ android:id="@+id/fanzhuan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:background="#fffdfd"
         >
 
@@ -107,14 +107,14 @@ android:id="@+id/tx"
         android:layout_height="wrap_content"
         android:text="头像"
         android:textSize="15dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="13dp"
         android:layout_marginLeft="10dp"
         />
     <ImageView
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:layout_marginLeft="300dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="5dp"
         android:src="@drawable/pet_head"
         android:id="@+id/userinfo_img"
@@ -125,7 +125,7 @@ android:id="@+id/tx"
         android:layout_height="30dp"
         android:src="@mipmap/personal_enter_img"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentRight="true"
         />
@@ -135,7 +135,7 @@ android:id="@+id/tx"
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:background="#eae5e5"
-        android:layout_marginTop="25dp"/>
+        android:layout_marginTop="15dp"/>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -376,7 +376,7 @@ android:layout_alignParentRight="true"
         android:layout_height="wrap_content"
         android:background="#fffdfd"
         android:orientation="vertical"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         >
 <TextView
     android:layout_width="match_parent"
@@ -389,7 +389,7 @@ android:layout_alignParentRight="true"
 
 <EditText
     android:layout_width="300dp"
-    android:layout_height="80dp"
+    android:layout_height="120dp"
     android:background="@drawable/shape"
     android:id="@+id/edit"
     android:gravity="top"
