@@ -72,6 +72,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         if(PreferencesUtil.getInstance().getWelcomeId()!=0){
             Intent in = new Intent(MainActivity.this, HomeActivity.class);
             startActivity(in);
+            finish();
         }
         welcome_pager = (ViewPager) findViewById(R.id.welcome_pager);
         start_btn = (Button) findViewById(R.id.start_btn);
@@ -85,7 +86,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 PreferencesUtil.getInstance().setWelcomeId(1);
                 Intent in = new Intent(MainActivity.this, HomeActivity.class);
                 startActivity(in);
-
                 finish();
                 break;
         }

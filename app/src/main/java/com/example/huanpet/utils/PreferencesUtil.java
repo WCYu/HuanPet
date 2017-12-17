@@ -32,4 +32,10 @@ public class PreferencesUtil {
     public int getWelcomeId(){
         return sharedPreferences.getInt("welcomeId",0);
     }
+    public void setUserId(String name){
+        sharedPreferences.edit().putString("userId",name).commit();
+    }
+    public String getUserId(){
+        return sharedPreferences.getString("userId",null);
+    }
 }
