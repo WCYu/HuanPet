@@ -69,6 +69,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     private ListView home_list;
     private CheckBox screening_cityName;
     private HomePresenter homePresenter;
+    private String userId;
 
     @Override
     public int initLayoutID() {
@@ -106,8 +107,15 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         param.put("beginIndex", (mPage - 1) * 10);
         param.put("endIndex", mPage * 10);
         homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
-        String userId = PreferencesUtil.getInstance().getUserId();
+
 //        Log.e("Tat-------------",userId);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userId = PreferencesUtil.getInstance().getUserId();
         if(!TextUtils.isEmpty(userId)){
             main_adduser.setVisibility(View.GONE);
         }else {

@@ -15,7 +15,7 @@
     android:layout_width="match_parent"
     android:layout_height="0dp"
     app:layout_heightPercent="7%"
-    android:id="@+id/jilu">
+    android:id="@+id/jianyi">
 
     <ImageView
         android:id="@+id/imageView11"
@@ -62,7 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_heightPercent="7%"
-        android:id="@+id/clear">
+        android:id="@+id/new_gongneng">
 
         <ImageView
             android:id="@+id/imageView14"
@@ -192,7 +192,7 @@
         app:layout_heightPercent="3%"/>
 
     <RelativeLayout
-        android:id="@+id/wife"
+        android:id="@+id/wifi"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_heightPercent="7%">
@@ -260,7 +260,7 @@
         android:layout_height="0dp"
         app:layout_heightPercent="0.045%"/>
     <RelativeLayout
-        android:id="@+id/sycnc"
+        android:id="@+id/cache"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_heightPercent="7%">

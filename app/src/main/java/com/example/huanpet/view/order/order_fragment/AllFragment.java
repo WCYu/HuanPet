@@ -11,6 +11,8 @@ import com.example.huanpet.R;
 import com.example.huanpet.app.Api;
 import com.example.huanpet.app.AppService;
 import com.example.huanpet.app.BaseFragment;
+import com.example.huanpet.utils.PreferencesUtil;
+import com.example.huanpet.utils.util.CJSON;
 import com.example.huanpet.view.order.presenter.PersenterIml;
 import com.example.huanpet.view.order.view.IView;
 
@@ -31,8 +33,9 @@ public class AllFragment extends BaseFragment implements IView {
 
     @Override
     public void initView(View view) {
-        int mPage = 1;
+//        int mPage = 1;
         lv_all = AppService.baseActivity.findViewById(R.id.lv_all);
+        String userId = PreferencesUtil.getInstance().getUserId();
         PersenterIml persenterIml = new PersenterIml(this);
         Map map = new HashMap<>();
 
@@ -43,8 +46,10 @@ public class AllFragment extends BaseFragment implements IView {
 //        map.put("endIndex",10);
 //        map.put("serviceCodes","");
 //        map.put("orderId","HH54516451513212");
-        map.put("petTypeCode","");
-        persenterIml.getUrldata(Api.baseUrl+"petType/getPetTypesByVO.jhtml",map);
+//        map.put("petTypeCode","");
+        map.put("userId",userId);
+        Log.i("userid",userId);
+        persenterIml.getUrldata(Api.baseUrl+"petInfo/getPetInfoByUserId.jhtml",map);
     }
 
     @Override
@@ -62,6 +67,10 @@ public class AllFragment extends BaseFragment implements IView {
 //        Gson gson = new Gson();
 //        gson.fromJson(data,)
         Log.i("tag", data + "");
+        String desc = CJSON.getDESC(data);
+        Log.i("tag","data======="+desc
+        );
+
     }
 
 

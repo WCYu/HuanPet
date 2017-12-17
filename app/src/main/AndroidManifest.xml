@@ -53,7 +53,7 @@
         <activity android:name=".view.pet.nicknameActivity" />
         <activity android:name=".view.pet.TypeofpetActivity" />
         <activity android:name=".view.pet.WeightActivity" />
-
+        <activity android:name=".view.set.view.JianYiActivity"/>
         <activity
             android:name="com.zaaach.citypicker.CityPickerActivity"
             android:screenOrientation="portrait"

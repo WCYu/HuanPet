@@ -6,7 +6,7 @@ import com.example.huanpet.app.BaseActivity;
  * Created by 解亚鑫 on 2017/12/14.
  */
 
-public class PingFen extends BaseActivity {
+public class PingFenActivity extends BaseActivity {
     @Override
     public int initLayoutID() {
         return 0;
