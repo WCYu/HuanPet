@@ -38,4 +38,7 @@ public class PreferencesUtil {
     public String getUserId(){
         return sharedPreferences.getString("userId",null);
     }
+    public void clearUserMeassage(){
+        setUserId(null);
+    }
 }

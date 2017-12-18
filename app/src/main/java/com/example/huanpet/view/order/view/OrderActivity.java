@@ -1,4 +1,4 @@
-package com.example.huanpet.view.order;
+package com.example.huanpet.view.order.view;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;

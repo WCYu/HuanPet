@@ -34,7 +34,7 @@ import com.example.huanpet.view.main.adapter.HomeListAdapter;
 import com.example.huanpet.view.main.adapter.HomePetAdapter;
 import com.example.huanpet.view.main.presenter.HomePresenter;
 import com.example.huanpet.view.news.NewsActivity;
-import com.example.huanpet.view.order.OrderActivity;
+import com.example.huanpet.view.order.view.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
@@ -73,6 +73,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     private ListView home_list;
     private CheckBox screening_cityName;
     private HomePresenter homePresenter;
+    private String userId;
 
     private String orderBy;
     private double coordX=40.22;
@@ -111,6 +112,23 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
         homePresenter = new HomePresenter(this);
+        int mPage=1;
+        Map param=new HashMap();
+        param.put("orderBy", "distance asc");
+        param.put("coordX", 40.22);
+        param.put("coordY",116.23 );
+        param.put("beginIndex", (mPage - 1) * 10);
+        param.put("endIndex", mPage * 10);
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
+
+//        Log.e("Tat-------------",userId);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userId = PreferencesUtil.getInstance().getUserId();
         setData("distance asc",coordX,coordY,beginIndex, screeningUrl);
         String userId = PreferencesUtil.getInstance().getUserId();
         if(!TextUtils.isEmpty(userId)){
