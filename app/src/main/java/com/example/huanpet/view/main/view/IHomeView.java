@@ -5,5 +5,5 @@ package com.example.huanpet.view.main.view;
  */
 
 public interface IHomeView {
-    void getData(String data);
+    void getData(String data,int i);
 }

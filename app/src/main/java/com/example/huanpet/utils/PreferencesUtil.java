@@ -18,7 +18,7 @@ public class PreferencesUtil {
     }
     public static PreferencesUtil getInstance(){
         if(preferencesUtil==null){
-            synchronized (OkhttpUtil.class){
+            synchronized (PreferencesUtil.class){
                 if(preferencesUtil==null){
                     preferencesUtil=new PreferencesUtil();
                 }

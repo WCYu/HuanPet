@@ -19,17 +19,19 @@ import java.util.Map;
 public class HomePresenter implements IHomePresenter,OnRegisterListener {
     IHomeModel homeModel;
     IHomeView homeView;
+    int i;
     public HomePresenter(IHomeView iHomeView){
         homeModel=new HomeModel();
         homeView=iHomeView;
     }
     @Override
-    public void getData(String url, Map map) {
+    public void getData(String url, Map map,int i) {
         homeModel.registerData(url,map,this);
+        this.i=i;
     }
 
     @Override
     public void transmitData(String data) {
-        homeView.getData(data);
+        homeView.getData(data,i);
     }
 }

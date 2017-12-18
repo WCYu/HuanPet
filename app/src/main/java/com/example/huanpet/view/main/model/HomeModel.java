@@ -1,5 +1,7 @@
 package com.example.huanpet.view.main.model;
 
+import android.util.Log;
+
 import com.example.huanpet.app.AppService;
 import com.example.huanpet.utils.OkhttpUtil;
 import com.example.huanpet.utils.util.CJSON;
@@ -22,6 +24,7 @@ public class HomeModel implements IHomeModel {
     public void registerData(String url, Map map, final OnRegisterListener onRegisterListener) {
         FormBody.Builder builder = new FormBody.Builder();
         String josn = CJSON.toJSONMap(map);
+        Log.e("TAG--------",josn);
         builder.add("data",josn);
 
         OkhttpUtil.getInstance().postJson(url, builder.build(), new Callback() {
