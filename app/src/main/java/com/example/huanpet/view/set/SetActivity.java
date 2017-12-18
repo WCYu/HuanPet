@@ -17,8 +17,7 @@ import com.example.huanpet.view.set.view.NewGongNengActivity;
 import com.example.huanpet.view.set.view.PingFenActivity;
 
 
-
-public class SetActivity extends BaseActivity implements View.OnClickListener{
+public class SetActivity extends BaseActivity implements View.OnClickListener {
 
     private CustomTool set_custom;
     private RelativeLayout jianyi;
@@ -56,7 +55,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener{
 
     @Override
     public void initData() {
-        set_custom.initViewsVisible(true,true,false,false);
+        set_custom.initViewsVisible(true, true, false, false);
         set_custom.setReturnBtn(" ");
 
     }
@@ -64,24 +63,24 @@ public class SetActivity extends BaseActivity implements View.OnClickListener{
     @Override
 
     public void initListener() {
-            set_custom.setOnLeftButtonClickListener(new CustomTool.OnLeftButtonClickListener() {
-                @Override
-                public void onLeftButtonClick(View v) {
-                    finish();
-                }
-            });
-            jianyi.setOnClickListener(this);
-            exit_login.setOnClickListener(this);
+        set_custom.setOnLeftButtonClickListener(new CustomTool.OnLeftButtonClickListener() {
+            @Override
+            public void onLeftButtonClick(View v) {
+                finish();
+            }
+        });
+        jianyi.setOnClickListener(this);
+        exit_login.setOnClickListener(this);
     }
 
     @Override
     public void setMyAppTitle() {
-            set_custom.setAppTitle("设置");
+        set_custom.setAppTitle("设置");
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.jianyi:
                 startActivity(new Intent(this, JianYiActivity.class));
                 break;
@@ -104,15 +103,16 @@ public class SetActivity extends BaseActivity implements View.OnClickListener{
 
                 break;
             case R.id.exit_login:
-                PreferencesUtil.getInstance().clearUserMeassage();
-                finish();
                 String userId = PreferencesUtil.getInstance().getUserId();
-                if (userId==null)
+                if (userId == null) {
                     Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
-                else
-                PreferencesUtil.getInstance().clearUserMeassage();
-                finish();
-                break;
+                    finish();
+                    break;
+                } else {
+                    PreferencesUtil.getInstance().clearUserMeassage();
+                    finish();
+                }
+                    break;
         }
     }
 }
