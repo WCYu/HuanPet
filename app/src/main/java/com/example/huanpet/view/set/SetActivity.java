@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import android.widget.Toast;
+
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.CustomTool;
@@ -13,6 +15,8 @@ import com.example.huanpet.view.set.view.GuanYuActivity;
 import com.example.huanpet.view.set.view.JianYiActivity;
 import com.example.huanpet.view.set.view.NewGongNengActivity;
 import com.example.huanpet.view.set.view.PingFenActivity;
+
+
 
 public class SetActivity extends BaseActivity implements View.OnClickListener{
 
@@ -58,6 +62,7 @@ public class SetActivity extends BaseActivity implements View.OnClickListener{
     }
 
     @Override
+
     public void initListener() {
             set_custom.setOnLeftButtonClickListener(new CustomTool.OnLeftButtonClickListener() {
                 @Override
@@ -101,8 +106,13 @@ public class SetActivity extends BaseActivity implements View.OnClickListener{
             case R.id.exit_login:
                 PreferencesUtil.getInstance().clearUserMeassage();
                 finish();
+                String userId = PreferencesUtil.getInstance().getUserId();
+                if (userId==null)
+                    Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+                else
+                PreferencesUtil.getInstance().clearUserMeassage();
+                finish();
                 break;
-
         }
     }
 }
