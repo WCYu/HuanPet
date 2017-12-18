@@ -119,7 +119,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         param.put("coordY",116.23 );
         param.put("beginIndex", (mPage - 1) * 10);
         param.put("endIndex", mPage * 10);
-        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param,0);
 
 //        Log.e("Tat-------------",userId);
 
@@ -434,6 +434,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
+        int i =0;
         switch (v.getId()) {
             case R.id.main_user:
                 intent.setClass(HomeActivity.this, UserActivity.class);
@@ -442,6 +443,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
                 intent.setClass(HomeActivity.this, NewsActivity.class);
                 break;
             case R.id.main_adduser:
+                i=1;
                 intent.setClass(HomeActivity.this, SignInActivity.class);
                 break;
             case R.id.main_pet:
@@ -454,13 +456,19 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
                 intent.setClass(HomeActivity.this, PurseActivity.class);
                 break;
             case R.id.main_know:
+                i=2;
                 intent.setClass(HomeActivity.this, KnowActivity.class);
                 break;
             case R.id.main_set:
+                i=3;
                 intent.setClass(HomeActivity.this, SetActivity.class);
                 break;
         }
-        startActivity(intent);
+        if (userId==null&&i==0){
+            Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+        }else {
+            startActivity(intent);
+        }
     }
 
     @Override
