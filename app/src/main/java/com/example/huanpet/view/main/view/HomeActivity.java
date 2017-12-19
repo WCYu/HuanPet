@@ -83,6 +83,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     private String petUrl=UrlPath.TOTALPATH+UrlPath.PETPATH;
     private PopupWindow popupWindow;
     private List<HomeBean.DescBean> desc;
+    private TextView home_username;
+    private TextView home_userpoph;
 
     @Override
     public int initLayoutID() {
@@ -111,14 +113,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         home_pettype = findViewById(R.id.home_pettype);
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
-
-        userId = PreferencesUtil.getInstance().getUserId();
-        if(!TextUtils.isEmpty(userId)){
-            main_adduser.setVisibility(View.GONE);
-        }else {
-            main_adduser.setVisibility(View.VISIBLE);
-        }
-
+        home_username =findViewById(R.id.home_username);
+        home_userpoph =findViewById(R.id.home_userpoph);
         homePresenter = new HomePresenter(this);
         setData("distance asc",coordX,coordY,beginIndex, screeningUrl);
     }
@@ -126,7 +122,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     @Override
     protected void onResume() {
         super.onResume();
-
+        userId = PreferencesUtil.getInstance().getUserId();
+        if(!TextUtils.isEmpty(userId)){
+            main_adduser.setVisibility(View.GONE);
+            //回传用户名
+            home_username.setText(PreferencesUtil.getInstance().getUserName());
+            //回传手机号
+            home_userpoph.setText(PreferencesUtil.getInstance().getUserPhone());
+        }else {
+            main_adduser.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setData(String orderBy, double coordX, double coordY, int beginIndex, String url) {
@@ -489,5 +494,4 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         }
 
     }
-
 }
