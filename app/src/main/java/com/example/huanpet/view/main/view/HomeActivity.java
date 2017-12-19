@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -24,13 +25,16 @@ import android.widget.Toast;
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.entity.HomeBean;
+import com.example.huanpet.entity.HomePetBean;
 import com.example.huanpet.utils.CustomTool;
 import com.example.huanpet.utils.PreferencesUtil;
+import com.example.huanpet.utils.UrlPath;
 import com.example.huanpet.view.know.KnowActivity;
 import com.example.huanpet.view.main.adapter.HomeListAdapter;
+import com.example.huanpet.view.main.adapter.HomePetAdapter;
 import com.example.huanpet.view.main.presenter.HomePresenter;
 import com.example.huanpet.view.news.NewsActivity;
-import com.example.huanpet.view.order.OrderActivity;
+import com.example.huanpet.view.order.view.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
 import com.example.huanpet.view.purse.PurseActivity;
 import com.example.huanpet.view.set.SetActivity;
@@ -69,6 +73,16 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     private ListView home_list;
     private CheckBox screening_cityName;
     private HomePresenter homePresenter;
+    private String userId;
+
+    private String orderBy;
+    private double coordX=40.22;
+    private double coordY=116.23;
+    private int beginIndex=0;
+    private String screeningUrl=UrlPath.TOTALPATH+UrlPath.SCREENINGPATH;
+    private String petUrl=UrlPath.TOTALPATH+UrlPath.PETPATH;
+    private PopupWindow popupWindow;
+    private List<HomeBean.DescBean> desc;
 
     @Override
     public int initLayoutID() {
@@ -105,12 +119,22 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         param.put("coordY", 116.23);
         param.put("beginIndex", (mPage - 1) * 10);
         param.put("endIndex", mPage * 10);
+<<<<<<< HEAD
 
         homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml", param);
 
         homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
+=======
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param,0);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userId = PreferencesUtil.getInstance().getUserId();
+        setData("distance asc",coordX,coordY,beginIndex, screeningUrl);
+>>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
         String userId = PreferencesUtil.getInstance().getUserId();
-//        Log.e("Tat-------------",userId);
         if(!TextUtils.isEmpty(userId)){
             main_adduser.setVisibility(View.GONE);
         }else {
@@ -119,6 +143,22 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+    private void setData(String orderBy,double coordX,double coordY,int beginIndex,String url) {
+        Map param=new HashMap();
+        param.put("orderBy", orderBy);
+        param.put("coordX", coordX);
+        param.put("coordY", coordY);
+        param.put("beginIndex", beginIndex*10);
+        param.put("endIndex", (beginIndex+1)*10);
+        homePresenter.getData(url,param,0);
+    }
+    private void setPetData(int beginIndex,String petTypeCode,String url) {
+        Map param=new HashMap();
+        param.put("beginIndex", beginIndex*10);
+        param.put("endIndex", (beginIndex+1)*10);
+        param.put("petTypeCode", "");
+        homePresenter.getData(url,param,1);
+    }
     //初始化适配器
     @Override
     public void initAdapter() {
@@ -175,6 +215,18 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                         }
                         break;
                 }
+            }
+        });
+        home_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent in=new Intent(HomeActivity.this,MerchantActivity.class);
+                in.putExtra("score",desc.get(position).getScore());
+                in.putExtra("address",desc.get(position).getAddress());
+                in.putExtra("userImage",desc.get(position).getUserImage());
+                in.putExtra("usersId",desc.get(position).getUsersId());
+                in.putExtra("family",desc.get(position).getFamily());
+                startActivity(in);
             }
         });
     }
@@ -255,34 +307,47 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     private void initPettypeView(View pettypeView) {
         RadioGroup pettype_group = pettypeView.findViewById(R.id.pettype_group);
         final RadioButton pettype_small = pettypeView.findViewById(R.id.pettype_small);
-        RadioButton pettype_medium = pettypeView.findViewById(R.id.pettype_medium);
-        RadioButton pettype_big = pettypeView.findViewById(R.id.pettype_big);
-        RadioButton pettype_cat = pettypeView.findViewById(R.id.pettype_cat);
-        RadioButton pettype_small_pet = pettypeView.findViewById(R.id.pettype_small_pet);
-        RadioButton pettype_puppy = pettypeView.findViewById(R.id.pettype_puppy);
+        final RadioButton pettype_medium = pettypeView.findViewById(R.id.pettype_medium);
+        final RadioButton pettype_big = pettypeView.findViewById(R.id.pettype_big);
+        final RadioButton pettype_cat = pettypeView.findViewById(R.id.pettype_cat);
+        final RadioButton pettype_small_pet = pettypeView.findViewById(R.id.pettype_small_pet);
+        final RadioButton pettype_puppy = pettypeView.findViewById(R.id.pettype_puppy);
         pettype_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.pettype_small:
+                        setPetData(beginIndex,pettype_small.getText().toString(),petUrl);
+                        home_pettype.setText(pettype_small.getText());
                         break;
                     case R.id.pettype_medium:
+                        setPetData(beginIndex,pettype_medium.getText().toString(),petUrl);
+                        home_pettype.setText(pettype_medium.getText());
                         break;
                     case R.id.pettype_big:
+                        setPetData(beginIndex,"",petUrl);
+                        home_pettype.setText(pettype_big.getText());
                         break;
                     case R.id.pettype_cat:
+                        setPetData(beginIndex,pettype_cat.getText().toString(),petUrl);
+                        home_pettype.setText(pettype_cat.getText());
                         break;
                     case R.id.pettype_small_pet:
+                        setPetData(beginIndex,pettype_small_pet.getText().toString(),petUrl);
+                        home_pettype.setText(pettype_small_pet.getText());
                         break;
                     case R.id.pettype_puppy:
+                        setPetData(beginIndex,pettype_puppy.getText().toString(),petUrl);
+                        home_pettype.setText(pettype_puppy.getText());
                         break;
                 }
+                popupWindow.dismiss();
             }
         });
     }
 
     //附近布局控件初始化
-    private void initVicinityView(View vicinityView) {
+    private void initVicinityView(final View vicinityView) {
         RadioGroup vicinity_group = vicinityView.findViewById(R.id.vicinity_group);
         final RadioButton vicinity_near = vicinityView.findViewById(R.id.vicinity_near);
         final RadioButton vicinity_praise = vicinityView.findViewById(R.id.vicinity_praise);
@@ -293,22 +358,38 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
+                    //附近优先
                     case R.id.vicinity_near:
-                        home_vicinity.setText(vicinity_near.getText());
+                        home_vicinity.setText(vicinity_near.getText().toString());
+                        orderBy="distance asc";
+                        setData(orderBy,coordX,coordY,beginIndex,screeningUrl);
                         break;
+                    //好评优先
                     case R.id.vicinity_praise:
-                        home_vicinity.setText(vicinity_praise.getText());
+                        home_vicinity.setText(vicinity_praise.getText().toString());
+                        orderBy="score desc";
+                        setData(orderBy,coordX,coordY,beginIndex,screeningUrl);
                         break;
+                    //订单优先
                     case R.id.vicinity_order:
-                        home_vicinity.setText(vicinity_order.getText());
+                        home_vicinity.setText(vicinity_order.getText().toString());
+                        orderBy="orderCount desc";
+                        setData(orderBy,coordX,coordY,beginIndex,screeningUrl);
                         break;
+                    //从高到低
                     case R.id.vicinity_high:
-                        home_vicinity.setText(vicinity_high.getText());
+                        home_vicinity.setText(vicinity_high.getText().toString());
+                        orderBy="price asc";
+                        setData(orderBy,coordX,coordY,beginIndex,screeningUrl);
                         break;
+                    //从低到高
                     case R.id.vicinity_low:
-                        home_vicinity.setText(vicinity_low.getText());
+                        home_vicinity.setText(vicinity_low.getText().toString());
+                        orderBy="price desc";
+                        setData(orderBy,coordX,coordY,beginIndex,screeningUrl);
                         break;
                 }
+                popupWindow.dismiss();
             }
         });
     }
@@ -316,7 +397,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     //初始化PopupWindow
     private void initPopu(View vicinityView) {
 //        vicinityView.getBackground().setAlpha(200);
-        final PopupWindow popupWindow = new PopupWindow(vicinityView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow = new PopupWindow(vicinityView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         vicinityView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -358,6 +439,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onClick(View v) {
         Intent intent = new Intent();
+        int i =0;
         switch (v.getId()) {
             case R.id.main_user:
                 intent.setClass(HomeActivity.this, UserActivity.class);
@@ -366,6 +448,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 intent.setClass(HomeActivity.this, NewsActivity.class);
                 break;
             case R.id.main_adduser:
+                i=1;
                 intent.setClass(HomeActivity.this, SignInActivity.class);
                 break;
             case R.id.main_pet:
@@ -378,13 +461,19 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
                 intent.setClass(HomeActivity.this, PurseActivity.class);
                 break;
             case R.id.main_know:
+                i=2;
                 intent.setClass(HomeActivity.this, KnowActivity.class);
                 break;
             case R.id.main_set:
+                i=3;
                 intent.setClass(HomeActivity.this, SetActivity.class);
                 break;
         }
-        startActivity(intent);
+        if (userId==null&&i==0){
+            Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
+        }else {
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -398,6 +487,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
+<<<<<<< HEAD
     public void getData(final String data) {
         final String str = data;
         Log.e("TAG-----------", data);
@@ -406,5 +496,22 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         List<HomeBean.DescBean> desc = homeBean.getDesc();
         HomeListAdapter homeListAdapter = new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc, this);
         home_list.setAdapter(homeListAdapter);
+=======
+    public void getData(final String data,int i) {
+        Gson gs=new Gson();
+        if(i==0){
+            Log.e("TAG--------",data);
+            HomeBean homeBean = gs.fromJson(data, HomeBean.class);
+            desc = homeBean.getDesc();
+            HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);
+            home_list.setAdapter(homeListAdapter);
+        }else if(i==1){
+            HomePetBean homePetBean = gs.fromJson(data, HomePetBean.class);
+            List<HomePetBean.DescBean> desc = homePetBean.getDesc();
+            HomePetAdapter homePetAdapter=new HomePetAdapter((ArrayList<HomePetBean.DescBean>) desc,this);
+            home_list.setAdapter(homePetAdapter);
+        }
+
+>>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
     }
 }

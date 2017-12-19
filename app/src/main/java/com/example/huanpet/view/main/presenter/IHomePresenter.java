@@ -7,5 +7,5 @@ import java.util.Map;
  */
 
 public interface IHomePresenter {
-    void getData(String url, Map map);
+    void getData(String url, Map map,int i);
 }

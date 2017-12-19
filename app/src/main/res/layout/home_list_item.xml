@@ -11,7 +11,8 @@
         android:layout_height="match_parent" />
     <LinearLayout
         android:padding="10dp"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
@@ -24,7 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:isIndicator="true"
+            style="@style/Base.Widget.AppCompat.RatingBar.Small"
             android:numStars="5"
+            android:rating="3"
+            android:progressTint="@color/cheng"
             />
         <TextView
             android:id="@+id/homeitem_address"
@@ -43,6 +47,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/cheng"

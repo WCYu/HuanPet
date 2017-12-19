@@ -3,10 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.huanpet">
 
+<<<<<<< HEAD
     <uses-sdk tools:overrideLibrary="compile &apos;com.gjiazhe:wavesidebar:1.0.2&apos;" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    ：
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+>>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
 
     <application
         android:name=".app.AppService"
@@ -26,6 +33,10 @@
         <activity android:name=".view.main.view.HomeActivity" />
         <activity android:name=".view.know.KnowActivity" />
         <activity android:name=".view.news.NewsActivity" />
+<<<<<<< HEAD
+=======
+        <activity android:name=".view.order.view.OrderActivity" />
+>>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
         <activity android:name=".view.order.OrderActivity" />
         <activity android:name=".view.purse.PurseActivity" />
         <activity android:name=".view.set.SetActivity" />
@@ -47,6 +58,10 @@
         <activity android:name=".view.pet.nicknameActivity" />
         <activity android:name=".view.pet.TypeofpetActivity" />
         <activity android:name=".view.pet.WeightActivity" />
+<<<<<<< HEAD
+=======
+        <activity android:name=".view.set.view.JianYiActivity" />
+>>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
         <activity
             android:name="com.zaaach.citypicker.CityPickerActivity"
             android:screenOrientation="portrait"
@@ -67,8 +82,16 @@
             android:name="com.amap.api.v2.apikey"
             android:value="138e5cf1e8961ae326ff0908c03d1ae1" />
 
+<<<<<<< HEAD
         <activity android:name=".view.pet.Main2Activity" />
         <activity android:name=".view.pet.PetSelectOneActivity"></activity>
+=======
+        <activity android:name=".view.main.view.MerchantActivity" />
+        <activity android:name=".view.main.view.AppointmentActivity" />
+        <activity android:name=".view.main.view.TransactActivity" />
+        <activity android:name=".view.main.view.DataActivity" />
+        <activity android:name=".view.main.view.CommentariesActivity"></activity>
+>>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
     </application>
 
 </manifest>

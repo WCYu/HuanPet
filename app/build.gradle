@@ -30,9 +30,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.android.support:percent:26.0.0'
     implementation 'com.android.support:design:+'
-    compile 'com.github.bumptech.glide:glide:4.0.0'
     testCompile 'junit:junit:4.12'
     compile files('libs/GifView.jar')
     compile files('libs/picasso-2.5.2.jar')
@@ -40,10 +40,14 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.0.1'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'cn.qqtheme.framework:AndroidPicker:latest.integration'
-    compile project(':citypicker')
+//    compile project(':citypicker')
     implementation files('libs/fastjson-1.1.34.android.jar')
     implementation 'com.google.code.gson:gson:2.2.4'
+
     compile files('libs/universal-image-loader-1.9.3.jar')
 
+
+
+    compile 'cn.aigestudio.datepicker:DatePicker:2.2.0'
 
 }
