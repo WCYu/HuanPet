@@ -112,14 +112,12 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                                         instance.setUserId(userId);
                                         String userId1 = instance.getUserId();
                                         instance.setUserName(userName);
+                                        Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                        finish();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-                                Intent intent=new Intent(SignInActivity.this,HomeActivity.class);
-                                startActivity(intent);
-                                Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
-                                finish();
                             }
                         });
                     }

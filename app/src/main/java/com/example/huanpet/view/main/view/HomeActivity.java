@@ -111,14 +111,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         home_pettype = findViewById(R.id.home_pettype);
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
-
-        userId = PreferencesUtil.getInstance().getUserId();
-        if(!TextUtils.isEmpty(userId)){
-            main_adduser.setVisibility(View.GONE);
-        }else {
-            main_adduser.setVisibility(View.VISIBLE);
-        }
-
         homePresenter = new HomePresenter(this);
         setData("distance asc",coordX,coordY,beginIndex, screeningUrl);
     }
@@ -126,7 +118,12 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     @Override
     protected void onResume() {
         super.onResume();
-
+        userId = PreferencesUtil.getInstance().getUserId();
+        if(!TextUtils.isEmpty(userId)){
+            main_adduser.setVisibility(View.GONE);
+        }else {
+            main_adduser.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setData(String orderBy, double coordX, double coordY, int beginIndex, String url) {
