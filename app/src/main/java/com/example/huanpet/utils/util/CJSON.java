@@ -16,7 +16,7 @@ public class CJSON extends JSON {
 	private static final String END_CONTENT = "\"";
 	private static final String COMMA = ",";
 	private static final String COLON = ":";
-
+	public static final String URL_STRING="http://123.56.150.230:8885/dog_family/";
 	/**
 	 * 
 	 * @描述 : 获取JSON中的DESC

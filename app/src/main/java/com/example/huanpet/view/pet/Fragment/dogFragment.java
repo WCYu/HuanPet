@@ -41,7 +41,7 @@ public class dogFragment extends Fragment {
 
     private void initView(View view) {
         dog = (LinearLayout) view.findViewById(R.id.dog);
-        rv = (RecyclerView) view.findViewById(R.id.rv);
+
 
        // sideBar = (WaveSideBar) view.findViewById(R.id.sideBar);
 

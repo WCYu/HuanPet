@@ -1,121 +1,124 @@
 package com.example.huanpet.view.pet.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.SectionIndexer;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.example.huanpet.R;
 
 import java.util.List;
 
-/**
- * @author: xp
- * @date: 2017/7/19
- */
+public class SortAdapter extends BaseAdapter implements SectionIndexer {
+	private List<SortModel> list = null;
+	private Context mContext;
 
-public class SortAdapter extends RecyclerView.Adapter<SortAdapter.ViewHolder> {
-    private LayoutInflater mInflater;
-    private List<SortModel> mData;
-    private Context mContext;
+	public SortAdapter(Context mContext, List<SortModel> list) {
+		this.mContext = mContext;
+		this.list = list;
+	}
 
-    public SortAdapter(Context context, List<SortModel> data) {
-        mInflater = LayoutInflater.from(context);
-        mData = data;
-        this.mContext = context;
-    }
+	/**
+	 * 当ListView数据发生变化时,调用此方法来更新ListView
+	 * 
+	 * @param list
+	 */
+	public void updateListView(List<SortModel> list) {
+		this.list = list;
+		notifyDataSetChanged();
+	}
 
-    @Override
-    public SortAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.item_name, parent,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.tvName = (TextView) view.findViewById(R.id.tvName);
-        return viewHolder;
-    }
+	public int getCount() {
+		return this.list.size();
+	}
 
-    @Override
-    public void onBindViewHolder(final SortAdapter.ViewHolder holder, final int position) {
-        if (mOnItemClickListener != null) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnItemClickListener.onItemClick(holder.itemView, position);
-                }
-            });
+	public Object getItem(int position) {
+		return list.get(position);
+	}
 
-        }
+	public long getItemId(int position) {
+		return position;
+	}
 
-        holder.tvName.setText(this.mData.get(position).getName());
+	public View getView(final int position, View view, ViewGroup arg2) {
+		ViewHolder viewHolder = null;
+		final SortModel mContent = list.get(position);
+		if (view == null) {
+			viewHolder = new ViewHolder();
+			view = LayoutInflater.from(mContext).inflate(R.layout.item, null);
+			viewHolder.tvTitle = (TextView) view.findViewById(R.id.title);
+			viewHolder.tvLetter = (TextView) view.findViewById(R.id.catalog);
+			view.setTag(viewHolder);
+		} else {
+			viewHolder = (ViewHolder) view.getTag();
+		}
 
-        holder.tvName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(mContext, mData.get(position).getName(),Toast.LENGTH_SHORT).show();
-            }
-        });
+		// 根据position获取分类的首字母的Char ascii值
+		int section = getSectionForPosition(position);
 
-    }
+		// 如果当前位置等于该分类首字母的Char的位置 ，则认为是第一次出现
+		if (position == getPositionForSection(section)) {
+			viewHolder.tvLetter.setVisibility(View.VISIBLE);
+			viewHolder.tvLetter.setText(mContent.getSortLetters());
+		} else {
+			viewHolder.tvLetter.setVisibility(View.GONE);
+		}
 
-    @Override
-    public int getItemCount() {
-        return mData.size();
-    }
+		viewHolder.tvTitle.setText(this.list.get(position).getName());
 
-    //**********************itemClick************************
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
-    }
+		return view;
 
-    private OnItemClickListener mOnItemClickListener;
+	}
 
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
-    }
-    //**************************************************************
+	final static class ViewHolder {
+		TextView tvLetter;
+		TextView tvTitle;
+	}
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName;
+	/**
+	 * 根据ListView的当前位置获取分类的首字母的Char ascii值
+	 */
+	public int getSectionForPosition(int position) {
+		return list.get(position).getSortLetters().charAt(0);
+	}
 
-        public ViewHolder(View itemView) {
-            super(itemView);
-        }
-    }
+	/**
+	 * 根据分类的首字母的Char ascii值获取其第一次出现该首字母的位置
+	 */
+	public int getPositionForSection(int section) {
+		for (int i = 0; i < getCount(); i++) {
+			String sortStr = list.get(i).getSortLetters();
+			char firstChar = sortStr.toUpperCase().charAt(0);
+			if (firstChar == section) {
+				return i;
+			}
+		}
 
-    /**
-     * 提供给Activity刷新数据
-     * @param list
-     */
-    public void updateList(List<SortModel> list){
-        this.mData = list;
-        notifyDataSetChanged();
-    }
+		return -1;
+	}
 
-    public Object getItem(int position) {
-        return mData.get(position);
-    }
+	/**
+	 * 提取英文的首字母，非英文字母用#代替。
+	 * 
+	 * @param str
+	 * @return
+	 */
+	private String getAlpha(String str) {
+		String sortStr = str.trim().substring(0, 1).toUpperCase();
+		// 正则表达式，判断首字母是否是英文字母
+		if (sortStr.matches("[A-Z]")) {
+			return sortStr;
+		} else {
+			return "#";
+		}
+	}
 
-    /**
-     * 根据ListView的当前位置获取分类的首字母的char ascii值
-     */
-    public int getSectionForPosition(int position) {
-        return mData.get(position).getLetters().charAt(0);
-    }
-
-    /**
-     * 根据分类的首字母的Char ascii值获取其第一次出现该首字母的位置
-     */
-    public int getPositionForSection(int section) {
-        for (int i = 0; i < getItemCount(); i++) {
-            String sortStr = mData.get(i).getLetters();
-            char firstChar = sortStr.toUpperCase().charAt(0);
-            if (firstChar == section) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
+	@Override
+	public Object[] getSections() {
+		return null;
+	}
 }
