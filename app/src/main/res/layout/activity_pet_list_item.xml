@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" >
+
+        <RelativeLayout
+            android:id="@+id/pet_photo_show"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/my" />
+
+        <TextView
+            android:id="@+id/pet_name_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/pet_photo_show"
+            android:layout_marginLeft="15dp"
+            android:layout_toRightOf="@+id/pet_photo_show"
+            android:text="捷豹"
+            android:textSize="18sp" />
+
+
+
+        <TextView
+            android:id="@+id/pet_desc_show"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/pet_name_show"
+            android:layout_below="@+id/pet_name_show"
+            android:maxLines="1"
+            android:layout_marginTop="2dp"
+            android:text="介绍介绍维嘉幸福"
+            android:textColor="#BEBEBE" />
+        
+        
+        <ImageView
+            android:id="@+id/iv_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/pet_sex_show"
+            android:src="@drawable/delete_pet" />
+    </RelativeLayout>
+
+</LinearLayout>

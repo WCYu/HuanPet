@@ -7,40 +7,49 @@
     android:orientation="vertical"
     tools:context="com.example.huanpet.view.pet.PetActivity">
     <RelativeLayout
-        android:id="@+id/title_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/dp10" >
 
-        android:layout_marginTop="10dp">
         <ImageView
-            android:layout_marginTop="10dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-android:id="@+id/fhhh"
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:src="@drawable/back_gray" />
 
         <TextView
-
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
-            android:gravity="center"
-            android:text="宠物列表"
+            android:layout_centerInParent="true"
+            android:text="我的宠物"
+            android:textSize="20sp" />
 
-            android:layout_marginTop="8dp"
-            android:textSize="20sp"
-            />
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/tz"
-            android:src="@mipmap/app_pet_press"
-            android:layout_alignParentRight ="true"
-            android:layout_marginTop="10dp"
-            />
-
-
+        <Button
+            android:id="@+id/btn_addPet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="#00000000"
+            android:text="+"
+            android:textSize="22sp" />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="10dp"
+        android:background="#BEBEBE" />
+
+    <ListView
+        android:id="@+id/lv_pet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#55660000"
+        android:dividerHeight="1dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        />
 
 </LinearLayout>

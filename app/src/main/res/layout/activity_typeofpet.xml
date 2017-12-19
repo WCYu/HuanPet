@@ -27,86 +27,92 @@
         android:layout_height="wrap_content"
 
         android:gravity="center"
-        android:text="昵称"
+        android:text="宠物类型"
 
         android:layout_marginTop="13dp"
         android:textSize="20sp"
         />
     </RelativeLayout>
 
-    <com.example.huanpet.custom.EditTextWithDelete
-        android:id="@+id/searchEditText"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_weight="1"
-        android:background="@drawable/cwed"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
 
+        <com.example.huanpet.custom.EditTextWithDelete
+            android:id="@+id/searchEditText"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
 
-        android:imeOptions="actionDone"
-        android:singleLine="true"
-        android:textSize="16sp" />
+            android:background="@drawable/shaape"
+            android:layout_marginLeft="10dp"
 
+            android:layout_marginRight="10dp"
+            android:imeOptions="actionDone"
+            android:singleLine="true"
+            android:textSize="16sp" />
 
-    <!--    <SearchView
-    android:layout_marginTop="15dp"
-            android:id="@+id/searchView"
-            android:layout_width="330dp"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:iconifiedByDefault="false"
-           android:background="@null"
-            android:layout_marginLeft="15dp"
-            android:queryHint="请输入宠物种类或者拼音"
-         />-->
+            android:orientation="horizontal"
+            android:background="@color/white"
+            >
 
-   <!-- <SearchView
-        android:layout_marginTop="15dp"
-        android:id="@+id/filter_edit"
+            <Button
+                android:id="@+id/pet_type_dog"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/typebutton"
+                android:text="狗" />
 
+            <Button
+                android:id="@+id/pet_type_cat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/typebutton"
+                android:layout_weight="1"
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:iconifiedByDefault="false"
-        android:background="@drawable/shaape"
+                android:text="猫" />
 
-        android:queryHint="请输入宠物种类或者拼音"
-        />-->
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp">
+            <Button
+                android:id="@+id/pet_type_pet"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/typebutton"
+                android:text="小宠" />
+        </LinearLayout>
+      <FrameLayout
+           android:layout_width="fill_parent"
+           android:layout_height="fill_parent" >
 
-    </android.support.v7.widget.RecyclerView>
+           <ListView
+               android:id="@+id/country_lvcountry"
+               android:layout_width="fill_parent"
+               android:layout_height="fill_parent"
+               android:layout_gravity="center"
+               android:divider="@null"
+               android:scrollbars="none" />
 
+           <TextView
+               android:id="@+id/dialog"
+               android:layout_width="80dp"
+               android:layout_height="80dp"
+               android:layout_gravity="center"
 
+               android:gravity="center"
+               android:textColor="#ffffffff"
+               android:textSize="30dp"
+               android:visibility="invisible" />
+          <com.example.huanpet.view.pet.SideBar
+              android:id="@+id/sidrbar"
+              android:layout_width="30dp"
+              android:layout_height="fill_parent"
+              android:layout_gravity="right|center" />
 
-        <!-- <ListView
-             android:id="@+id/listView"
-             android:layout_width="match_parent"
-             android:layout_height="0dp"
-             android:layout_weight="1" >-->
-        <android.support.design.widget.TabLayout
-           android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/tablayout"
-            android:layout_marginTop="15dp"
-android:background="#ffffff"
-            app:tabIndicatorColor="@android:color/holo_orange_light"
-
-            />
-<android.support.v4.view.ViewPager
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:id="@+id/vp"
-    >
-
-</android.support.v4.view.ViewPager>
-
-
-
-    </LinearLayout>
+      </FrameLayout>
+    <!--
+               <jiyun.com.lovepet.view.SideBar
+                  />
+           -->
+</LinearLayout>
 
 
