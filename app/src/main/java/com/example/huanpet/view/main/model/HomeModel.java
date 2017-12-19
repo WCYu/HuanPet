@@ -24,9 +24,8 @@ public class HomeModel implements IHomeModel {
     public void registerData(String url, Map map, final OnRegisterListener onRegisterListener) {
         FormBody.Builder builder = new FormBody.Builder();
         String josn = CJSON.toJSONMap(map);
-        Log.e("TAG--------",josn);
         builder.add("data",josn);
-
+        Log.e("----Model----",josn);
         OkhttpUtil.getInstance().postJson(url, builder.build(), new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {

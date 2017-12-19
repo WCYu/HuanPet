@@ -11,4 +11,8 @@ public class UrlPath {
     public static final String SCREENINGPATH="users/getUsersInfoByVO.jhtml";
     //宠物查询
     public static final String PETPATH="petType/getPetTypesByVO.jhtml";
+    //预约寄养
+    public static final String JIYANGPATH="orderInfo/saveOrderInfo.jhtml";
+    //寄养评论
+    public static final String PINGLUNPATH="users/getUsersInfoByVO.jhtml";
 }

@@ -1,11 +1,17 @@
 package com.example.huanpet.view.main.view;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -15,8 +21,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.custom.PercentLinearLayout;
+import com.example.huanpet.utils.UrlPath;
+import com.example.huanpet.view.main.presenter.HomePresenter;
 
-public class MerchantActivity extends BaseActivity implements View.OnClickListener {
+import java.util.HashMap;
+import java.util.Map;
+
+public class MerchantActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private PercentLinearLayout commentaries;
     private TextView address;
@@ -31,6 +42,8 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
     private ImageView user_icon;
     private TextView user_name;
     private RatingBar user_rating;
+    private HomePresenter homePresenter;
+
     @Override
     public int initLayoutID() {
         return R.layout.activity_merchant;
@@ -51,6 +64,12 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
         userImage = intent.getStringExtra("userImage");
         usersId = intent.getStringExtra("usersId");
         family = intent.getStringExtra("family");
+
+        homePresenter = new HomePresenter(this);
+        Map param=new HashMap();
+        param.put("usersId", "usersId");
+        homePresenter.getData((UrlPath.TOTALPATH + UrlPath.PINGLUNPATH),param,0);
+
         appointment.setOnClickListener(this);
         contact.setOnClickListener(this);
     }
@@ -74,7 +93,8 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
         commentaries.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(MerchantActivity.this,CommentariesActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -89,11 +109,46 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.appointment:
                 Intent in=new Intent(MerchantActivity.this,AppointmentActivity.class);
+                in.putExtra("userId",usersId);
+                in.putExtra("family",family);
                 startActivity(in);
                 break;
             case R.id.contact:
+                View view = LayoutInflater.from(this).inflate(R.layout.contact_item,null);
+                view.getBackground().setAlpha(200);
+                TextView call=view.findViewById(R.id.make_a_call);
+                TextView message=view.findViewById(R.id.send_a_message);
+                TextView cancle=view.findViewById(R.id.cancel);
+                final PopupWindow popupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+                call.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(Intent.ACTION_DIAL);
+                        Uri data = Uri.parse("tel:" + "18317521412");
+                        intent.setData(data);
+                        startActivity(intent);
+                    }
+                });
 
+                message.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                    }
+                });
+                cancle.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                popupWindow.showAtLocation(contact, Gravity.CENTER,0,0);
                 break;
         }
+    }
+
+    @Override
+    public void getData(String data, int i) {
+        Log.e("Tag---------",data);
     }
 }

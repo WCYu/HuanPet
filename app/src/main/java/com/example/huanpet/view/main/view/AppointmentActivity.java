@@ -14,9 +14,19 @@ import android.widget.Toast;
 
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
+import com.example.huanpet.entity.OrderItemInfo;
 import com.example.huanpet.utils.CustomTool;
+import com.example.huanpet.utils.PreferencesUtil;
+import com.example.huanpet.utils.UrlPath;
+import com.example.huanpet.utils.util.AppUtils;
+import com.example.huanpet.utils.util.CJSON;
+import com.example.huanpet.view.main.presenter.HomePresenter;
 
-public class AppointmentActivity extends BaseActivity implements View.OnClickListener {
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class AppointmentActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private CustomTool appointment_custom;
     private TextView appointment_day;
@@ -38,11 +48,14 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
     private int xizao = 0;
     private int jiesong = 0;
     private int day = 0;
+    private int zong;
     private LinearLayout start_date;
     private LinearLayout end_date;
     private TextView start_tv;
     private TextView end_tv;
     private TextView appointment_date;
+    private String careId;
+    private String family;
 
     @Override
     public int initLayoutID() {
@@ -71,6 +84,10 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
         start_tv = findViewById(R.id.start_tv);
         end_tv = findViewById(R.id.end_tv);
         appointment_date=findViewById(R.id.appointment_date);
+
+        Intent intent = getIntent();
+        careId = intent.getStringExtra("userId");
+        family = intent.getStringExtra("family");
 
         start_date.setOnClickListener(this);
         end_date.setOnClickListener(this);
@@ -121,8 +138,38 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.appointment_yuyue:
-                Intent in = new Intent(AppointmentActivity.this, TransactActivity.class);
-                startActivity(in);
+//                Intent in = new Intent(AppointmentActivity.this, TransactActivity.class);
+//                startActivity(in);
+                ArrayList list=new ArrayList();
+                for (int i = 0; i < 3; i++) {
+                    OrderItemInfo orderinfo1 = new OrderItemInfo();
+                    orderinfo1.setIsService(1);
+                    orderinfo1.setPetDuration(day);
+//                orderinfo1.setPetId();
+//                orderinfo1.setPetImage();
+//                orderinfo1.setPetName();
+//                orderinfo1.setPetPricingCode();
+//                orderinfo1.setPetPricingPrice();
+//                orderinfo1.setPrice(new BigDecimal());
+//                orderinfo1.setServiceCode();
+//                orderinfo1.setServiceCount(1 + "");
+//                orderinfo1.setServiceName();
+//                orderinfo1.setServicePrice(new BigDecimal());
+                    list.add(orderinfo1);
+                }
+                HashMap param=new HashMap();
+                param.put("orderAmount", zong);
+                param.put("paidUpAmount", zong);
+                param.put("receivableAmount", zong);
+                param.put("serviceBeginTime", start_tv.getText().toString());
+                param.put("serviceEndTime", end_tv.getText().toString());
+                param.put("userId", PreferencesUtil.getInstance().getUserId());
+                param.put("userName", PreferencesUtil.getInstance().getUserId());
+                param.put("userWord", comment_et.getText().toString());
+                param.put("usersName", family);
+                param.put("usersId", careId);
+                param.put("orderItemInfoVOs", list);
+                new HomePresenter(AppointmentActivity.this).getData((UrlPath.TOTALPATH+UrlPath.JIYANGPATH),param,0);
                 break;
             case R.id.appointment_xi_add:
                 if (xizao >= 0 && xizao < 3) {
@@ -156,18 +203,26 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 startActivityForResult(intentEnd, 1);
                 break;
         }
+        setComputations();
+    }
+
+    private void setComputations() {
+        appointment_day.setText(day + "天");
+        appointment_date.setText(day+"晚");
+        appointment_day_yuan.setText(30*day+"元");
         appointment_xi_gold.setText(xizao * 60 + "元");
         appointment_jie_gold.setText(jiesong * 50 + "元");
         appointment_xicode.setText(xizao + "");
         appointment_jie_code.setText(jiesong + "");
         appointment_heji_gold.setText((xizao * 60) + (jiesong * 50) + (day * 30) + "元");
-        appointment_zong_gold.setText("￥" + ((xizao * 60) + (jiesong * 50) + (day * 30)));
+        zong = (xizao * 60) + (jiesong * 50) + (day * 30);
+        appointment_zong_gold.setText("￥" + zong);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        String extra = data.getStringExtra("data");
         if (data != null) {
+            String extra = data.getStringExtra("data");
             if (requestCode == 0 && resultCode == 0) {
                 start_tv.setText(extra);
             } else if (requestCode == 1 && resultCode == 0) {
@@ -176,10 +231,10 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 String[] split = string.split("-");
                 String[] split1 = extra.split("-");
                 int  start = Integer.parseInt(split[2]);
-                int end =  - (Integer.parseInt(split1[2]));
+                int end = Integer.parseInt(split1[2]);
                 int date=end-start;
-                appointment_day.setText(date + "天");
-                appointment_date.setText(date+"晚");
+                day=date;
+                setComputations();
             }
         }
     }
@@ -193,8 +248,7 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) and run LayoutCreator again
+    public void getData(String data, int i) {
+        Log.e("----Appointment----",data);
     }
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.huanpet.custom.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -317,9 +317,10 @@
             android:layout_margin="10dp"
             android:text="总金额:" />
 
-        <RelativeLayout
+        <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
 
             <TextView
                 android:id="@+id/appointment_zong_gold"
@@ -331,12 +332,18 @@
                 android:textSize="15sp" />
 
             <Button
+                android:layout_margin="5dp"
                 android:id="@+id/appointment_yuyue"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:text="预约寄养" />
-        </RelativeLayout>
+                android:layout_alignParentTop="true"
+                android:layout_marginEnd="11dp"
+                android:layout_marginRight="11dp"
+                android:background="@drawable/jiyang_item"
+                android:text="预约寄养"
+                app:layout_heightPercent="6%" />
+        </android.support.percent.PercentRelativeLayout>
     </LinearLayout>
-</LinearLayout>
+</com.example.huanpet.custom.PercentLinearLayout>

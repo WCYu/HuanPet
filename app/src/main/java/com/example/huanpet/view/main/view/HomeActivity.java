@@ -120,9 +120,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         param.put("beginIndex", (mPage - 1) * 10);
         param.put("endIndex", mPage * 10);
         homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param,0);
-
-//        Log.e("Tat-------------",userId);
-
     }
 
     @Override
@@ -485,6 +482,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     public void getData(final String data,int i) {
         Gson gs=new Gson();
         if(i==0){
+            Log.e("TAG--------",data);
             HomeBean homeBean = gs.fromJson(data, HomeBean.class);
             desc = homeBean.getDesc();
             HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);

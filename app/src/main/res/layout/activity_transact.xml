@@ -9,6 +9,7 @@
     tools:context="com.example.huanpet.view.main.view.TransactActivity">
 
     <com.example.huanpet.utils.CustomTool
+        android:id="@+id/transact_custom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_heightPercent="8%">
@@ -17,17 +18,18 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="15%"
+        app:layout_heightPercent="17%"
         >
         <ImageView
             android:layout_centerInParent="true"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/pet_status_success"/>
     </RelativeLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/white"
         app:layout_heightPercent="20%"
         >
         <LinearLayout
@@ -52,38 +54,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="16%"
+        app:layout_heightPercent="18%"
         android:orientation="vertical"
+        android:background="@android:color/white"
         >
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="10dp"
             android:layout_weight="1">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订单号"
                 />
+            <TextView
+                android:id="@+id/transact_orderid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="10dp"
             android:layout_weight="1">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订单时间"
                 />
+            <TextView
+                android:id="@+id/transact_ordertime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="10dp"
             android:layout_weight="1">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订单金额"
                 />
+            <TextView
+                android:id="@+id/transact_ordertmoney"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
     </LinearLayout>
     <RelativeLayout
@@ -99,13 +117,15 @@
                 android:layout_weight="1"
                 android:layout_margin="15dp"
                 android:layout_height="wrap_content"
-                android:text="联系寄养家庭"/>
+                android:text="联系寄养家庭"
+                android:background="@drawable/biankung_hei"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_margin="15dp"
                 android:layout_height="wrap_content"
-                android:text="完成"/>
+                android:text="完成"
+                android:background="@drawable/jiyang_item"/>
         </LinearLayout>
     </RelativeLayout>
 </com.example.huanpet.custom.PercentLinearLayout>
