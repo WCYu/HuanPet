@@ -19,6 +19,7 @@ import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.entity.RegisterBean;
 import com.example.huanpet.utils.OkhttpUtil;
 import com.example.huanpet.utils.PreferencesUtil;
+import com.example.huanpet.utils.util.AppUtils;
 import com.example.huanpet.utils.util.CJSON;
 import com.example.huanpet.view.main.view.HomeActivity;
 import com.google.gson.Gson;
@@ -69,22 +70,23 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         btn_login.setOnClickListener(this);
         main_login_qq.setOnClickListener(this);
         main_login_wachat.setOnClickListener(this);
+        AppUtils.setAppContext(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.header_titles:
-                Intent intentheader = new Intent(SignInActivity.this,RegisterActivity.class);
+                Intent intentheader = new Intent(SignInActivity.this, RegisterActivity.class);
                 startActivity(intentheader);
                 break;
             case R.id.btn_login:
-                HashMap map=new HashMap();
-                map.put("userPhone",edit_phone.getText().toString());
-                map.put("password",edit_pwd.getText().toString());
+                HashMap map = new HashMap();
+                map.put("userPhone", edit_phone.getText().toString());
+                map.put("password", edit_pwd.getText().toString());
                 FormBody.Builder builder = new FormBody.Builder();
                 String josn = CJSON.toJSONMap(map);
-                builder.add("data",josn);
+                builder.add("data", josn);
 
                 OkhttpUtil.getInstance().postJson("http://123.56.150.230:8885/dog_family/" + "user/login.jhtml", builder.build(), new Callback() {
                     @Override
@@ -99,19 +101,23 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                             @Override
                             public void run() {
                                 try {
-                                    JSONObject jsonObject=new JSONObject(string);
-                                   boolean ret = (boolean) jsonObject.get("ret");
-                                   if(ret){
-                                       JSONObject result = jsonObject.getJSONObject("result");
-                                       String userId = (String) result.get("userId");
-                                       PreferencesUtil instance = PreferencesUtil.getInstance();
-                                              instance .setUserId(userId);
-                                       Log.e("Tat------111111-------",userId);
-                                       Log.e("Tat------222222-------",instance.getUserId());
-                                       Intent in=new Intent(SignInActivity.this,HomeActivity.class);
-                                       startActivity(in);
-                                       finish();
-                                   }
+                                    JSONObject jsonObject = new JSONObject(string);
+                                    boolean ret = (boolean) jsonObject.get("ret");
+                                    if (ret) {
+                                        JSONObject result = jsonObject.getJSONObject("result");
+                                        String userId = (String) result.get("userId");
+                                        String userName = (String) result.get("userName");
+                                        String usersex = (String) result.get("usersex");
+                                        String birthday = (String) result.get("Birthday");
+//                                        String Birthday = (String) result.get("Birthday");
+                                        PreferencesUtil instance = PreferencesUtil.getInstance();
+                                        instance.setUserId(userId);
+                                        instance.setUserName(userName);
+                                        instance.setUserSex(usersex);
+                                        instance.setBirthday(birthday);
+//                                        instance.setBirthday(Birthday);
+                                        finish();
+                                    }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
@@ -120,7 +126,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                         });
                     }
                 });
-                Toast.makeText(this, "登陆", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_find_pwd:
                 Toast.makeText(this, "忘记密码", Toast.LENGTH_SHORT).show();

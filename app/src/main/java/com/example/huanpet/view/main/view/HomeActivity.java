@@ -2,6 +2,7 @@ package com.example.huanpet.view.main.view;
 
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
@@ -44,7 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
+public class HomeActivity extends BaseActivity implements View.OnClickListener, IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
@@ -69,6 +70,14 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     private ListView home_list;
     private CheckBox screening_cityName;
     private HomePresenter homePresenter;
+    private CustomTool home_custom;
+    private ImageView home_spreads;
+    private SearchView home_search;
+    private ImageView home_usericon;
+    private TextView home_username;
+    private TextView home_userpoph;
+    private LinearLayout home_hides;
+    private DrawerLayout home_drawer;
 
     @Override
     public int initLayoutID() {
@@ -85,7 +94,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         main_purse = findViewById(R.id.main_purse);
         main_know = findViewById(R.id.main_know);
         main_set = findViewById(R.id.main_set);
-        main_adduser=findViewById(R.id.main_adduser);
+        main_adduser = findViewById(R.id.main_adduser);
         main_btn = findViewById(R.id.main_btn);
         customTool = findViewById(R.id.home_custom);
         searchView = findViewById(R.id.home_search);
@@ -97,20 +106,23 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         home_pettype = findViewById(R.id.home_pettype);
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
+        home_username=findViewById(R.id.home_username);
+        home_usericon=findViewById(R.id.home_usericon);
+        home_userpoph=findViewById(R.id.home_userpoph);
         homePresenter = new HomePresenter(this);
-        int mPage=1;
-        Map param=new HashMap();
+        int mPage = 1;
+        Map param = new HashMap();
         param.put("orderBy", "distance asc");
         param.put("coordX", 40.22);
-        param.put("coordY",116.23 );
+        param.put("coordY", 116.23);
         param.put("beginIndex", (mPage - 1) * 10);
         param.put("endIndex", mPage * 10);
-        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
+        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml", param);
         String userId = PreferencesUtil.getInstance().getUserId();
 //        Log.e("Tat-------------",userId);
-        if(!TextUtils.isEmpty(userId)){
+        if (!TextUtils.isEmpty(userId)) {
             main_adduser.setVisibility(View.GONE);
-        }else {
+        } else {
             main_adduser.setVisibility(View.VISIBLE);
         }
     }
@@ -395,12 +407,21 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
 
     @Override
     public void getData(final String data) {
-        final String str=data;
-        Log.e("TAG-----------",data);
-        Gson gs=new Gson();
+        final String str = data;
+        Log.e("TAG-----------", data);
+        Gson gs = new Gson();
         HomeBean homeBean = gs.fromJson(str, HomeBean.class);
         List<HomeBean.DescBean> desc = homeBean.getDesc();
-        HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);
+        HomeListAdapter homeListAdapter = new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc, this);
         home_list.setAdapter(homeListAdapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //回传用户名
+        home_username.setText(PreferencesUtil.getInstance().getUserName());
+        //回传手机号
+        home_userpoph.setText(PreferencesUtil.getInstance().getUserPhone());
     }
 }

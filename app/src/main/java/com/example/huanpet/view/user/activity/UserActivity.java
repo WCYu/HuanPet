@@ -1,12 +1,16 @@
 package com.example.huanpet.view.user.activity;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -24,8 +28,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.huanpet.R;
+import com.example.huanpet.app.AppService;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.CustomTool;
+import com.example.huanpet.utils.PreferencesUtil;
+import com.example.huanpet.utils.util.AppUtils;
+import com.example.huanpet.utils.util.CJSON;
+import com.example.huanpet.utils.util.FileUtil;
+import com.example.huanpet.utils.util.TableUtils;
+import com.example.huanpet.utils.util.ToastUtil;
 import com.example.huanpet.view.main.view.HomeActivity;
 import com.example.huanpet.view.user.adpter.NumericWheelAdapter;
 import com.example.huanpet.view.user.image.ImageUtils;
@@ -37,15 +48,23 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.channels.Selector;
+import java.text.Format;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -68,9 +87,9 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     protected static Uri tempUri;
     private UserManagers userManagers;
     private String verifycode;
-    private static final int PHOTO_REQUEST_CAREMA = 1;// 拍照
-    private static final int PHOTO_REQUEST_GALLERY = 2;// 从相册中选择
-    private static final int PHOTO_REQUEST_CUT = 3;// 结果
+    private static final int PHOTO_REQUEST_CAREMA = 7;// 拍照
+    private static final int PHOTO_REQUEST_GALLERY = 8;// 从相册中选择
+    private static final int PHOTO_REQUEST_CUT = 9;// 结果
     private File tempFile;
     /* 头像名称 */
     private static final String PHOTO_FILE_NAME = "temp_photo.jpg";
@@ -87,7 +106,8 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     private WheelView year;
     private WheelView month;
     private WheelView day;
-
+    private TextView textview_boy;
+    private TextView textview_girl;
 
     @Override
     public int initLayoutID() {
@@ -134,6 +154,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         textview_WeChat = (TextView) findViewById(R.id.textview_WeChat);
         textview_Contact_address = (TextView) findViewById(R.id.textview_Contact_address);
         textview_qq = (TextView) findViewById(R.id.textview_qq);
+        AppUtils.setAppContext(this);
     }
 
     @Override
@@ -147,13 +168,12 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             //修改名称
             case R.id.Name:
                 Intent intent = new Intent(UserActivity.this, ModifyTheNameActivity.class);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
                 break;
 
             //选择性别
             case R.id.Gender:
                 showName();
-
                 break;
 
             //出生日期
@@ -182,14 +202,15 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             //添加联系地址
             case R.id.Contact_address:
                 Intent intentaddress = new Intent(UserActivity.this, ContactAddressActivity.class);
-                startActivityForResult(intentaddress, 4);
+                startActivity(intentaddress);
                 break;
 
 
         }
     }
 
-    private void showDateDialog() {
+    private void  showDateDialog() {
+
 //        final AlertDialog dialog = new AlertDialog.Builder(UserActivity.this)
 //                .create();
 //        dialog.show();
@@ -251,29 +272,20 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 String str = String.format(Locale.CHINA, "%4d年%2d月%2d日", year.getCurrentItem() + 1950, month.getCurrentItem() + 1, day.getCurrentItem() + 1);
-//                Toast.makeText(UserActivity.this, str, Toast.LENGTH_LONG).show();
                 textview_Date_of_birth.setText(str);
-//                dialog.cancel();
+                String data = PreferencesUtil.getInstance().getBirthday();
+                UpdateDate(data);
                 window.dismiss();
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                dialog.cancel();
                 window.dismiss();
             }
         });
-//        LinearLayout cancelLayout = (LinearLayout) window.findViewById(R.id.view_none);
-//        cancelLayout.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent motionEvent) {
-//                dialog.cancel();
-//                return false;
-//            }
-//        });
-
     }
 
     /**
@@ -371,26 +383,35 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             }
         });
         //  男
-        final TextView textview_boy = view.findViewById(R.id.textview_boy);
+        textview_boy = view.findViewById(R.id.textview_boy);
         textview_boy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                textview_Gender.setText(textview_boy.getText().toString().trim());
+//                textview_Gender.setText(textview_boy.getText().toString().trim());
+                textview_Gender.setText("男");
+                PreferencesUtil.getInstance().setUserSex(11+"");
+                FileUtil.saveUser(AppUtils.userInfo);
+                UpdateSex();
                 window.dismiss();
+
             }
         });
 
         //  女
-        final TextView textview_girl = view.findViewById(R.id.textview_girl);
+        textview_girl = view.findViewById(R.id.textview_girl);
         textview_girl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(UserActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                textview_Gender.setText(textview_girl.getText().toString().trim());
+//                textview_Gender.setText(textview_girl.getText().toString().trim());
+                textview_Gender.setText("女");
+                PreferencesUtil.getInstance().setUserSex(22+"");
+                FileUtil.saveUser(AppUtils.userInfo);
+                UpdateSex();
                 window.dismiss();
+
             }
         });
+
 
     }
 
@@ -518,7 +539,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
 
         } else if (requestCode == PHOTO_REQUEST_CAREMA) {
             // 从相机返回的数据
-            if (data!=null&&hasSdcard()) {
+            if (hasSdcard()) {
                 crop(Uri.fromFile(tempFile));
             } else {
                 Toast.makeText(UserActivity.this, "未找到存储卡，无法存储照片！",Toast.LENGTH_SHORT).show();
@@ -539,7 +560,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
                 WindowManager.LayoutParams params = getWindow().getAttributes();
                 params.alpha = 1f;
                 getWindow().setAttributes(params);
-                Toast.makeText(this, "已提交申请，待审核", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "上传成功", Toast.LENGTH_SHORT).show();
             }
             try {
                 // 将临时文件删除
@@ -547,119 +568,165 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+//            if (requestCode == 0&&resultCode==-2) {
+//                //用户名回传的数据
+//                String userId = PreferencesUtil.getInstance().getUserId();
+//                Bundle bundle_name = data.getExtras();
+//                String name = bundle_name.getString("name");
+//                textview_name.setText(userId);
+//            } else
+//              if (requestCode == 1) {
+//                //手机回传的数据
+//                Bundle bundle_phone = data.getExtras();
+//                String phone = bundle_phone.getString("phone");
+//                textview_Phone.setText(phone);
+//            } else if (requestCode == 2) {
+//                //微信回传的数据
+//                Bundle bundle_wechat = data.getExtras();
+//                String wechat = bundle_wechat.getString("wechat");
+//                textview_WeChat.setText(wechat);
+//
+//            } else if (requestCode == 3) {
+//                //QQ回传的数据
+//                Bundle bundle_QQ = data.getExtras();
+//                String QQ = bundle_QQ.getString("QQ");
+//                textview_qq.setText(QQ);
+//            } else if (requestCode == 4) {
+//                //联系地址回传的数据
+//                Bundle bundle_contactaddress = data.getExtras();
+//                String contactaddress = bundle_contactaddress.getString("contactaddress");
+//                textview_Contact_address.setText(contactaddress);
+//            }
+        }
 
-            if (data != null) {
-                if (requestCode == 0) {
-                    //用户名回传的数据
-                    Bundle bundle_name = data.getExtras();
-                    String name = bundle_name.getString("name");
-                    textview_name.setText(name);
-                } else if (requestCode == 1) {
-                    //手机回传的数据
-                    Bundle bundle_phone = data.getExtras();
-                    String phone = bundle_phone.getString("phone");
-                    textview_Phone.setText(phone);
-                } else if (requestCode == 2) {
-                    //微信回传的数据
-                    Bundle bundle_wechat = data.getExtras();
-                    String wechat = bundle_wechat.getString("wechat");
-                    textview_WeChat.setText(wechat);
 
-                } else if (requestCode == 3) {
-                    //QQ回传的数据
-                    Bundle bundle_QQ = data.getExtras();
-                    String QQ = bundle_QQ.getString("QQ");
-                    textview_qq.setText(QQ);
-                } else if (requestCode == 4) {
-                    //联系地址回传的数据
-                    Bundle bundle_contactaddress = data.getExtras();
-                    String contactaddress = bundle_contactaddress.getString("contactaddress");
-                    textview_Contact_address.setText(contactaddress);
-                }
+
+    private void uploadPic(Bitmap bitmap) {
+
+    }
+
+    /**
+     * 绑定性别
+     */
+    private void UpdateSex() {
+        Map<String,Object> param = new HashMap<>();
+        param.put(TableUtils.UserInfo.USERID,PreferencesUtil.getInstance().getUserId());
+        param.put(TableUtils.UserInfo.USERSEX,PreferencesUtil.getInstance().getUserSex());
+//       生成提交服务器的JSON字符串
+        String json = CJSON.toJSONMap(param);
+        FormBody.Builder builder = new FormBody.Builder();
+        builder.add(CJSON.DATA, json);
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .post(builder.build())
+                .url("http://123.56.150.230:8885/dog_family/user/updateUserInfo.jhtml")
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
             }
 
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String string = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("TAG",string);
+                        if (CJSON.getRET(string)){
+                            Toast.makeText(UserActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(UserActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+    }
+    /**
+     * 绑定日期
+     *
+     * @描述:
+     * @作者: Android - GWJ
+     * @创建日期: 2016年6月14日 上午8:45:15
+     */
+    private void UpdateDate(final String data) {
+        Map<String,Object> paramdata = new HashMap<>();
+        paramdata.put(TableUtils.UserInfo.USERID,PreferencesUtil.getInstance().getUserId());
+        paramdata.put(TableUtils.UserInfo.BIRTHDAY,data);
+        // 生成提交服务器的JSON字符串
+        String json = CJSON.toJSONMap(paramdata);
+        FormBody.Builder builder = new FormBody.Builder();
+//        builder.add(CJSON.DATA, data);
+        OkHttpClient okHttpClient = new OkHttpClient();
+        Request request = new Request.Builder()
+                .post(builder.build())
+                .url("http://123.56.150.230:8885/dog_family/user/updateUserInfo.jhtml")
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                final String string = response.body().string();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.e("TAG",string);
+                        if (CJSON.getRET(string)){
+                            Toast.makeText(UserActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                        }else {
+                            Toast.makeText(UserActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
+
+
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //修改用户名
+        textview_name.setText(PreferencesUtil.getInstance().getUserName());
+        //修改性别
+        String sex = PreferencesUtil.getInstance().getUserSex();
+        if (sex.equals(11+"")){
+            textview_Gender.setText("男");
+            PreferencesUtil.getInstance().setUserSex(11+"");
+        }else if (sex.equals(22+"")){
+            textview_Gender.setText("女");
+            PreferencesUtil.getInstance().setUserSex(22+"");
         }
+//        修改日期
+//        if (PreferencesUtil.getInstance().getBirthday() == null) {
+//            textview_Date_of_birth.setText("未完善");
+//        } else {
+//            String birthday = PreferencesUtil.getInstance().getBirthday();
+//            textview_Date_of_birth.setText(PreferencesUtil.getInstance().getBirthday());
+//        }
+
+        //修改手机号
+        textview_Phone.setText(PreferencesUtil.getInstance().getUserPhone());
+        //修改QQ号
+        textview_qq.setText(PreferencesUtil.getInstance().getQq());
+        //修改微信号
+        textview_WeChat.setText(PreferencesUtil.getInstance().getWechat());
+        //修改联系地址
+        textview_Contact_address.setText(PreferencesUtil.getInstance().getAddress());
     }
 
 
 
-//    private void uploadPic(Bitmap bitmap) {
-//        // 上传至服务器
-//        // ... 可以在这里把Bitmap转换成file，然后得到file的url，做文件上传操作
-//        // 注意这里得到的图片已经是圆形图片了
-//        // bitmap是没有做个圆形处理的，但已经被裁剪了
-//        final String imagePath = ImageUtils.savePhoto(bitmap, Environment
-//                .getExternalStorageDirectory().getAbsolutePath(), String
-//                .valueOf(System.currentTimeMillis()));
-//        if (imagePath != null) {
-////            String url = "http://my.cntv.cn/intf/napi/api.php" + "?client="
-////                    + "cbox_mobile" + "&method=" + "user.alterUserFace"
-////                    + "&userid=" + mUserManager.getUserId();
-//            String url = "http://my.cntv.cn/intf/napi/api.php";
-//            Log.e("TAG", "-----verifycode----" + "开始");
-//            OkHttpClient okHttpClient = new OkHttpClient.Builder().cookieJar(new CookieJar() {
-//                List<Cookie> cooKies = new ArrayList<>();
-//
-//                @Override
-//                public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-//                    cooKies = cookies;
-//                    Log.e("TAG", "-----verifycode----" + "进行中");
-//                    for (Cookie cookie : cooKies) {
-//                        Log.e("TAG", "-----verifycode----" + cookie.value());
-//                        if ("verifycode".equals(cookie.name())) {
-//                            verifycode = cookie.value();
-//                        }
-//                    }
-//                }
-//
-//                @Override
-//                public List<Cookie> loadForRequest(HttpUrl url) {
-//                    return cooKies;
-//                }
-//            }).build();
-//            Log.e("TAG", "-----verifycode----" + "结束");
-//            File file = new File(imagePath);
-//            MultipartBody.Builder builder = new MultipartBody.Builder();
-//            builder.setType(MultipartBody.FORM);
-//            builder.addFormDataPart("client", "ipanda_mobile");
-//            builder.addFormDataPart("method", "user.alterUserFace");
-//            builder.addFormDataPart("userid", userManagers.getUserId());
-//            builder.addFormDataPart("facefile", file.getName(), RequestBody.create(MediaType.parse("image/png"), file));
-//            RequestBody body = builder.build();
-////            Request request = new Request.Builder().url(url).build();
-//            Request request = new Request.Builder().url(url).addHeader("Referer", "iPanda.Android")
-//                    .addHeader("User-Agent", "CNTV_APP_CLIENT_CBOX_MOBILE")
-//                    .addHeader("Cookie", "verifycode=" + userManagers.getVerifycode()).post(body).build();
-//
-//            okHttpClient.newCall(request).enqueue(new Callback() {
-//                @Override
-//                public void onFailure(Call call, IOException e) {
-//                    Log.e("TAG", userManagers.getUserId() + "----------上传头像--------失败" + verifycode);
-//                }
-//
-//                @Override
-//                public void onResponse(Call call, Response response) throws IOException {
-//                    String string = response.body().string();
-//                    try {
-//                        JSONObject jsonObject = new JSONObject(string);
-//                        int code = jsonObject.getInt("code");
-//                        if (code == 0) {
-//                            String error = jsonObject.getString("error");
-//                            Log.e("TAG", userManagers.getUserId() + "----------上传头像--------成功" + error);
-//                        } else if (code == -100) {
-//                            String error = jsonObject.getString("error");
-//                            Log.e("TAG", "--------error-----" + error);
-//                            Log.e("TAG", userManagers.getUserId() + "----------上传头像--------失败" + userManagers.getVerifycode());
-//                        }
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//
-//                    }
-//                    Log.e("TAG", "----------上传头像--------" + string + userManagers.getUserId() + "----" + imagePath);
-//                }
-//            });
-//        }
-//    }
+
+
 
 
     @Override
@@ -683,9 +750,13 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // TODO: add setContentView(...) and run LayoutCreator again
+        // android 7.0系统解决拍照的问题
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
     }
 }
