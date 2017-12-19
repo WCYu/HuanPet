@@ -104,29 +104,26 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                                     JSONObject jsonObject = new JSONObject(string);
                                     boolean ret = (boolean) jsonObject.get("ret");
                                     if (ret) {
+//                                        Log.e("----SignIn----",string);
                                         JSONObject result = jsonObject.getJSONObject("result");
                                         String userId = (String) result.get("userId");
                                         String userName = (String) result.get("userName");
-                                        String usersex = (String) result.get("usersex");
-                                        String birthday = (String) result.get("Birthday");
-//                                        String Birthday = (String) result.get("Birthday");
                                         PreferencesUtil instance = PreferencesUtil.getInstance();
                                         instance.setUserId(userId);
+                                        String userId1 = instance.getUserId();
                                         instance.setUserName(userName);
-                                        instance.setUserSex(usersex);
-                                        instance.setBirthday(birthday);
-//                                        instance.setBirthday(Birthday);
-                                        finish();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();
                                 }
-
+                                Intent intent=new Intent(SignInActivity.this,HomeActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                finish();
                             }
                         });
                     }
                 });
-                Toast.makeText(this, "登陆成功", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_find_pwd:
                 Toast.makeText(this, "忘记密码", Toast.LENGTH_SHORT).show();
