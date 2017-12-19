@@ -83,6 +83,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     private String petUrl=UrlPath.TOTALPATH+UrlPath.PETPATH;
     private PopupWindow popupWindow;
     private List<HomeBean.DescBean> desc;
+    private TextView home_username;
+    private TextView home_userpoph;
 
     @Override
     public int initLayoutID() {
@@ -111,7 +113,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         home_pettype = findViewById(R.id.home_pettype);
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
-
+        home_username = findViewById(R.id.home_username);
+        home_userpoph = findViewById(R.id.home_userpoph);
         userId = PreferencesUtil.getInstance().getUserId();
         if(!TextUtils.isEmpty(userId)){
             main_adduser.setVisibility(View.GONE);
@@ -126,7 +129,10 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     @Override
     protected void onResume() {
         super.onResume();
-
+        //回传用户名
+        home_username.setText(PreferencesUtil.getInstance().getUserName());
+        //回传手机号
+        home_userpoph.setText(PreferencesUtil.getInstance().getUserPhone());
     }
 
     private void setData(String orderBy, double coordX, double coordY, int beginIndex, String url) {
@@ -474,19 +480,19 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
 
     @Override
     public void getData(final String data,int i) {
-        Gson gs=new Gson();
-        if(i==0){
-            Log.e("TAG--------",data);
+        Gson gs = new Gson();
+        if (i == 0) {
+            Log.e("TAG--------", data);
             HomeBean homeBean = gs.fromJson(data, HomeBean.class);
             desc = homeBean.getDesc();
-            HomeListAdapter homeListAdapter=new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc,this);
+            HomeListAdapter homeListAdapter = new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc, this);
             home_list.setAdapter(homeListAdapter);
-        }else if(i==1){
+        } else if (i == 1) {
             HomePetBean homePetBean = gs.fromJson(data, HomePetBean.class);
             List<HomePetBean.DescBean> desc = homePetBean.getDesc();
-            HomePetAdapter homePetAdapter=new HomePetAdapter((ArrayList<HomePetBean.DescBean>) desc,this);
+            HomePetAdapter homePetAdapter = new HomePetAdapter((ArrayList<HomePetBean.DescBean>) desc, this);
             home_list.setAdapter(homePetAdapter);
         }
-
     }
+
 }
