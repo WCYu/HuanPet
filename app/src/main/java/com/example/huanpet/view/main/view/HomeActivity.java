@@ -48,7 +48,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HomeActivity extends BaseActivity implements View.OnClickListener, IHomeView {
+public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
     private LinearLayout main_user;
@@ -111,39 +111,25 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
         home_pettype = findViewById(R.id.home_pettype);
         home_screening = findViewById(R.id.home_screening);
         home_list = findViewById(R.id.home_list);
-        homePresenter = new HomePresenter(this);
-        int mPage = 1;
-        Map param = new HashMap();
-        param.put("orderBy", "distance asc");
-        param.put("coordX", 40.22);
-        param.put("coordY", 116.23);
-        param.put("beginIndex", (mPage - 1) * 10);
-        param.put("endIndex", mPage * 10);
-<<<<<<< HEAD
 
-        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml", param);
-
-        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param);
-=======
-        homePresenter.getData("http://123.56.150.230:8885/dog_family/" + "users/getUsersInfoByVO.jhtml",param,0);
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         userId = PreferencesUtil.getInstance().getUserId();
-        setData("distance asc",coordX,coordY,beginIndex, screeningUrl);
->>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
-        String userId = PreferencesUtil.getInstance().getUserId();
         if(!TextUtils.isEmpty(userId)){
             main_adduser.setVisibility(View.GONE);
         }else {
             main_adduser.setVisibility(View.VISIBLE);
         }
 
+        homePresenter = new HomePresenter(this);
+        setData("distance asc",coordX,coordY,beginIndex, screeningUrl);
     }
 
-    private void setData(String orderBy,double coordX,double coordY,int beginIndex,String url) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    }
+
+    private void setData(String orderBy, double coordX, double coordY, int beginIndex, String url) {
         Map param=new HashMap();
         param.put("orderBy", orderBy);
         param.put("coordX", coordX);
@@ -487,16 +473,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     @Override
-<<<<<<< HEAD
-    public void getData(final String data) {
-        final String str = data;
-        Log.e("TAG-----------", data);
-        Gson gs = new Gson();
-        HomeBean homeBean = gs.fromJson(str, HomeBean.class);
-        List<HomeBean.DescBean> desc = homeBean.getDesc();
-        HomeListAdapter homeListAdapter = new HomeListAdapter((ArrayList<HomeBean.DescBean>) desc, this);
-        home_list.setAdapter(homeListAdapter);
-=======
     public void getData(final String data,int i) {
         Gson gs=new Gson();
         if(i==0){
@@ -512,6 +488,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener, 
             home_list.setAdapter(homePetAdapter);
         }
 
->>>>>>> 0872ec041f940e05daf5533d56c2467d5df78c28
     }
+
 }

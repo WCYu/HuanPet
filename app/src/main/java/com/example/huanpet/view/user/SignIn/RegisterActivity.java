@@ -114,6 +114,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                             AppService.baseActivity.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    Log.e("TAAG-------",string);
                                     Gson gs=new Gson();
                                     RegisterBean registerBean = gs.fromJson(string, RegisterBean.class);
                                     RegisterBean.ResultBean result = registerBean.getResult();
