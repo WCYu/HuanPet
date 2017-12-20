@@ -3,24 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#dedada"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.huanpet.view.pet.Fragment.dogFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
+
+    <com.example.huanpet.view.pet.Fragment.WaveSideBar
+        android:id="@+id/sideBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        app:textColor="#969696"
+        app:backgroundColor="#bef9b81b"
+        app:textSize="10sp"
+        app:hintTextSize="32sp"
+        app:radius="20dp"
+        app:circleRadius="24dp"/>
+
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="热门"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="4dp"
+        android:text="热门宠物"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+
         />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:orientation="vertical"
-        android:layout_marginLeft="10dp"
+
         android:id="@+id/dog"
         >
 
@@ -149,6 +165,11 @@
                />
         </LinearLayout>
 
+
+
+
     </LinearLayout>
+
+
 
 </LinearLayout>

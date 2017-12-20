@@ -10,6 +10,9 @@
     <color name="colorGreenFill">#73CD80</color>
     <color name="colorGreenText">#13B129</color>
     <color name="colorGreen">#4CBF5C</color>
+    <color name="pickerview_timebtn_nor">#057dff</color>
+    <color name="pickerview_timebtn_pre">#c2daf5</color>
+    <color name="status_bar">#303135</color>
 
     <!--白-->
     <color name="colorWhite">#FFFFFF</color>

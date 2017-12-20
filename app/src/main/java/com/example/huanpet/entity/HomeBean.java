@@ -16,6 +16,7 @@ public class HomeBean {
     private boolean ret;
     private List<DescBean> desc;
 
+
     public boolean isRet() {
         return ret;
     }

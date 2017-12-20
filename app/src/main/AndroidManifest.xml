@@ -3,9 +3,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.huanpet">
 
+    <uses-sdk tools:overrideLibrary="compile &apos;com.gjiazhe:wavesidebar:1.0.2&apos;" />
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.INTERNET" />
-    ：
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
@@ -69,6 +72,8 @@
             android:name="com.amap.api.v2.apikey"
             android:value="138e5cf1e8961ae326ff0908c03d1ae1" />
 
+        <activity android:name=".view.pet.Main2Activity" />
+        <activity android:name=".view.pet.PetSelectOneActivity"></activity>
         <activity android:name=".view.main.view.MerchantActivity" />
         <activity android:name=".view.main.view.AppointmentActivity" />
         <activity android:name=".view.main.view.TransactActivity" />

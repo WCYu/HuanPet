@@ -4,16 +4,14 @@ package com.example.huanpet.view.pet.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.example.huanpet.R;
 import com.example.huanpet.view.pet.PetAddActivity;
-import com.example.huanpet.view.pet.nicknameActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -22,6 +20,8 @@ public class dogFragment extends Fragment {
 
 
     private LinearLayout dog;
+    private RecyclerView rv;
+    private WaveSideBar sideBar;
 
     public dogFragment() {
         // Required empty public constructor
@@ -41,6 +41,10 @@ public class dogFragment extends Fragment {
 
     private void initView(View view) {
         dog = (LinearLayout) view.findViewById(R.id.dog);
+
+
+       // sideBar = (WaveSideBar) view.findViewById(R.id.sideBar);
+
         dog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +57,7 @@ public class dogFragment extends Fragment {
 
 
         });
+
 
 
     }
