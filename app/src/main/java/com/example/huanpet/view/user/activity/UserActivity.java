@@ -702,6 +702,10 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             textview_Gender.setText("男");
             PreferencesUtil.getInstance().setUserSex(11+"");
         }else if ((22+"").equals(sex)){
+        if (sex.equals(11+"")){
+            textview_Gender.setText("男");
+            PreferencesUtil.getInstance().setUserSex(11+"");
+        }else if (sex.equals(22+"")){
             textview_Gender.setText("女");
             PreferencesUtil.getInstance().setUserSex(22+"");
         }
