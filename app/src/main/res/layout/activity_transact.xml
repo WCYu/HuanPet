@@ -22,7 +22,7 @@
         >
         <ImageView
             android:layout_centerInParent="true"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/pet_status_success"/>
     </RelativeLayout>
@@ -51,7 +51,7 @@
                 android:text="请等待寄养家庭确认"/>
         </LinearLayout>
     </RelativeLayout>
-    <LinearLayout
+    <com.example.huanpet.custom.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_heightPercent="18%"
@@ -61,6 +61,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_widthPercent="94%"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1">
             <TextView
@@ -71,11 +73,14 @@
             <TextView
                 android:id="@+id/transact_orderid"
                 android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_widthPercent="94%"
+            android:layout_gravity="center"
             android:layout_margin="10dp"
             android:layout_weight="1">
             <TextView
@@ -84,6 +89,7 @@
                 android:text="订单时间"
                 />
             <TextView
+                android:layout_alignParentRight="true"
                 android:id="@+id/transact_ordertime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -91,6 +97,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_gravity="center"
+            app:layout_widthPercent="94%"
             android:layout_margin="10dp"
             android:layout_weight="1">
             <TextView
@@ -101,13 +109,14 @@
             <TextView
                 android:id="@+id/transact_ordertmoney"
                 android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_height="wrap_content" />
         </RelativeLayout>
-    </LinearLayout>
+    </com.example.huanpet.custom.PercentLinearLayout>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_heightPercent="20%">
+        app:layout_heightPercent="11%">
         <LinearLayout
             android:layout_centerInParent="true"
             android:layout_width="match_parent"

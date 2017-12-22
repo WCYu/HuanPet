@@ -118,11 +118,16 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                                     Gson gs=new Gson();
                                     RegisterBean registerBean = gs.fromJson(string, RegisterBean.class);
                                     RegisterBean.ResultBean result = registerBean.getResult();
+                                    boolean ret=registerBean.isRet();
+                                    if(ret){
+                                        finish();
+                                    }else {
+                                        Toast.makeText(RegisterActivity.this, "注册失败", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }
                     });
-                    Toast.makeText(this, "注册", Toast.LENGTH_SHORT).show();
                     break;
 
             }

@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
+import com.example.huanpet.custom.PercentLinearLayout;
 import com.example.huanpet.entity.HomeBean;
 import com.example.huanpet.entity.HomePetBean;
 import com.example.huanpet.utils.CustomTool;
@@ -33,6 +34,7 @@ import com.example.huanpet.view.know.KnowActivity;
 import com.example.huanpet.view.main.adapter.HomeListAdapter;
 import com.example.huanpet.view.main.adapter.HomePetAdapter;
 import com.example.huanpet.view.main.presenter.HomePresenter;
+import com.example.huanpet.view.main.view.foster_families.FosterHomeActivity;
 import com.example.huanpet.view.news.NewsActivity;
 import com.example.huanpet.view.order.view.OrderActivity;
 import com.example.huanpet.view.pet.PetActivity;
@@ -48,6 +50,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**/
 public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
@@ -85,7 +88,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     private List<HomeBean.DescBean> desc;
     private TextView home_username;
     private TextView home_userpoph;
-
+    private PercentLinearLayout userLayout;
+    private PercentLinearLayout fosterLayout;
     @Override
     public int initLayoutID() {
         return R.layout.activity_home;
@@ -94,6 +98,8 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
     //初始化空间
     @Override
     public void initView() {
+        userLayout=findViewById(R.id.user_sideslip);
+        fosterLayout=findViewById(R.id.foster_sideslip);
         main_user = findViewById(R.id.main_user);
         main_news = findViewById(R.id.main_news);
         main_pet = findViewById(R.id.main_pet);
@@ -125,13 +131,13 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         userId = PreferencesUtil.getInstance().getUserId();
         if(!TextUtils.isEmpty(userId)){
             main_adduser.setVisibility(View.GONE);
-            //回传用户名
-            home_username.setText(PreferencesUtil.getInstance().getUserName());
-            //回传手机号
-            home_userpoph.setText(PreferencesUtil.getInstance().getUserPhone());
         }else {
             main_adduser.setVisibility(View.VISIBLE);
         }
+        //回传用户名
+        home_username.setText(PreferencesUtil.getInstance().getUserName());
+        //回传手机号
+        home_userpoph.setText(PreferencesUtil.getInstance().getUserPhone());
     }
 
     private void setData(String orderBy, double coordX, double coordY, int beginIndex, String url) {
@@ -218,6 +224,37 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
                 in.putExtra("usersId",desc.get(position).getUsersId());
                 in.putExtra("family",desc.get(position).getFamily());
                 startActivity(in);
+            }
+        });
+        main_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent=new Intent(HomeActivity.this, FosterHomeActivity.class);
+//                startActivity(intent);
+                String btn = main_btn.getText().toString();
+                if("申请成为寄养家庭".equals(btn)){
+                    main_btn.setText("切换至寄养家庭");
+                }else if("切换至寄养家庭".equals(btn)){
+                    main_btn.setText("切换至用户");
+                    fosterLayout.setVisibility(View.VISIBLE);
+                    userLayout.setVisibility(View.GONE);
+                }else if ("切换至用户".equals(btn)){
+                    main_btn.setText("切换至寄养家庭");
+                    fosterLayout.setVisibility(View.GONE);
+                    userLayout.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        userLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        fosterLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }
@@ -464,6 +501,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
             Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
         }else {
             startActivity(intent);
+            drawerLayout.closeDrawer(linearLayout);
         }
     }
 

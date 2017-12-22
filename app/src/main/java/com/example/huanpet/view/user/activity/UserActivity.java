@@ -702,10 +702,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             textview_Gender.setText("男");
             PreferencesUtil.getInstance().setUserSex(11+"");
         }else if ((22+"").equals(sex)){
-        if (sex.equals(11+"")){
-            textview_Gender.setText("男");
-            PreferencesUtil.getInstance().setUserSex(11+"");
-        }else if (sex.equals(22+"")){
             textview_Gender.setText("女");
             PreferencesUtil.getInstance().setUserSex(22+"");
         }
@@ -726,12 +722,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         //修改联系地址
         textview_Contact_address.setText(PreferencesUtil.getInstance().getAddress());
     }
-
-
-
-
-
-
 
     @Override
     public void initAdapter() {
@@ -762,5 +752,11 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         // android 7.0系统解决拍照的问题
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
     }
 }

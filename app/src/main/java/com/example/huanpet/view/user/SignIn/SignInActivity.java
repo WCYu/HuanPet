@@ -108,12 +108,14 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                                         JSONObject result = jsonObject.getJSONObject("result");
                                         String userId = (String) result.get("userId");
                                         String userName = (String) result.get("userName");
+                                        long userPhone = (long) result.get("userPhone");
                                         PreferencesUtil instance = PreferencesUtil.getInstance();
                                         instance.setUserId(userId);
-                                        String userId1 = instance.getUserId();
                                         instance.setUserName(userName);
-                                        Toast.makeText(SignInActivity.this, "登陆成功", Toast.LENGTH_SHORT).show();
+                                        instance.setUserPhone(userPhone+"");
                                         finish();
+                                    }else {
+                                        Toast.makeText(SignInActivity.this, "登陆成功失败", Toast.LENGTH_SHORT).show();
                                     }
                                 } catch (JSONException e) {
                                     e.printStackTrace();

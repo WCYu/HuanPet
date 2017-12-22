@@ -73,12 +73,13 @@
             android:value="138e5cf1e8961ae326ff0908c03d1ae1" />
 
         <activity android:name=".view.pet.Main2Activity" />
-        <activity android:name=".view.pet.PetSelectOneActivity"></activity>
+        <activity android:name=".view.pet.PetSelectOneActivity" />
         <activity android:name=".view.main.view.MerchantActivity" />
         <activity android:name=".view.main.view.AppointmentActivity" />
         <activity android:name=".view.main.view.TransactActivity" />
         <activity android:name=".view.main.view.DataActivity" />
-        <activity android:name=".view.main.view.CommentariesActivity"></activity>
+        <activity android:name=".view.main.view.CommentariesActivity" />
+        <activity android:name=".view.main.view.foster_families.FosterHomeActivity"></activity>
     </application>
 
 </manifest>

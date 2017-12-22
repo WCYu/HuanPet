@@ -1,5 +1,6 @@
 package com.example.huanpet.view.main.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -9,12 +10,15 @@ import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.CustomTool;
 
+import java.util.Date;
+
 public class TransactActivity extends BaseActivity {
 
     private CustomTool transact_custom;
     private TextView transact_orderid;
     private TextView transact_ordertime;
     private TextView transact_ordertmoney;
+    private String desc;
 
     @Override
     public int initLayoutID() {
@@ -26,6 +30,15 @@ public class TransactActivity extends BaseActivity {
         transact_orderid = (TextView) findViewById(R.id.transact_orderid);
         transact_ordertime = (TextView) findViewById(R.id.transact_ordertime);
         transact_ordertmoney = (TextView) findViewById(R.id.transact_ordertmoney);
+        Intent intent = getIntent();
+        long timeMillis = System.currentTimeMillis();
+        Date date=new Date(timeMillis);
+        String string = date.toString();
+        transact_ordertime.setText(string);
+        desc = intent.getStringExtra("desc");
+        transact_orderid.setText(desc);
+        int money = intent.getIntExtra("money",0);
+        transact_ordertmoney.setText(money+".00");
     }
 
     @Override

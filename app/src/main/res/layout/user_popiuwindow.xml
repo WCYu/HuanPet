@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.huanpet.custom.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorGreyDark"
     android:orientation="vertical">
 
-    <LinearLayout
+    <com.example.huanpet.custom.PercentLinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:layout_widthPercent="94%"
+        app:layout_heightPercent="27%"
+        android:layout_gravity="center"
         android:background="@drawable/bg_corners"
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/user_poputitle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_margin="15sp"
             android:gravity="center"
             android:text="更换用户头像"
@@ -28,7 +34,8 @@
         <TextView
             android:id="@+id/but_Take_pictures"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_margin="15sp"
             android:gravity="center"
             android:text="@string/Take_pictures"
@@ -42,19 +49,23 @@
         <TextView
             android:id="@+id/but_album"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_margin="15sp"
             android:gravity="center"
             android:text="@string/album"
             android:textColor="@color/colorBlue"
             android:textSize="@dimen/text_title"/>
 
-    </LinearLayout>
+    </com.example.huanpet.custom.PercentLinearLayout>
 
     <LinearLayout
+        app:layout_widthPercent="94%"
+        app:layout_heightPercent="9%"
         android:layout_marginTop="@dimen/text_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:background="@drawable/bg_corners"
         android:orientation="vertical">
 
@@ -71,4 +82,4 @@
     </LinearLayout>
 
 
-</LinearLayout>
+</com.example.huanpet.custom.PercentLinearLayout>

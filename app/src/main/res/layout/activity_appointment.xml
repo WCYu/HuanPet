@@ -149,10 +149,10 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/appointment_xi_add"
+                        android:id="@+id/appointment_xi_jian"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/plus" />
+                        android:background="@drawable/reduce" />
 
                     <TextView
                         android:id="@+id/appointment_xicode"
@@ -163,10 +163,10 @@
                         android:text="0" />
 
                     <ImageView
-                        android:id="@+id/appointment_xi_jian"
+                        android:id="@+id/appointment_xi_add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/reduce" />
+                        android:background="@drawable/plus" />
                 </LinearLayout>
 
                 <TextView
@@ -198,10 +198,10 @@
                     android:gravity="center">
 
                     <ImageView
-                        android:id="@+id/appointment_jie_add"
+                        android:id="@+id/appointment_jie_jian"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/plus" />
+                        android:background="@drawable/reduce" />
 
                     <TextView
                         android:id="@+id/appointment_jie_code"
@@ -212,10 +212,10 @@
                         android:text="0" />
 
                     <ImageView
-                        android:id="@+id/appointment_jie_jian"
+                        android:id="@+id/appointment_jie_add"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/reduce" />
+                        android:background="@drawable/plus" />
                 </LinearLayout>
 
                 <TextView

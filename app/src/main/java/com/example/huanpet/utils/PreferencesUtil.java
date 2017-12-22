@@ -91,5 +91,7 @@ public class PreferencesUtil {
 
     public void clearUserMeassage(){
         setUserId(null);
+        setUserName(null);
+        setUserPhone(null);
     }
 }

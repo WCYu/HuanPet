@@ -9,6 +9,8 @@ import com.example.huanpet.R;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.utils.CustomTool;
 
+/*
+ 寄养评价*/
 public class CommentariesActivity extends BaseActivity {
 
     private CustomTool commentaries_custom;

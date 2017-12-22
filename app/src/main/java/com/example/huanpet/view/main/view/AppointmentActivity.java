@@ -22,11 +22,16 @@ import com.example.huanpet.utils.util.AppUtils;
 import com.example.huanpet.utils.util.CJSON;
 import com.example.huanpet.view.main.presenter.HomePresenter;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-public class AppointmentActivity extends BaseActivity implements View.OnClickListener,IHomeView {
+/*
+* 预约寄养
+* */
+public class AppointmentActivity extends BaseActivity implements View.OnClickListener, IHomeView {
 
     private CustomTool appointment_custom;
     private TextView appointment_day;
@@ -83,7 +88,7 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
         end_date = findViewById(R.id.end_date);
         start_tv = findViewById(R.id.start_tv);
         end_tv = findViewById(R.id.end_tv);
-        appointment_date=findViewById(R.id.appointment_date);
+        appointment_date = findViewById(R.id.appointment_date);
 
         Intent intent = getIntent();
         careId = intent.getStringExtra("userId");
@@ -138,9 +143,7 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.appointment_yuyue:
-//                Intent in = new Intent(AppointmentActivity.this, TransactActivity.class);
-//                startActivity(in);
-                ArrayList list=new ArrayList();
+                ArrayList list = new ArrayList();
                 for (int i = 0; i < 3; i++) {
                     OrderItemInfo orderinfo1 = new OrderItemInfo();
                     orderinfo1.setIsService(1);
@@ -157,19 +160,21 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
 //                orderinfo1.setServicePrice(new BigDecimal());
                     list.add(orderinfo1);
                 }
-                HashMap param=new HashMap();
+                HashMap param = new HashMap();
                 param.put("orderAmount", zong);
                 param.put("paidUpAmount", zong);
                 param.put("receivableAmount", zong);
                 param.put("serviceBeginTime", start_tv.getText().toString());
                 param.put("serviceEndTime", end_tv.getText().toString());
                 param.put("userId", PreferencesUtil.getInstance().getUserId());
-                param.put("userName", PreferencesUtil.getInstance().getUserId());
+                param.put("userName", PreferencesUtil.getInstance().getUserName());
                 param.put("userWord", comment_et.getText().toString());
                 param.put("usersName", family);
                 param.put("usersId", careId);
                 param.put("orderItemInfoVOs", list);
-                new HomePresenter(AppointmentActivity.this).getData((UrlPath.TOTALPATH+UrlPath.JIYANGPATH),param,0);
+                new HomePresenter(AppointmentActivity.this).getData((UrlPath.TOTALPATH + UrlPath.JIYANGPATH), param, 0);
+                //                Intent in = new Intent(AppointmentActivity.this, TransactActivity.class);
+//                startActivity(in);
                 break;
             case R.id.appointment_xi_add:
                 if (xizao >= 0 && xizao < 3) {
@@ -208,8 +213,8 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
 
     private void setComputations() {
         appointment_day.setText(day + "天");
-        appointment_date.setText(day+"晚");
-        appointment_day_yuan.setText(30*day+"元");
+        appointment_date.setText(day + "晚");
+        appointment_day_yuan.setText(30 * day + "元");
         appointment_xi_gold.setText(xizao * 60 + "元");
         appointment_jie_gold.setText(jiesong * 50 + "元");
         appointment_xicode.setText(xizao + "");
@@ -230,10 +235,10 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
                 String string = start_tv.getText().toString();
                 String[] split = string.split("-");
                 String[] split1 = extra.split("-");
-                int  start = Integer.parseInt(split[2]);
+                int start = Integer.parseInt(split[2]);
                 int end = Integer.parseInt(split1[2]);
-                int date=end-start;
-                day=date;
+                int date = end - start;
+                day = date;
                 setComputations();
             }
         }
@@ -249,6 +254,19 @@ public class AppointmentActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     public void getData(String data, int i) {
-        Log.e("----Appointment----",data);
+        Log.e("----Appointment----", data);
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            boolean ret = (boolean) jsonObject.get("ret");
+            if (ret) {
+                String desc = (String) jsonObject.get("desc");
+                Intent in = new Intent(AppointmentActivity.this, TransactActivity.class);
+                in.putExtra("desc",desc);
+                in.putExtra("money",zong);
+                startActivity(in);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }

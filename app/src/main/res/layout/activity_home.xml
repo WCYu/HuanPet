@@ -1,331 +1,595 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.huanpet.custom.PercentLinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.huanpet.custom.PercentLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".view.main.view.HomeActivity">
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/home_drawer"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
         <!-- 主页面布局-->
-    <com.example.huanpet.custom.PercentLinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <android.support.percent.PercentRelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_heightPercent="7%">
-            <com.example.huanpet.utils.CustomTool
-                android:id="@+id/home_custom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                >
-            </com.example.huanpet.utils.CustomTool>
-            <ImageView
-                android:id="@+id/home_spreads"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/my"
-                android:layout_marginLeft="20dp"
-                android:layout_centerVertical="true"
-                />
-            <android.support.v7.widget.SearchView
-                android:id="@+id/home_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:queryHint="地区/街道/小区">
-
-            </android.support.v7.widget.SearchView>
-        </android.support.percent.PercentRelativeLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray"/>
         <com.example.huanpet.custom.PercentLinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <RadioGroup
-                android:id="@+id/home_group"
-                app:layout_heightPercent="7%"
+
+            <android.support.percent.PercentRelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:padding="10dp">
-                    <RadioButton
-                        android:id="@+id/home_vicinity"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:button="@null"
-                        android:drawableRight="@drawable/options_check"
-                        android:textSize="16sp"
-                        android:text="附近优先"/>
-                    <RadioButton
-                        android:id="@+id/home_pettype"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:textSize="16sp"
-                        android:drawableRight="@drawable/options_check"
-                        android:button="@null"
-                        android:text="宠物类型"/>
-                    <RadioButton
-                        android:id="@+id/home_screening"
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:drawableRight="@drawable/options_check"
-                        android:button="@null"
-                        android:textSize="16sp"
-                        android:text="筛选"/>
-            </RadioGroup>
+                app:layout_heightPercent="7%">
+
+                <com.example.huanpet.utils.CustomTool
+                    android:id="@+id/home_custom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.example.huanpet.utils.CustomTool>
+
+                <ImageView
+                    android:id="@+id/home_spreads"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/my" />
+
+                <android.support.v7.widget.SearchView
+                    android:id="@+id/home_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    app:queryHint="地区/街道/小区">
+
+                </android.support.v7.widget.SearchView>
+            </android.support.percent.PercentRelativeLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.5dp"
-                android:background="@android:color/darker_gray"/>
-            <ListView
-                android:layout_marginLeft="10dp"
-                android:id="@+id/home_list"
+                android:background="@android:color/darker_gray" />
+
+            <com.example.huanpet.custom.PercentLinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                >
-
-            </ListView>
-        </com.example.huanpet.custom.PercentLinearLayout>
-    </com.example.huanpet.custom.PercentLinearLayout>
-
-        <!--android:layout_gravity="start" 侧滑布局 -->
-    <LinearLayout
-        android:id="@+id/home_hides"
-        android:background="@android:color/transparent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:orientation="vertical"
-
-        >
-        <com.example.huanpet.custom.PercentLinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white">
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                app:layout_widthPercent="90%"
-                android:background="@android:color/white"
                 android:orientation="vertical">
-                <com.example.huanpet.custom.PercentLinearLayout
+
+                <RadioGroup
+                    android:id="@+id/home_group"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="10dp"
+                    app:layout_heightPercent="7%">
+
+                    <RadioButton
+                        android:id="@+id/home_vicinity"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/options_check"
+                        android:gravity="center"
+                        android:text="附近优先"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/home_pettype"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/options_check"
+                        android:gravity="center"
+                        android:text="宠物类型"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/home_screening"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:button="@null"
+                        android:drawableRight="@drawable/options_check"
+                        android:gravity="center"
+                        android:text="筛选"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@android:color/darker_gray" />
+
+                <ListView
+                    android:id="@+id/home_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:id="@+id/main_user"
-                        android:layout_margin="10dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_heightPercent="10%"
-                        >
-                        <ImageView
-                            android:id="@+id/home_usericon"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:src="@mipmap/ic_launcher"/>
-                        <LinearLayout
-                            android:layout_marginLeft="10px"
-                            android:layout_gravity="center"
-                            android:layout_width="0px"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical">
-                            <TextView
-                                android:id="@+id/home_username"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="name"
-                                />
-                            <TextView
-                                android:id="@+id/home_userpoph"
-                                android:layout_marginTop="10px"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="poph"/>
-                        </LinearLayout>
+                    android:layout_marginLeft="10dp">
 
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:background="@drawable/img_go" />
-                    </LinearLayout>
-
-                    <View
-                        android:layout_margin="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="1px"
-                        android:background="@android:color/darker_gray"
-                        />
-                    <LinearLayout
-                        android:id="@+id/main_news"
-                        app:layout_heightPercent="6%"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_margin="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/messages"/>
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="消息"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/main_adduser"
-                        app:layout_heightPercent="6%"
-                        android:orientation="horizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_margin="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/customer_information"/>
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="添加用户"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/main_pet"
-                        app:layout_heightPercent="6%"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_margin="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/pet"/>
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="宠物"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/main_order"
-                        app:layout_heightPercent="6%"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_margin="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/order_details"/>
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="订单"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/main_purse"
-                        app:layout_heightPercent="6%"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_margin="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/collection_account"/>
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="钱包"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/main_know"
-                        app:layout_heightPercent="6%"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <ImageView
-                            android:layout_margin="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/know"/>
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="需知"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/main_set"
-                        app:layout_heightPercent="6%"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:layout_marginBottomPercent="10%"
-                        >
-                        <ImageView
-                            android:layout_margin="10dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/setting"/>
-                        <TextView
-                            android:layout_margin="5dp"
-                            android:layout_gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="设置"/>
-                    </LinearLayout>
-                    <Button
-                        android:id="@+id/main_btn"
-                        app:layout_heightPercent="6%"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:padding="10dp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:background="@drawable/search_input_box"
-                        android:text="申请成为寄养家庭"
-                        />
-                </com.example.huanpet.custom.PercentLinearLayout>
-            </LinearLayout>
+                </ListView>
+            </com.example.huanpet.custom.PercentLinearLayout>
         </com.example.huanpet.custom.PercentLinearLayout>
-    </LinearLayout>
+
+        <!--android:layout_gravity="start" 侧滑布局 -->
+        <LinearLayout
+            android:id="@+id/home_hides"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:layout_gravity="start"
+            android:orientation="vertical">
+
+            <com.example.huanpet.custom.PercentLinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/white"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    app:layout_widthPercent="90%">
+
+                    <com.example.huanpet.custom.PercentLinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <android.support.percent.PercentFrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <com.example.huanpet.custom.PercentLinearLayout
+                                android:id="@+id/user_sideslip"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:id="@+id/main_user"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="10dp"
+                                    app:layout_heightPercent="10%">
+
+                                    <ImageView
+                                        android:id="@+id/home_usericon"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:src="@drawable/group_head" />
+
+                                    <LinearLayout
+                                        android:layout_width="0px"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_marginLeft="10px"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/home_username"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="name" />
+
+                                        <TextView
+                                            android:id="@+id/home_userpoph"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10px"
+                                            android:text="poph" />
+                                    </LinearLayout>
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:background="@drawable/img_go" />
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="match_parent"
+                                    android:layout_height="1px"
+                                    android:layout_margin="5dp"
+                                    android:background="@android:color/darker_gray" />
+
+                                <LinearLayout
+                                    android:id="@+id/main_news"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="6%">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/messages" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:text="消息" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/main_adduser"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    app:layout_heightPercent="6%">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/customer_information" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:text="添加用户" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/main_pet"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="6%">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/pet" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:text="宠物" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="3%"></LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/main_order"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="6%">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/order_details" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:text="订单" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/main_purse"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="6%">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/collection_account" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:text="钱包" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/main_know"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="6%">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/know" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:text="需知" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="3%">
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1px"
+                                        android:layout_margin="5dp"
+                                        android:background="@android:color/darker_gray"
+                                        android:padding="10dp" />
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/main_set"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    app:layout_heightPercent="6%"
+                                    app:layout_marginBottomPercent="10%">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="10dp"
+                                        android:background="@drawable/setting" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:layout_margin="5dp"
+                                        android:text="设置" />
+                                </LinearLayout>
+                            </com.example.huanpet.custom.PercentLinearLayout>
+
+
+                            <!-- 侧滑布局2-->
+                            <com.example.huanpet.custom.PercentLinearLayout
+                                android:id="@+id/foster_sideslip"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:visibility="gone"
+                                android:background="@android:color/white"
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:background="@android:color/white"
+                                    android:orientation="vertical"
+                                    app:layout_widthPercent="90%">
+
+                                    <com.example.huanpet.custom.PercentLinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/mainfoster_user"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="10dp"
+                                        app:layout_heightPercent="10%">
+
+                                        <ImageView
+                                            android:id="@+id/homefoster_usericon"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:src="@drawable/group_head" />
+
+                                        <LinearLayout
+                                            android:layout_width="0px"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_marginLeft="10px"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+
+                                            <TextView
+                                                android:id="@+id/homefoster_username"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="name" />
+
+                                            <TextView
+                                                android:id="@+id/homefoster_userpoph"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginTop="10px"
+                                                android:text="poph" />
+                                        </LinearLayout>
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:background="@drawable/img_go" />
+                                    </LinearLayout>
+                                    </com.example.huanpet.custom.PercentLinearLayout>
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="1px"
+                                        android:layout_margin="5dp"
+                                        android:background="@android:color/darker_gray" />
+
+                                    <LinearLayout
+                                        android:id="@+id/mainfoster_news"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:layout_heightPercent="6%">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="10dp"
+                                            android:background="@drawable/messages" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="5dp"
+                                            android:text="订单详情" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/mainfoster_adduser"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        app:layout_heightPercent="6%">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="10dp"
+                                            android:background="@drawable/customer_information" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="5dp"
+                                            android:text="顾客信息" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:layout_heightPercent="3%">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:layout_margin="5dp"
+                                            android:background="@android:color/darker_gray"
+                                            android:padding="10dp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/mainfoster_pet"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:layout_heightPercent="6%">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="10dp"
+                                            android:background="@drawable/pet" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="5dp"
+                                            android:text="时间设置" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/mainfoster_order"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:layout_heightPercent="6%">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="10dp"
+                                            android:background="@drawable/order_details" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="5dp"
+                                            android:text="收款账户" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:layout_heightPercent="3%">
+
+                                        <View
+                                            android:layout_width="match_parent"
+                                            android:layout_height="1px"
+                                            android:layout_margin="5dp"
+                                            android:background="@android:color/darker_gray"
+                                            android:padding="10dp" />
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:id="@+id/mainfoster_purse"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        app:layout_heightPercent="6%">
+
+                                        <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="10dp"
+                                            android:background="@drawable/collection_account" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center"
+                                            android:layout_margin="5dp"
+                                            android:text="完善信息" />
+                                    </LinearLayout>
+                                </LinearLayout>
+                            </com.example.huanpet.custom.PercentLinearLayout>
+
+                        </android.support.percent.PercentFrameLayout>
+
+                        <Button
+                            android:id="@+id/main_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/search_input_box"
+                            android:padding="10dp"
+                            android:paddingLeft="15dp"
+                            android:paddingRight="15dp"
+                            android:text="申请成为寄养家庭"
+                            app:layout_heightPercent="6%" />
+                    </com.example.huanpet.custom.PercentLinearLayout>
+                </LinearLayout>
+            </com.example.huanpet.custom.PercentLinearLayout>
+        </LinearLayout>
     </android.support.v4.widget.DrawerLayout>
 </com.example.huanpet.custom.PercentLinearLayout>
