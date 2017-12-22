@@ -79,6 +79,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                     //取消
                 case R.id.back_header:
                     Toast.makeText(this, "取消", Toast.LENGTH_SHORT).show();
+                    finish();
                     break;
                     //获取验证码
                 case R.id.btn_get_code:
