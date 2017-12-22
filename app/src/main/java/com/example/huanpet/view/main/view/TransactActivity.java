@@ -2,8 +2,8 @@ package com.example.huanpet.view.main.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.huanpet.R;
@@ -12,6 +12,9 @@ import com.example.huanpet.utils.CustomTool;
 
 import java.util.Date;
 
+/*
+* 订单预约成功
+* */
 public class TransactActivity extends BaseActivity {
 
     private CustomTool transact_custom;
@@ -19,6 +22,8 @@ public class TransactActivity extends BaseActivity {
     private TextView transact_ordertime;
     private TextView transact_ordertmoney;
     private String desc;
+    private Button transact_contact;
+    private Button transact_finish;
 
     @Override
     public int initLayoutID() {
@@ -30,15 +35,17 @@ public class TransactActivity extends BaseActivity {
         transact_orderid = (TextView) findViewById(R.id.transact_orderid);
         transact_ordertime = (TextView) findViewById(R.id.transact_ordertime);
         transact_ordertmoney = (TextView) findViewById(R.id.transact_ordertmoney);
+        transact_contact=findViewById(R.id.transact_contact);
+        transact_finish=findViewById(R.id.transact_finish);
         Intent intent = getIntent();
         long timeMillis = System.currentTimeMillis();
-        Date date=new Date(timeMillis);
+        Date date = new Date(timeMillis);
         String string = date.toString();
         transact_ordertime.setText(string);
         desc = intent.getStringExtra("desc");
         transact_orderid.setText(desc);
-        int money = intent.getIntExtra("money",0);
-        transact_ordertmoney.setText(money+".00");
+        int money = intent.getIntExtra("money", 0);
+        transact_ordertmoney.setText(money + ".00");
     }
 
     @Override
@@ -53,7 +60,14 @@ public class TransactActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        transact_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(TransactActivity.this,HomeActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

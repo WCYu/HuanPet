@@ -54,7 +54,7 @@
                         android:id="@+id/start_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2016-03-04" />
+                        android:text="0000-00-00" />
                 </LinearLayout>
 
                 <TextView
@@ -82,7 +82,7 @@
                         android:id="@+id/end_tv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2016-03-04" />
+                        android:text="0000-00-00" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -294,6 +294,7 @@
 
                 <EditText
                     android:id="@+id/comment_et"
+                    android:layout_marginTop="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
@@ -335,7 +336,7 @@
                 android:layout_margin="5dp"
                 android:id="@+id/appointment_yuyue"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="33dp"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
@@ -343,7 +344,7 @@
                 android:layout_marginRight="11dp"
                 android:background="@drawable/jiyang_item"
                 android:text="预约寄养"
-                app:layout_heightPercent="6%" />
+                />
         </android.support.percent.PercentRelativeLayout>
     </LinearLayout>
 </com.example.huanpet.custom.PercentLinearLayout>

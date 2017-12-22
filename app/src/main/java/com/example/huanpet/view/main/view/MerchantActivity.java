@@ -29,6 +29,9 @@ import com.example.huanpet.view.main.presenter.HomePresenter;
 import java.util.HashMap;
 import java.util.Map;
 
+/*
+* 寄养师详情
+* */
 public class MerchantActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private PercentLinearLayout commentaries;
@@ -45,7 +48,7 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
     private TextView user_name;
     private RatingBar user_rating;
     private HomePresenter homePresenter;
-
+    private ImageView merchant_return;
     @Override
     public int initLayoutID() {
         return R.layout.activity_merchant;
@@ -60,6 +63,8 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
         user_name=findViewById(R.id.merchant_username);
         user_icon=findViewById(R.id.merchant_usericon);
         user_rating=findViewById(R.id.merchant_userrating);
+        merchant_return=findViewById(R.id.merchant_return);
+
         Intent intent = getIntent();
         score = intent.getDoubleExtra("score", 0);
         address1 = intent.getStringExtra("address");
@@ -88,6 +93,15 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
         user_rating.setRating((float) score);
         user_name.setText(family);
         Glide.with(this).load(userImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(user_icon);
+        if(userImage!=null){
+            if(userImage.startsWith("http")){
+                Glide.with(this).load(userImage).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(user_icon);
+            }else {
+                Glide.with(this).load(R.drawable.photos).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(user_icon);
+            }
+        }else {
+            Glide.with(this).load(R.drawable.photos).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(user_icon);
+        }
     }
 
     @Override
@@ -97,6 +111,12 @@ public class MerchantActivity extends BaseActivity implements View.OnClickListen
             public void onClick(View v) {
                 Intent intent=new Intent(MerchantActivity.this,CommentariesActivity.class);
                 startActivity(intent);
+            }
+        });
+        merchant_return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

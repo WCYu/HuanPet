@@ -50,7 +50,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/**/
+/*
+* 主页面
+* */
 public class HomeActivity extends BaseActivity implements View.OnClickListener,IHomeView {
 
     private static final int REQUEST_CODE_PICK_CITY = 233;
@@ -501,7 +503,6 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
             Toast.makeText(this, "请先登录", Toast.LENGTH_SHORT).show();
         }else {
             startActivity(intent);
-            drawerLayout.closeDrawer(linearLayout);
         }
     }
 

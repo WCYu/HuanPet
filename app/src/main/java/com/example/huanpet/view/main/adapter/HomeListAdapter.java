@@ -59,7 +59,15 @@ public class HomeListAdapter extends BaseAdapter {
         double dizhi=distance/shu;
         String result = String .format("%.2f",dizhi);
         vh.homeitem_distance.setText(result+"km");
-        Glide.with(context).load(descBeans.get(position).getUserImage()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(vh.homeitem_icon);
+            if(((descBeans.get(position).getUserImage()))!=null){
+                if((descBeans.get(position).getUserImage()).startsWith("http")){
+                    Glide.with(context).load(descBeans.get(position).getUserImage()).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(vh.homeitem_icon);
+                }else {
+                    Glide.with(context).load(R.drawable.photos).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(vh.homeitem_icon);
+                }
+            }else {
+                Glide.with(context).load(R.drawable.photos).apply(RequestOptions.bitmapTransform(new CircleCrop())).into(vh.homeitem_icon);
+            }
         vh.homeitem_bar.setRating((float) descBeans.get(position).getScore());
         return convertView;
     }
