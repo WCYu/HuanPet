@@ -300,7 +300,7 @@ public class HomeActivity extends BaseActivity implements View.OnClickListener,I
         screening_determine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                popupWindow.dismiss();
             }
         });
 

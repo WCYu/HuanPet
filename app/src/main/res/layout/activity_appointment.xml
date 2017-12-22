@@ -297,7 +297,7 @@
                     android:layout_marginTop="15dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
+                    android:layout_centerHorizontal="true"
                     android:background="@drawable/dotted_box"
                     android:hint="和他/她说点儿什么吧"
                     android:padding="10dp"
@@ -309,7 +309,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
 
         <TextView
             android:layout_width="wrap_content"
@@ -321,7 +322,7 @@
         <android.support.percent.PercentRelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            >
 
             <TextView
                 android:id="@+id/appointment_zong_gold"

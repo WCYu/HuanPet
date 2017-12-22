@@ -65,6 +65,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         main_login_wachat = (ImageView) findViewById(R.id.main_login_wachat);
         login_qq = (TextView) findViewById(R.id.login_qq);
 
+        header_back.setOnClickListener(this);
         header_titles.setOnClickListener(this);
         btn_find_pwd.setOnClickListener(this);
         btn_login.setOnClickListener(this);
@@ -135,6 +136,9 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
             case R.id.main_login_wachat:
                 Toast.makeText(this, "微信", Toast.LENGTH_SHORT).show();
 
+                break;
+            case R.id.header_back:
+                finish();
                 break;
         }
     }
