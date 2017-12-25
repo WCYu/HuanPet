@@ -59,7 +59,7 @@ class DialogUtils {
                         .inflate(R.layout.layout_loading, null);
                 RelativeLayout rlRoot = (RelativeLayout) v.findViewById(R.id.root);
                 rlRoot.setBackgroundColor(resColorId);
-                RelativeLayout.LayoutParams lp = (android.widget.RelativeLayout.LayoutParams) rlRoot
+                RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) rlRoot
                         .getLayoutParams();
                 lp.topMargin = context.getResources().getDimensionPixelSize(resId);
                 v.setLayoutParams(lp);

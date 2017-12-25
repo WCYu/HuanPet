@@ -1,6 +1,7 @@
 package com.example.huanpet.view.pet;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -22,32 +23,23 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.huanpet.R;
 import com.example.huanpet.app.AppService;
 import com.example.huanpet.app.BaseActivity;
 import com.example.huanpet.custom.EditTextWithDelete;
+import com.example.huanpet.utils.PreferencesUtil;
 import com.example.huanpet.utils.util.AppUtils;
 import com.example.huanpet.utils.util.CJSON;
 import com.example.huanpet.utils.util.PetType;
 import com.example.huanpet.utils.util.TableUtils;
-import com.example.huanpet.view.pet.Fragment.catFragment;
-import com.example.huanpet.view.pet.Fragment.dogFragment;
-import com.example.huanpet.view.pet.Fragment.petFragment;
-import com.example.huanpet.view.pet.View.CustomTextLayout;
+
 import com.example.huanpet.view.pet.View.SortModel;
 import com.example.huanpet.view.pet.adapter.ClearEditText;
 import com.example.huanpet.view.pet.adapter.MyAdapter;
 import com.example.huanpet.view.pet.adapter.PinyinComparator;
 
-
-import com.example.huanpet.view.pet.adapter.SortAdapter;
-import com.lzy.okhttputils.callback.StringCallback;
-import com.lzy.okhttputils.request.PostRequest;
-import com.zaaach.citypicker.utils.PinyinUtils;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -66,6 +58,7 @@ import okhttp3.Response;
 
 
 public class TypeofpetActivity extends BaseActivity {
+
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -87,8 +80,7 @@ public class TypeofpetActivity extends BaseActivity {
     private View v;
     private SortListView sortListView;
 
-
-    private EditTextWithDelete searchEditText;
+    private EditTextWithDelete clearEditText;
     private ImageView fh;
 
     @Override
@@ -99,11 +91,10 @@ public class TypeofpetActivity extends BaseActivity {
     @Override
     public void initView() {
         listView = (ListView) findViewById(R.id.country_lvcountry);
-
+        fh = (ImageView) findViewById(R.id.fh);
         pet_type_dog = (Button) findViewById(R.id.pet_type_dog);
         pet_type_cat = (Button) findViewById(R.id.pet_type_cat);
         pet_type_pet = (Button) findViewById(R.id.pet_type_pet);
-        fh = (ImageView) findViewById(R.id.fh);
         sideBar = (SideBar) findViewById(R.id.sidrbar);
         dialog = (TextView) findViewById(R.id.dialog);
         petCode = getIntent().getStringExtra(TableUtils.PetInfo.PETCODE);
@@ -127,8 +118,8 @@ public class TypeofpetActivity extends BaseActivity {
 
 
         //收缩框
-        searchEditText = (EditTextWithDelete) findViewById(R.id.searchEditText);
-        searchEditText.addTextChangedListener(new TextWatcher() {
+        clearEditText = (EditTextWithDelete) findViewById(R.id.searchEditText);
+        clearEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 filterData(charSequence.toString());
@@ -144,13 +135,7 @@ public class TypeofpetActivity extends BaseActivity {
 
             }
         });
-fh.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent in=new Intent(TypeofpetActivity.this,PetAddActivity.class);
-        startActivity(in);
-    }
-});
+
         pet_type_dog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -234,7 +219,7 @@ fh.setOnClickListener(new View.OnClickListener() {
         }
 
         // 根据a-z进行排序
-     //Collections.sort(filterDateList, pinyinComparator);
+        //Collections.sort(filterDateList, pinyinComparator);
         sortListView.updateListView(filterDateList);
     }
 
@@ -264,14 +249,16 @@ fh.setOnClickListener(new View.OnClickListener() {
                         public void run() {
 
                             petType();
+
                         }
                     });
 
                 }
             }
         });
-
-
+//        Collections.sort(SourceDateList, pinyinComparator);
+//        sortListView = new SortListView(this, SourceDateList);
+//        listView.setAdapter(sortListView);
     }
 
     /*
@@ -281,7 +268,7 @@ fh.setOnClickListener(new View.OnClickListener() {
         if (v != null) {
             listView.removeHeaderView(v);
         }
-      // Collections.sort(SourceDateList, pinyinComparator);
+        //Collections.sort(SourceDateList, pinyinComparator);
         sortListView = new SortListView(this, SourceDateList);
         v = LayoutInflater.from(this).inflate(R.layout.item, null);
         // if (hotList != null && hotList.size() > 0) {
@@ -324,12 +311,18 @@ fh.setOnClickListener(new View.OnClickListener() {
 
     @Override
     public void initListener() {
-
+        fh.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
     public void setMyAppTitle() {
 
     }
-
 }
+
+

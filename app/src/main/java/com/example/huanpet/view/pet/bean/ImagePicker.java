@@ -8,15 +8,14 @@ import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
 
-
-import com.example.huanpet.view.pet.ImageLoader;
-
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+
 
 public class ImagePicker {
 

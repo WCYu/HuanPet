@@ -26,12 +26,20 @@ public class PreferencesUtil {
         }
         return preferencesUtil;
     }
+
+
+
+
     public void setWelcomeId(int id){
         sharedPreferences.edit().putInt("welcomeId",id).commit();
     }
     public int getWelcomeId(){
         return sharedPreferences.getInt("welcomeId",0);
     }
+
+
+
+
     public void setUserId(String name){
         sharedPreferences.edit().putString("userId",name).commit();
     }
@@ -45,6 +53,8 @@ public class PreferencesUtil {
     public String getUserName(){
         return sharedPreferences.getString("userName",null);
     }
+
+
 
     public void setUserSex(String userSex){
         sharedPreferences.edit().putString("userSex",userSex).commit();
@@ -89,9 +99,62 @@ public class PreferencesUtil {
         return sharedPreferences.getString("Wechat",null);
     }
 
+
+
+
+
+
+    public void setPetName(String petName){
+        sharedPreferences.edit().putString("petName",petName).commit();
+    }
+    public String getPetName(){
+        return sharedPreferences.getString("petName",null);
+    }
+
+    public void setPetType(String PetType){
+        sharedPreferences.edit().putString("PetType",PetType).commit();
+    }
+    public String getPetType(){
+        return sharedPreferences.getString("PetType",null);
+    }
+
+    public void setpetBirthTime(String petBirthTime){
+        sharedPreferences.edit().putString("petBirthTime",petBirthTime).commit();
+    }
+    public String getpetBirthTime(){
+        return sharedPreferences.getString("petBirthTime",null);
+    }
+    public void setPetInfo(String petInfo){
+        sharedPreferences.edit().putString("petInfo",petInfo).commit();
+    }
+    public String getPetInfo(){
+        return sharedPreferences.getString("petInfo",null);
+    }
+    public void setPetTypeName(String petTypeName){
+        sharedPreferences.edit().putString("petTypeName",petTypeName).commit();
+    }
+    public String getPetTypeName(){
+        return sharedPreferences.getString("petTypeName",null);
+    }
+    public void setIsSterilization(String isSterilization){
+        sharedPreferences.edit().putString("isSterilization",isSterilization).commit();
+    }
+    public String getIsSterilization(){
+        return sharedPreferences.getString("isSterilization",null);
+    }
+    public void setPetWeight(String petWeight){
+        sharedPreferences.edit().putString("petWeight",petWeight).commit();
+    }
+    public String getPetWeight(){
+        return sharedPreferences.getString("petWeight",null);
+    }
+    public void setIsimmune(String isimmune){
+        sharedPreferences.edit().putString("isimmune",isimmune).commit();
+    }
+    public String getIsimmune(){
+        return sharedPreferences.getString("isimmune",null);
+    }
     public void clearUserMeassage(){
         setUserId(null);
-        setUserName(null);
-        setUserPhone(null);
     }
 }
