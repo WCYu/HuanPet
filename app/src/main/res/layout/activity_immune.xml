@@ -176,12 +176,12 @@ android:layout_marginLeft="10dp"
 
             <CheckBox
                 android:id="@+id/pet_mianyi_bing1"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:button="@null"
                android:layout_marginLeft="2dp"
                 android:checked="false"
-                android:onClick="click"
+
                 android:drawableLeft="@drawable/shape_redio"
                 android:text="犬温病毒" />
         </RadioGroup>
@@ -201,7 +201,7 @@ android:layout_marginLeft="10dp"
             android:layout_width="100dp"
             android:layout_height="80dp"
             android:button="@null"
-            android:onClick="click"
+
             android:checked="false"
 android:layout_marginLeft="8dp"
             android:drawableLeft="@drawable/shape_redio"
@@ -232,7 +232,7 @@ android:layout_marginLeft="8dp"
                     android:button="@null"
                     android:layout_marginLeft="2dp"
                     android:checked="false"
-                    android:onClick="click"
+
                     android:drawableLeft="@drawable/shape_redio"
                     android:text="犬限病毒" />
             </RadioGroup>
@@ -252,7 +252,7 @@ android:layout_marginLeft="8dp"
                     android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:button="@null"
-                    android:onClick="click"
+
                     android:checked="false"
                     android:layout_marginLeft="10dp"
                     android:drawableLeft="@drawable/shape_redio"

@@ -73,13 +73,16 @@ public class nicknameActivity extends BaseActivity {
 
     }
 
+    public void setMyAppTitle() {
+
+    }
+
     @Override
     public void initListener() {
         fh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent in=new Intent(nicknameActivity.this,PetAddActivity.class);
-                startActivity(in);
+                finish();
 
             }
         });
@@ -89,24 +92,57 @@ public class nicknameActivity extends BaseActivity {
                 if (TextUtils.isEmpty(searchEditText.getText().toString())) {
                     Toast.makeText(nicknameActivity.this, "昵称不能为空", Toast.LENGTH_SHORT).show();
                 } else {
-                    String nick = searchEditText.getText().toString();
                     Intent intent = new Intent();
-                    intent.putExtra("nick", nick);
-                    nicknameActivity.this.setResult(RESULT_OK, intent);
+                    String name = searchEditText.getText().toString().trim();
+                    intent.putExtra("name", name);
+                    setResult(RESULT_OK, intent);
                     finish();
-
                 }
-
             }
+
+
+
+
+            private void UpdateName() {
+                final String nameString = clearEditText.getText().toString();
+                Map<String, Object> param = new HashMap<>();
+                String userId = PreferencesUtil.getInstance().getUserId();
+//        String userId = AppUtils.userInfo.getUserId();
+                param.put(TableUtils.PetInfo.USERID, userId);
+                param.put(TableUtils.PetInfo.USERNAME, nameString);
+                // 生成提交服务器的JSON字符串
+                String json = CJSON.toJSONMap(param);
+                FormBody.Builder builder = new FormBody.Builder();
+                builder.add("data", json);
+                Log.e("Model----111111------", json);
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request request = new Request.Builder()
+                        .post(builder.build())
+                        .url("http://123.56.150.230:8885/dog_family/petInfo/savePetInfo.jhtml")
+                        .build();
+                okHttpClient.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    public void onResponse(Call call, Response response) throws IOException {
+                        final String string = response.body().string();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Log.e("TAG", string);
+                                PreferencesUtil.getInstance().setPetName(nameString);
+
+                                finish();
+                            }
+                        });
+                    }
+                });
+            }
+
+
         });
-
-
-
-    }
-
-    @Override
-    public void setMyAppTitle() {
-
     }
 }
-

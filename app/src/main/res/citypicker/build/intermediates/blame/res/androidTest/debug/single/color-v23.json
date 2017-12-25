@@ -1,0 +1,38 @@
+[
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_edittext.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_switch_track.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_btn_checkable.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_text_material.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_spinner.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_tint_spinner.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_default.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_tint_default.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_color_highlight_material.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_tint_seek_thumb.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "E:\\AAA\\HuanPet\\citypicker\\build\\intermediates\\res\\merged\\androidTest\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
+        "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\e6000d9b4672b3e28d65f1416f347fa6\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
+    }
+]

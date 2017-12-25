@@ -6,6 +6,7 @@ import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 import java.util.function.ToLongFunction;
 
+
 public class PinyinComparator implements Comparator<SortModel> {
 
 	public int compare(SortModel o1, SortModel o2) {
@@ -18,8 +19,4 @@ public class PinyinComparator implements Comparator<SortModel> {
 			return o1.getSortLetters().compareTo(o2.getSortLetters());
 		}
 	}
-
-
-
-
 }

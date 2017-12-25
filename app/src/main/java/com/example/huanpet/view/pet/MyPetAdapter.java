@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.example.huanpet.R;
 import com.example.huanpet.utils.util.AppUtils;
 import com.example.huanpet.utils.util.CJSON;
@@ -20,10 +21,15 @@ import com.example.huanpet.utils.util.TableUtils;
 import com.lzy.okhttputils.callback.StringCallback;
 import com.lzy.okhttputils.request.PostRequest;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -33,24 +39,24 @@ import okhttp3.Response;
 
 class MyPetAdapter extends  BaseAdapter {
 
-    private List<PetInfo> petInfos;
+    private List<PetInfo> listpet;
     private Context mContext;
     private ListView mlv;
 
-    public MyPetAdapter(List<PetInfo> petInfos, Context mContext, ListView mlv) {
-        this.petInfos = petInfos;
-        this.mContext = mContext;
-        this.mlv = mlv;
+    public MyPetAdapter(List<PetInfo> list, Context context, ListView lv) {
+        this.listpet = list;
+        this.mContext = context;
+        this.mlv = lv;
     }
 
     @Override
     public int getCount() {
-        return petInfos.size();
+        return listpet.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return petInfos.get(position);
+        return listpet.get(position);
     }
 
     @Override
@@ -62,7 +68,7 @@ class MyPetAdapter extends  BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = null;
         ViewHolder viewHolder = null;
-        final PetInfo pet = petInfos.get(position);
+        final PetInfo pet = listpet.get(position);
         viewHolder = new ViewHolder();
 
         view = LayoutInflater.from(mContext).inflate(
@@ -70,12 +76,14 @@ class MyPetAdapter extends  BaseAdapter {
         viewHolder.desc = (TextView) view.findViewById(R.id.pet_desc_show);
         viewHolder.name = (TextView) view.findViewById(R.id.pet_name_show);
 
-
+        viewHolder.icon_sex = (ImageView) view.findViewById(R.id.pet_sex_show);
         viewHolder.del = (ImageView) view.findViewById(R.id.iv_delete);
-
-        viewHolder.desc.setText(petInfos.get(position).getPetInfo());
+        viewHolder.icon = (ImageView) view
+                .findViewById(R.id.pet_photo_show);
+        viewHolder.desc.setText(listpet.get(position).getPetInfo());
         viewHolder.name.setText(pet.getPetName());
-       // viewHolder.icon.setImageHttpDefaultUrl(pet.getPetImage());
+        Glide.with(mContext).load(pet.getPetImage()).into(viewHolder.icon);
+
         viewHolder.del.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,22 +102,33 @@ class MyPetAdapter extends  BaseAdapter {
                                         map.put(TableUtils.PetInfo.PETCODE,
                                                 code);
                                         map.put(TableUtils.PetInfo.ISUSE, "2");
-                                        PostRequest post = new PostRequest(
-                                                AppUtils.REQUESTURL
-                                                        + "petInfo/deletePetInfo.jhtml");
-                                        post.params(CJSON.DATA,
-                                                CJSON.toJSONMap(map));
-                                        post.execute(new StringCallback() {
+
+
+                                        String url="http://123.56.150.230:8885/dog_family/petInfo/deletePetInfo.jhtml";
+                                        String json = CJSON.toJSONMap(map);
+                                        OkHttpClient ohc = new OkHttpClient();
+                                        FormBody.Builder body = new FormBody.Builder();
+                                        body.add(CJSON.DATA, json);
+                                        Request request = new Request.Builder()
+                                                .url(url)
+                                                .post(body.build())
+                                                .build();
+
+                                        ohc.newCall(request).enqueue(new Callback() {
+                                            @Override
+                                            public void onFailure(Call call, IOException e) {
+
+                                            }
 
                                             @Override
-                                            public void onResponse(
-                                                    boolean arg0, String json,
-                                                    Request arg2, Response arg3) {
-                                                petInfos.remove(position);
+                                            public void onResponse(Call call, Response response) throws IOException {
+                                                listpet.remove(position);
                                                 mlv.setAdapter(new MyPetAdapter(
-                                                        petInfos, mContext, mlv));
+                                                        listpet, mContext, mlv));
                                             }
                                         });
+
+
                                     }
                                 })
                         .setNegativeButton("取消",
@@ -133,10 +152,11 @@ class MyPetAdapter extends  BaseAdapter {
     }
 
     class ViewHolder {
-        PhotoCircleView icon;
+
         ImageView icon_sex;
         TextView name;
         TextView desc;
         ImageView del;
+        public ImageView icon;
     }
 }

@@ -20,7 +20,7 @@
             android:id="@+id/fh"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginLeft="10dp"
             android:src="@drawable/back_gray" />
 
@@ -28,12 +28,12 @@
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="15dp"
             android:layout_weight="4"
             android:gravity="center"
 
             android:text="宠物列表"
-            android:textSize="20sp" />
+            android:textSize="20dp" />
 
         <TextView
             android:id="@+id/bc"
@@ -43,7 +43,7 @@
             android:layout_alignParentRight="true"
 
             android:layout_marginRight="10dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="20dp"
             android:text="保存" />
 
     </RelativeLayout>
@@ -61,7 +61,7 @@
             android:layout_marginTop="20dp">
 
             <RelativeLayout
-                android:id="@+id/add_pet_icon"
+                android:id="@+id/bbb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
@@ -73,7 +73,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_alignParentTop="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="20dp"
                     android:layout_toLeftOf="@+id/iv_to_pet_head"
                     android:src="@drawable/pet_head" />
 
@@ -102,7 +102,7 @@
                 android:background="#BEBEBE" />
 
             <RelativeLayout
-                android:id="@+id/add_pet_nick"
+                android:id="@+id/aaa"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
@@ -122,7 +122,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="25dp"
+
                     android:layout_toLeftOf="@+id/iv_to_nick" />
 
                 <TextView
@@ -161,7 +162,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="25dp"
+android:hint=""
+
                     android:layout_toLeftOf="@+id/iv_to_pet_type" />
 
                 <TextView
@@ -201,7 +204,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="35dp"
+
                     android:layout_toLeftOf="@+id/iv_to_isPass" />
 
                 <TextView
@@ -240,9 +244,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="50dp"
-                    android:layout_marginTop="15dp"
-                    android:text="" />
+                    android:layout_marginRight="40dp"
+
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -250,6 +254,7 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:text="出生日期"
+                    android:id="@+id/cs"
                     android:textSize="@dimen/dp18" />
             </RelativeLayout>
 
@@ -280,7 +285,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="35dp"
+
                     android:layout_toLeftOf="@+id/iv_to_weight" />
 
                 <TextView
@@ -318,11 +324,11 @@
                     android:id="@+id/immune_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
-                    android:layout_toLeftOf="@+id/iv_to_immune"
+
+                    android:layout_marginRight="25dp"
+                   android:layout_alignParentRight="true"
                     android:hint="未完善信息"
-                    android:textSize="@dimen/dp18" />
+                  />
 
                 <TextView
                     android:layout_width="wrap_content"

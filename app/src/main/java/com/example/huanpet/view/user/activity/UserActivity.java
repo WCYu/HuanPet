@@ -705,6 +705,8 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             textview_Gender.setText("女");
             PreferencesUtil.getInstance().setUserSex(22+"");
         }
+
+
 //        修改日期
 //        if (PreferencesUtil.getInstance().getBirthday() == null) {
 //            textview_Date_of_birth.setText("未完善");

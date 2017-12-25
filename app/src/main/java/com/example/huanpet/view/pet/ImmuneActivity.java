@@ -1,13 +1,22 @@
 package com.example.huanpet.view.pet;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,14 +24,21 @@ import android.widget.Toast;
 import com.example.huanpet.R;
 import com.example.huanpet.app.AppService;
 import com.example.huanpet.app.BaseActivity;
+import com.example.huanpet.utils.PreferencesUtil;
 import com.example.huanpet.utils.util.CJSON;
 import com.example.huanpet.utils.util.TableUtils;
 import com.example.huanpet.view.pet.adapter.ImmuneInfo;
+import com.example.huanpet.view.user.activity.UserActivity;
+import com.example.huanpet.view.user.adpter.NumericWheelAdapter;
+import com.example.huanpet.view.user.widget.WheelView;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import cn.qqtheme.framework.picker.DatePicker;
@@ -35,21 +51,16 @@ import okhttp3.Response;
 
 
 public class ImmuneActivity extends BaseActivity implements View.OnClickListener {
-    private RelativeLayout App_title;
+    private RelativeLayout App;
     private Drawable leftDrawable;
-    private Button button1, button2, button3, getButton3, button4;
+    private Button button1,button2,button3,getButton3,button4;
     private List<Imm> valueslist = null;
     private List<Imm> datalist = null;
-    private List<ImmuneInfo> jiulist = null;
+    private List<ImmuneInfo> jiulist=null;
     private String path;
-
+    private TextView time;
     private RelativeLayout mTv_time;
-    private Button mBtn1;
-    private Button mBtn2;
-    private Button mBtn3;
-    private Button mBtn4;
-    private TextView pet_mianyi_time_tv;
-    private TextView mBirth;
+    private TextView immune_info;
 
     @Override
     public int initLayoutID() {
@@ -59,14 +70,14 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
     @Override
     public void initView() {
         Resources res = getResources();
-        leftDrawable = res.getDrawable(R.drawable.imm_check);
+        leftDrawable=res.getDrawable(R.drawable.imm_check);
         leftDrawable.setBounds(0, 0, leftDrawable.getMinimumWidth(),
                 leftDrawable.getMinimumHeight());
-        App_title = (RelativeLayout) findViewById(R.id.App_title);
+        App= (RelativeLayout) findViewById(R.id.App_title);
 
 
-        mTv_time = (RelativeLayout) findViewById(R.id.pet_mianyi_time);
-        mBirth = (TextView) findViewById(R.id.pet_mianyi_time_tv);
+        time= (TextView) findViewById(R.id.pet_mianyi_time_tv);
+        mTv_time= (RelativeLayout) findViewById(R.id.pet_mianyi_time);
         mTv_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,10 +89,10 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
                 picker.setOnDatePickListener(new DatePicker.OnYearMonthDayPickListener() {
                     @Override
                     public void onDatePicked(String year, String month, String day) {
-                        if (!year.isEmpty() || !month.isEmpty() || !day.isEmpty()) {
+                        if(!year.isEmpty()||!month.isEmpty()||!day.isEmpty()){
                             Toast.makeText(ImmuneActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                            mBirth.setText(year + "年" + month + "月" + day + "日");
-                        } else {
+                            time.setText(year+"年"+month+"月"+day+"日");
+                        }else{
                             Toast.makeText(ImmuneActivity.this, "网络不佳,请稍后重试", Toast.LENGTH_SHORT).show();
                         }
 
@@ -91,16 +102,17 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
+
         //初始化免疫病毒左边的图片
 
-        mBtn1 = (Button) findViewById(R.id.pet_mianyi_bing1);
-        mBtn2 = (Button) findViewById(R.id.pet_mianyi_bing2);
-        mBtn3 = (Button) findViewById(R.id.pet_mianyi_bing3);
-        mBtn4 = (Button) findViewById(R.id.pet_mianyi_bing4);
-        mBtn1.setOnClickListener(this);
-        mBtn2.setOnClickListener(this);
-        mBtn3.setOnClickListener(this);
-        mBtn4.setOnClickListener(this);
+        button1= (Button) findViewById(R.id.pet_mianyi_bing1);
+        button2= (Button) findViewById(R.id.pet_mianyi_bing2);
+        button3= (Button) findViewById(R.id.pet_mianyi_bing3);
+        button4= (Button) findViewById(R.id.pet_mianyi_bing4);
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
+        button3.setOnClickListener(this);
+        button4.setOnClickListener(this);
 
         if (getIntent().getStringExtra("petimmlist") != null) {
             String petimmlist = getIntent().getStringExtra("petimmlist");
@@ -108,27 +120,29 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
         }
         //查询免疫信息
         querymianyiInfo();
-        App_title.setOnClickListener(new CustomTextLayout.OnClickListener() {
+        App.setOnClickListener(new View.OnClickListener(){
+
 
             @Override
             public void onClick(View v) {
 
 
-                Intent intent = new Intent();
-                if (mBirth.getText().toString().isEmpty()) {
+
+            Intent intent=new Intent();
+                if(time.getText().toString().isEmpty()){
                     Toast.makeText(ImmuneActivity.this, "请选择上次免疫时间", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (valueslist == null) {
+                if(valueslist==null){
                     return;
                 }
                 for (Imm imm : valueslist) {
-                    imm.setImmuneTime(mBirth.getText().toString());
+                    imm.setImmuneTime(time.getText().toString());
                 }
                 String list = CJSON.toJSONString(valueslist);
                 intent.putExtra("list", list);
                 Log.i("TAG", "=======1=======" + list);
-
+                Toast.makeText(ImmuneActivity.this, "上传成功", Toast.LENGTH_SHORT).show();
                 setResult(RESULT_OK, intent);
                 finish();
             }
@@ -140,21 +154,29 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
 
     }
 
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void setMyAppTitle() {
+
+    }
+
     private void querymianyiInfo() {
-        OkHttpClient okhttp = new OkHttpClient();
-
-        Map<String, Object> map = new HashMap<>();
-
-        map.put(TableUtils.ImmuneInfo.ISUSE, 1 + "");
-
+        OkHttpClient okhttp=new OkHttpClient();
+        Map<String,Object> map=new HashMap<>();
+        map.put(TableUtils.ImmuneInfo.ISUSE,1+"");
         final String json = CJSON.toJSONMap(map);
-
-        FormBody.Builder builder = new FormBody.Builder();
-
+        FormBody.Builder builder=new FormBody.Builder();
         builder.add(CJSON.DATA, json);
-
-        Request request = new Request.Builder().url(CJSON.URL_STRING + "immuneInfo/getImmuneInfos.jhtml").
-                post(builder.build()).build();
+        Request request=new Request.Builder().url(CJSON.URL_STRING+"immuneInfo/getImmuneInfos.jhtml").post(builder.build()).build();
         okhttp.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
@@ -163,28 +185,26 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                String str = response.body().string();
-
-                if (CJSON.getRET(str)) {
+                String str=response.body().string();
+                if(CJSON.getRET(str)) {
                     String desc = CJSON.getDESC(str);
                     datalist = CJSON.parseArray(desc, Imm.class);
-                    Log.e("SSS",str);
                 }
                 AppService.baseActivity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
 
 
-                        mBtn1.setText(datalist.get(0).getImmuneName());
-                        mBtn2.setText(datalist.get(1).getImmuneName());
-                        mBtn3.setText(datalist.get(2).getImmuneName());
-                        mBtn4.setText(datalist.get(3).getImmuneName());
-                        if (jiulist != null) {
-                            for (int i = 0; i < jiulist.size(); i++) {
-                                for (int y = 0; y < datalist.size(); y++) {
-                                    if (jiulist.get(i).getImmuneCode().equals(datalist.get(y).getImmuneCode())) {
+                        button1.setText(datalist.get(0).getImmuneName());
+                        button2.setText(datalist.get(1).getImmuneName());
+                        button3.setText(datalist.get(2).getImmuneName());
+                        button4.setText(datalist.get(3).getImmuneName());
+                        if(jiulist!=null){
+                            for(int i=0;i<jiulist.size();i++){
+                                for(int y=0;y<datalist.size();y++){
+                                    if(jiulist.get(i).getImmuneCode().equals(datalist.get(y).getImmuneCode())){
 
-                                        switch (y) {
+                                        switch (y){
                                             case 0:
                                                 button1.setCompoundDrawables(leftDrawable, null, null,
                                                         null);
@@ -207,7 +227,8 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
                                                 button4.setOnClickListener(obclick);
                                                 break;
                                         }
-                                    } else {
+                                    }
+                                    else {
                                         Toast.makeText(ImmuneActivity.this, "没有免疫信息", Toast.LENGTH_SHORT).show();
                                     }
 
@@ -223,19 +244,10 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
     }
 
 
-    public void initData() {
+    public  void initData(String s) {
 
     }
 
-    @Override
-    public void initListener() {
-
-    }
-
-    @Override
-    public void setMyAppTitle() {
-
-    }
 
 
     @Override
@@ -245,9 +257,9 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
         }
         Imm i = null;
 
-        switch (view.getId()) {
+        switch (view.getId()){
             case R.id.pet_mianyi_bing1:
-                mBtn1.setCompoundDrawables(leftDrawable, null, null,
+                button1.setCompoundDrawables(leftDrawable, null, null,
                         null);
                 for (Imm imm : valueslist) {
                     if (imm.getImmuneCode() == datalist.get(0)
@@ -262,7 +274,7 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.pet_mianyi_bing2:
-                mBtn2.setCompoundDrawables(leftDrawable, null, null,
+                button2.setCompoundDrawables(leftDrawable, null, null,
                         null);
                 for (Imm imm : valueslist) {
                     if (imm.getImmuneCode() == datalist.get(1)
@@ -279,7 +291,7 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.pet_mianyi_bing3:
-                mBtn3.setCompoundDrawables(leftDrawable, null, null,
+                button3.setCompoundDrawables(leftDrawable, null, null,
                         null);
                 for (Imm imm : valueslist) {
                     if (imm.getImmuneCode() == datalist.get(2)
@@ -294,7 +306,7 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
                 }
                 break;
             case R.id.pet_mianyi_bing4:
-                mBtn4.setCompoundDrawables(leftDrawable, null, null,
+                button4.setCompoundDrawables(leftDrawable, null, null,
                         null);
                 for (Imm imm : valueslist) {
                     if (imm.getImmuneCode() == datalist.get(3)
@@ -313,14 +325,10 @@ public class ImmuneActivity extends BaseActivity implements View.OnClickListener
         }
         valueslist.add(i);
     }
-
-    View.OnClickListener obclick = new View.OnClickListener() {
+    View.OnClickListener obclick=new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Toast.makeText(ImmuneActivity.this, "片只能上传一次", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ImmuneActivity.this, "图片只能上传一次", Toast.LENGTH_SHORT).show();
         }
     };
-
-
-
 }

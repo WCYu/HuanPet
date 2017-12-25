@@ -8,8 +8,8 @@
     tools:context="com.example.huanpet.view.pet.PetActivity">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/dp10" >
+        android:layout_height="150px"
+        >
 
         <ImageView
             android:id="@+id/iv_back"
@@ -51,5 +51,4 @@
         android:overScrollMode="never"
         android:scrollbars="none"
         />
-
 </LinearLayout>

@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15sp"
             android:gravity="center"
-            android:text="@string/boy"
+            android:text="是"
             android:textColor="@color/colorBlue"
             android:textSize="@dimen/text_title"/>
         <View
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="15sp"
             android:gravity="center"
-            android:text="@string/gril"
+            android:text="否"
             android:textColor="@color/colorBlue"
             android:textSize="@dimen/text_title"/>
 

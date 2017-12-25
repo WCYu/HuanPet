@@ -214,4 +214,6 @@ public class PetInfo implements Serializable {
 				+ ", petParentTypeName=" + petParentTypeName + "]";
 	}
 
+	public void setPetWeight(String petweigth) {
+	}
 }
